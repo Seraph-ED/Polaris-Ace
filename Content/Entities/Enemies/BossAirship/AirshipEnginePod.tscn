@@ -1,0 +1,116 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipEnginePod.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipEnginePodBroken.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Enemies/BossAirship/AirshipEnginePod.cs" type="Script" id=3]
+[ext_resource path="res://Content/Entities/CharacterParticles.cs" type="Script" id=4]
+[ext_resource path="res://Content/VFX/JetExhaustParticlesLarge.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=6]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=7]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=8]
+[ext_resource path="res://Content/VFX/DamageFireParticlesMaterial.tres" type="Material" id=9]
+[ext_resource path="res://Content/VFX/DamageSmokeParticleMaterial.tres" type="Material" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[node name="AirshipEnginePod" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 3 )
+Health = 400.0
+IsEnemy = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.999997, -1.90735e-06 )
+scale = Vector2( 0.76, 0.76 )
+frames = SubResource( 1 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+position = Vector2( 1, 0 )
+scale = Vector2( 0.76, 0.76 )
+polygon = PoolVector2Array( -34, -32, 33, -32, 34, 34, -34, 33 )
+
+[node name="Exhausts" type="Node2D" parent="."]
+script = ExtResource( 8 )
+Active = true
+
+[node name="Afterburner" type="Particles2D" parent="Exhausts"]
+material = ExtResource( 7 )
+position = Vector2( -15, 26 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="Afterburner2" type="Particles2D" parent="Exhausts"]
+material = ExtResource( 7 )
+position = Vector2( 17, 27 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 5 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="DamageFlames" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 8 )
+Active = true
+
+[node name="Smoke" type="Particles2D" parent="DamageFlames"]
+material = SubResource( 2 )
+position = Vector2( -15, 13 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 10 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="Smoke2" type="Particles2D" parent="DamageFlames"]
+material = SubResource( 2 )
+position = Vector2( 22, -19 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 10 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="Flame" type="Particles2D" parent="DamageFlames"]
+material = ExtResource( 7 )
+position = Vector2( -19, 10 )
+amount = 200
+lifetime = 0.4
+randomness = 0.2
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 9 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )
+
+[node name="Flame2" type="Particles2D" parent="DamageFlames"]
+material = ExtResource( 7 )
+position = Vector2( 23, -19 )
+amount = 200
+lifetime = 0.4
+randomness = 0.2
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 9 )
+texture = ExtResource( 6 )
+script = ExtResource( 4 )

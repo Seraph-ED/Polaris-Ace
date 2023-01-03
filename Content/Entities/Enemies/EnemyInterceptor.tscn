@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Content/VFX/JetExhaustParticles2.tres" type="Material" id=1]
+[ext_resource path="res://Content/Entities/Enemies/EnemyInterceptor.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/JetInterceptor.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/Entities/CharacterParticles.cs" type="Script" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 44.0
+
+[node name="EnemyInterceptor" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( 0, -18 )
+scale = Vector2( 0.368787, 0.368787 )
+texture = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["HostileEntity", "Main"]]
+visible = false
+position = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Afterburners" type="Node2D" parent="."]
+
+[node name="Afterburner" type="Particles2D" parent="Afterburners"]
+material = ExtResource( 5 )
+position = Vector2( -5, 43 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="Afterburner2" type="Particles2D" parent="Afterburners"]
+material = ExtResource( 5 )
+position = Vector2( 5, 43 )
+amount = 2400
+lifetime = 3.0
+visibility_rect = Rect2( -20000, -20000, 40000, 40000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true
+
+[node name="FiringArc" type="Area2D" parent="."]
+position = Vector2( 0, -17 )
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FiringArc"]
+polygon = PoolVector2Array( 0, -6, -1600, -1600, 1600, -1600 )
+
+[connection signal="body_entered" from="FiringArc" to="." method="SetTargetInArc"]
+[connection signal="body_exited" from="FiringArc" to="." method="UnsetTargetInArc"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Sprites/TankTurret.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTank.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/TankChassis.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/JetExhaustParticles1.tres" type="Material" id=6]
+[ext_resource path="res://Content/Entities/CharacterParticles.cs" type="Script" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 44.0
+
+[node name="EnemyTank" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Chassis" type="Sprite" parent="."]
+position = Vector2( 0, 9.53674e-07 )
+scale = Vector2( 0.172647, 0.172647 )
+texture = ExtResource( 3 )
+
+[node name="Turret" type="Sprite" parent="."]
+scale = Vector2( 0.171147, 0.171147 )
+texture = ExtResource( 1 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["HostileEntity", "Main"]]
+visible = false
+position = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Afterburners" type="Node2D" parent="."]
+visible = false
+
+[node name="Particles2D" type="Particles2D" parent="Afterburners"]
+visible = false
+material = ExtResource( 5 )
+position = Vector2( 0, 34 )
+amount = 1200
+lifetime = 2.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 6 )
+texture = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true
+
+[node name="FiringArc" type="Area2D" parent="."]
+position = Vector2( 0, -17 )
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FiringArc"]
+polygon = PoolVector2Array( 0, -6, -150, -990, 150, -990 )

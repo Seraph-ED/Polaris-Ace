@@ -1,0 +1,69 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Content/Entities/Player.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Jet.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Afterburner.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/JetPlayer.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/JetExhaustParticleMaterialHighTemp.tres" type="Material" id=6]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=7]
+[ext_resource path="res://Content/VFX/WeaponCrosshairContainer.cs" type="Script" id=8]
+[ext_resource path="res://Content/Equipment/Weapons/MissileCrosshair.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Content/Equipment/Weapons/BombCrosshair.tscn" type="PackedScene" id=10]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 41.0
+
+[node name="Player" type="KinematicBody2D" groups=["Main"]]
+collision_layer = 129
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="JetPlayer" type="Sprite" parent="."]
+scale = Vector2( 0.275, 0.275 )
+texture = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 1.5, 1 )
+scale = Vector2( 0.1675, 0.1675 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="MissileTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="DefenseTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="Afterburner" type="Particles2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( 0, 30 )
+amount = 1800
+lifetime = 2.0
+speed_scale = 0.75
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 6 )
+texture = ExtResource( 7 )
+script = ExtResource( 3 )
+
+[node name="WeaponCrosshairContainer" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="CrosshairMissile" parent="WeaponCrosshairContainer" instance=ExtResource( 9 )]
+
+[node name="CrosshairBomb" parent="WeaponCrosshairContainer" instance=ExtResource( 10 )]

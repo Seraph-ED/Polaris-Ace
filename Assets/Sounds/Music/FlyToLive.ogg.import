@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/FlyToLive.ogg-b65392e5a4097ea281ffc0a08b15b7a5.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/FlyToLive.ogg"
+dest_files=[ "res://.import/FlyToLive.ogg-b65392e5a4097ea281ffc0a08b15b7a5.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

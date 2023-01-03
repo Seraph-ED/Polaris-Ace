@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/BossAirship/AirshipMissilePodFragmentation.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipMissileBayClosed.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipMissileBayOpen.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
+
+[node name="AirshipMissilePodFragementation" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+Active = false
+ShootState = 1
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.75, 0.75 )
+polygon = PoolVector2Array( 52, 0, 28, 13.3333, -22.6667, 13.3333, -50.6667, 0, -22.6667, -13.3333, 26.6667, -13.3333 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.90735e-06, 0 )
+scale = Vector2( 0.633333, 0.4 )
+frames = SubResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 6.0
+one_shot = true
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true

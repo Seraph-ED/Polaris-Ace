@@ -1,0 +1,521 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://Content/Levels/Level2.cs" type="Script" id=1]
+[ext_resource path="res://Content/VFX/BackgroundGrassLow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Content/Main/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=4]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTank.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sounds/Music/Level2MusicStream.tres" type="AudioStream" id=7]
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=8]
+[ext_resource path="res://Content/VFX/ForegroundClouds.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetRadar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetHangar.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Content/Entities/PathEntityContainer.cs" type="Script" id=12]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTankAntiAir.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetControlTower.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTankSam.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/BaseRunway.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Content/Entities/Enemies/EnemyHelicopterScout.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBasic.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Content/Entities/Enemies/EnemyHelicopterGunship.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Content/Entities/Enemies/EnemyAirDefenseFighter.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Content/Entities/Enemies/BossCommandTank/BossCommandTank.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Curve2D" id=6]
+_data = {
+"points": PoolVector2Array( -10.6787, 247.24, 10.6787, -247.24, 210, -228.439, 0, 0, 0, 0, 1043, -401.268, 122.669, 321.291, -122.669, -321.291, 1127, -885.93, 285.732, 14.701, -285.732, -14.701, 649, -1541.41, 117.885, -222.937, -117.885, 222.937, 183, -1426.16, 443.499, -1224.16, -443.499, 1224.16, -1300, -1443.7, -285.905, -126.332, 285.905, 126.332, -608, 239.758, 115.37, 80.1719, -115.37, -80.1719, 339, -31.8545, 0, 0, 0, 0, 210, -228.439 )
+}
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 404, -60.667, 0, 0, 0, 0, 399, 11.3633, 0, 0, 0, 0, 397, 32.9727, 0, 0, 0, 0, 473, 162.627, 0, 0, 0, 0, 542, 333.442, 0, 0, 0, 0, 606, 365.341, 0, 0, 0, 0, 713, 387.979, 0, 0, 0, 0, 837, 372.544, 0, 0, 0, 0, 946, 311.833 )
+}
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 404, -60.667, 0, 0, 0, 0, 397, 32.9727, 0, 0, 0, 0, 441, 358.139, 0, 0, 0, 0, 416, 610.245, 0, 0, 0, 0, 1030, 1457.12 )
+}
+
+[sub_resource type="Curve2D" id=5]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 404, -60.667, 0, 0, 0, 0, 399, 11.3633, 0, 0, 0, 0, 381, 90.5967, 0, 0, 0, 0, 483, 252.151, 0, 0, 0, 0, 134, 337.559, 0, 0, 0, 0, -106, 917.917 )
+}
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 404, -60.667, 0, 0, 0, 0, 439, 60.7559, 0, 0, 0, 0, 476, 265.527, 0, 0, 0, 0, 379, 375.631, 0, 0, 0, 0, 224, 749.16, 0, 0, 0, 0, -297, 1480.78 )
+}
+
+[sub_resource type="Curve2D" id=8]
+_data = {
+"points": PoolVector2Array( -1095.52, -1053.38, 1095.52, 1053.38, 4533, -1303.75, 1041.64, -397.327, -1041.64, 397.327, 3501, 414.689, 664.498, -397.327, -664.498, 397.327, 582, 1459.13, 754.295, 702.252, -754.295, -702.252, -2453, 1034.15, 440.005, 637.571, -440.005, -637.571, -3817, -665.768, -332.249, 914.776, 332.249, -914.776, -4805, -2938.84, -1293.08, -55.4409, 1293.08, 55.4409, -2461, -4454.57, -547.762, -286.445, 547.762, 286.445, 53, -2634.25, -745.315, -175.563, 745.315, 175.563, 2558, -2836.97, -152.655, -665.291, 152.655, 665.291, 3555, -860.249, -835.112, -452.768, 835.112, 452.768, 4533, -1303.75 )
+}
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( -610.251, 331.419, 610.251, -331.419, 667, 1808.99, -42.3785, 924.484, 42.3785, -924.484, 2583, 849.958, -76.1953, 777.52, 76.1953, -777.52, 177, -1293.46, -673.058, -71.8716, 673.058, 71.8716, 1689, -2198.99, 107.943, -816.722, -107.943, 816.722, 3218, -940.512, -339.028, -1133.8, 339.028, 1133.8, -934, 992.99, -500.067, 279.089, 500.067, -279.089, 667, 1808.99 )
+}
+
+[sub_resource type="Curve2D" id=12]
+_data = {
+"points": PoolVector2Array( 423.785, 427.356, -423.785, -427.356, 622, 111.133, 0, 0, 0, 0, -802, -245.933, 550.921, 218.039, -550.921, -218.039, -2565, 155.38, 186.465, 732.61, -186.465, -732.61, -3574, -970.353, -567.872, 252.925, 567.872, -252.925, -3124, -2950.16, -779.765, -279.089, 779.765, 279.089, -209, -2548.85, 101.708, -1037.86, -101.708, 1037.86, 1961, -2915.17, -474.639, -680.281, 474.639, 680.281, 3012, -1257.44, 398.358, -907.041, -398.358, 907.041, 2037, 32.9282, 177.99, 680.281, -177.99, -680.281, 622, 111.133 )
+}
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 438, -67.8701, 0, 0, 0, 0, 514, 47.3789 )
+}
+
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 409, -71.9854, 0, 0, 0, 0, 352, 60.7559 )
+}
+
+[sub_resource type="Curve2D" id=13]
+_data = {
+"points": PoolVector2Array( 60.3212, -143.743, -60.3212, 143.743, -737, 1106.23, 92.0693, -91.4729, -92.0693, 91.4729, -813, 1362.45, 169.897, -81.5852, -169.897, 81.5852, -1211, 1409.78, 139.693, -128.205, -139.693, 128.205, -1932, 1761.7, 7.55099, -202.02, -7.55099, 202.02, -2302, 2606.52, -230.305, -124.32, 230.305, 124.32, -1885, 3527.48, -196.326, 42.7351, 196.326, -42.7351, 1304, 3755.92, -120.816, 50.5051, 120.816, -50.5051, 4696, 2286.5, -86.8364, 1122.77, 86.8364, -1122.77, 10933, 122.496, 673.058, 522.702, -673.058, -522.702, 6773, -1869.66, 1498.51, 65.3378, -1498.51, -65.3378, 4659, -5215.99, 952.441, -1071.54, -952.441, 1071.54, -5350, -4647.97, 0, 0, 0, 0, -6523, -832.421, -88.8945, -1241.42, 88.8945, 1241.42, -6934, 5618.42, -609.562, -718.716, 609.562, 718.716, -6195, 10323, -596.209, 54.2801, 596.209, -54.2801, -2807, 12255.5, 0, 0, 0, 0, 6536, 12204.1, -644.485, 42.4696, 644.485, -42.4696, 10837, 12185.5, 265.872, 564.631, -265.872, -564.631, 10230, 7539.57, 0, 0, 0, 0, 6653, 4225.14, 540, 115.249, -540, -115.249, 3040, 1338.78, 165.09, 173.145, -165.09, -173.145, -449, 1444.77, 58.7338, 31.0354, -58.7338, -31.0354, -610, 1138.13, 76.5686, 84.5829, -76.5686, -84.5829, -737, 1106.23 )
+}
+
+[node name="Level2" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 1 )
+LevelName = "Test mission 2"
+Description = "We have been able to stall the enemy offensive, but our troops are taking heavy fire from enemy air support and armoured columns, they are being supported from a Forward Operating Base near the border. Neutralize the base and any armoured columns leaving its premises. Beware its air defense systems and interceptor fighters."
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="BackgroundGrassLow" parent="." instance=ExtResource( 2 )]
+
+[node name="ForegroundClouds" parent="." instance=ExtResource( 9 )]
+layer = 2
+
+[node name="GameCamera" parent="." groups=["Main"] instance=ExtResource( 3 )]
+position = Vector2( 1, -5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 7 )
+volume_db = -15.0
+autoplay = true
+bus = "Music"
+script = ExtResource( 8 )
+
+[node name="BaseParts" type="Node2D" parent="."]
+script = ExtResource( 4 )
+Active = true
+
+[node name="Hangar5" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -2323, -10158 )
+IsStructure = true
+
+[node name="Hangar6" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -1814, -10153 )
+IsStructure = true
+
+[node name="Hangar7" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -1305, -10153 )
+IsStructure = true
+
+[node name="BaseRunway" parent="BaseParts" instance=ExtResource( 16 )]
+position = Vector2( -1346, -8051 )
+
+[node name="BaseRunway2" parent="BaseParts" instance=ExtResource( 16 )]
+position = Vector2( -1349, -9603 )
+
+[node name="TargetControlTower" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( -914, -6853 )
+
+[node name="TargetControlTower2" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( -4977, -8677 )
+
+[node name="TargetControlTower3" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( -3515, -6871 )
+
+[node name="TargetControlTower5" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( 2467, -6925 )
+
+[node name="TargetControlTower7" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( 4637, -6931 )
+
+[node name="TargetControlTower8" parent="BaseParts" instance=ExtResource( 14 )]
+position = Vector2( 4637, -6931 )
+
+[node name="TargetRadar" parent="BaseParts" instance=ExtResource( 10 )]
+position = Vector2( 588, -5486 )
+IsEnemy = true
+
+[node name="Hangar1" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -2464, -9007 )
+IsStructure = true
+
+[node name="Hangar2" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -1966, -9007 )
+IsStructure = true
+
+[node name="Hangar3" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -1446, -9007 )
+IsStructure = true
+
+[node name="Hangar4" parent="BaseParts" instance=ExtResource( 11 )]
+position = Vector2( -939, -9007 )
+IsStructure = true
+
+[node name="Wave1" type="Node2D" parent="."]
+script = ExtResource( 4 )
+Active = true
+
+[node name="EnemyTank" parent="Wave1" instance=ExtResource( 5 )]
+position = Vector2( 602, -4121 )
+rotation = 3.14159
+
+[node name="EnemyTank2" parent="Wave1" instance=ExtResource( 5 )]
+position = Vector2( 1208, -4463 )
+rotation = 3.14159
+
+[node name="EnemyTank3" parent="Wave1" instance=ExtResource( 5 )]
+position = Vector2( 2077, -4933 )
+rotation = 3.14159
+
+[node name="EnemyTank4" parent="Wave1" instance=ExtResource( 5 )]
+position = Vector2( -18, -4506 )
+rotation = 3.14159
+
+[node name="EnemyTank5" parent="Wave1" instance=ExtResource( 5 )]
+position = Vector2( -887, -5125 )
+rotation = 3.14159
+
+[node name="Wave2" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="HeliPath1" type="Node2D" parent="Wave2"]
+position = Vector2( -945, -8465 )
+script = ExtResource( 12 )
+Proportion = 0.03
+CompletionTime = 12.0
+LoopType = 1
+
+[node name="HelicopterScout" parent="Wave2/HeliPath1" instance=ExtResource( 17 )]
+position = Vector2( 8, -12 )
+
+[node name="Path" type="Path2D" parent="Wave2/HeliPath1"]
+position = Vector2( -382, 355 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 6 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave2/HeliPath1/Path"]
+position = Vector2( 389.786, -373.541 )
+rotation = -0.255261
+offset = 246.77
+
+[node name="TankPath1" type="Node2D" parent="Wave2"]
+position = Vector2( -933, -8776 )
+script = ExtResource( 12 )
+CompletionTime = 4.0
+
+[node name="EnemyTankAntiAir" parent="Wave2/TankPath1" instance=ExtResource( 13 )]
+position = Vector2( -41, 22 )
+
+[node name="Path" type="Path2D" parent="Wave2/TankPath1"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 2 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave2/TankPath1/Path"]
+position = Vector2( 404, -60.667 )
+rotation = 1.64009
+
+[node name="TankPath2" type="Node2D" parent="Wave2"]
+position = Vector2( -1438, -8768 )
+script = ExtResource( 12 )
+CompletionTime = 5.0
+
+[node name="EnemyTankSam" parent="Wave2/TankPath2" instance=ExtResource( 15 )]
+
+[node name="Path" type="Path2D" parent="Wave2/TankPath2"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 3 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave2/TankPath2/Path"]
+position = Vector2( 404, -60.667 )
+rotation = 1.64541
+
+[node name="TankPath4" type="Node2D" parent="Wave2"]
+position = Vector2( -2466, -8771 )
+script = ExtResource( 12 )
+CompletionTime = 5.0
+
+[node name="EnemyTankAntiAir" parent="Wave2/TankPath4" instance=ExtResource( 13 )]
+position = Vector2( 46, 34 )
+
+[node name="Path" type="Path2D" parent="Wave2/TankPath4"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 5 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave2/TankPath4/Path"]
+position = Vector2( 404, -60.667 )
+rotation = 1.64009
+
+[node name="TankPath3" type="Node2D" parent="Wave2"]
+position = Vector2( -1963, -8763 )
+script = ExtResource( 12 )
+CompletionTime = 4.0
+
+[node name="EnemyTankSam" parent="Wave2/TankPath3" instance=ExtResource( 15 )]
+
+[node name="Path" type="Path2D" parent="Wave2/TankPath3"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 4 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave2/TankPath3/Path"]
+position = Vector2( 404, -60.667 )
+rotation = 1.29016
+
+[node name="Wave3" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="EnemyMig29" parent="Wave3" instance=ExtResource( 20 )]
+position = Vector2( -299, -8040 )
+rotation = 1.77675
+
+[node name="EnemyMig30" parent="Wave3" instance=ExtResource( 20 )]
+position = Vector2( -998, -7981 )
+rotation = 1.77675
+
+[node name="EnemyBasic" parent="Wave3" instance=ExtResource( 18 )]
+position = Vector2( -598, -9714 )
+rotation = 1.44688
+
+[node name="EnemyBasic2" parent="Wave3" instance=ExtResource( 18 )]
+position = Vector2( -940, -9702 )
+rotation = 1.44688
+
+[node name="EnemyBasic3" parent="Wave3" instance=ExtResource( 18 )]
+position = Vector2( -1254, -9703 )
+rotation = 1.44688
+
+[node name="HeliPath1" type="Node2D" parent="Wave3"]
+position = Vector2( -945, -8465 )
+script = ExtResource( 12 )
+Proportion = 0.03
+CompletionTime = 45.0
+LoopType = 2
+
+[node name="HelicopterScout" parent="Wave3/HeliPath1" instance=ExtResource( 17 )]
+position = Vector2( 8, -12 )
+
+[node name="Path" type="Path2D" parent="Wave3/HeliPath1"]
+position = Vector2( -149, 1657 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 8 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave3/HeliPath1/Path"]
+position = Vector2( 4706.95, -1122.61 )
+rotation = 0.852968
+offset = 246.77
+
+[node name="HeliPath2" type="Node2D" parent="Wave3"]
+position = Vector2( -945, -8465 )
+script = ExtResource( 12 )
+Proportion = 0.03
+CompletionTime = 30.0
+LoopType = 2
+
+[node name="HelicopterScout" parent="Wave3/HeliPath2" instance=ExtResource( 17 )]
+position = Vector2( 8, -12 )
+
+[node name="Path" type="Path2D" parent="Wave3/HeliPath2"]
+position = Vector2( -382, 355 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 7 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave3/HeliPath2/Path"]
+position = Vector2( 894.223, 1718.61 )
+rotation = -0.282539
+offset = 246.77
+
+[node name="Wave4" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="HeliPath1" type="Node2D" parent="Wave4"]
+position = Vector2( -945, -8465 )
+script = ExtResource( 12 )
+Proportion = 0.03
+CompletionTime = 70.0
+LoopType = 2
+
+[node name="EnemyHelicopterGunship" parent="Wave4/HeliPath1" instance=ExtResource( 19 )]
+Health = 600.0
+IsBoss = true
+
+[node name="Path" type="Path2D" parent="Wave4/HeliPath1"]
+position = Vector2( -43, 638 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 12 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave4/HeliPath1/Path"]
+position = Vector2( 422.036, -36.5165 )
+rotation = -2.64063
+offset = 246.77
+
+[node name="Wave5" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="EnemyMig29" parent="Wave5" instance=ExtResource( 20 )]
+position = Vector2( -6160, 228 )
+rotation = 0.727802
+
+[node name="EnemyMig33" parent="Wave5" instance=ExtResource( 20 )]
+position = Vector2( -6627, 283 )
+rotation = 0.727802
+
+[node name="EnemyMig30" parent="Wave5" instance=ExtResource( 20 )]
+position = Vector2( -5657, 1299 )
+rotation = 0.727802
+
+[node name="EnemyMig31" parent="Wave5" instance=ExtResource( 20 )]
+position = Vector2( -5654, 818 )
+rotation = 0.727802
+
+[node name="EnemyMig32" parent="Wave5" instance=ExtResource( 20 )]
+position = Vector2( -5673, 305 )
+rotation = 0.727802
+
+[node name="TankPath1" type="Node2D" parent="Wave5"]
+position = Vector2( -1287, -9905 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="EnemyTankAntiAir" parent="Wave5/TankPath1" instance=ExtResource( 13 )]
+position = Vector2( -56, 54 )
+
+[node name="Path" type="Path2D" parent="Wave5/TankPath1"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 10 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankPath1/Path"]
+position = Vector2( 438, -67.8701 )
+rotation = 0.98781
+
+[node name="TankPath2" type="Node2D" parent="Wave5"]
+position = Vector2( -1791, -9906 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="EnemyTankAntiAir" parent="Wave5/TankPath2" instance=ExtResource( 13 )]
+position = Vector2( -41, 22 )
+
+[node name="Path" type="Path2D" parent="Wave5/TankPath2"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 10 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankPath2/Path"]
+position = Vector2( 438, -67.8701 )
+rotation = 0.98781
+
+[node name="TankPath3" type="Node2D" parent="Wave5"]
+position = Vector2( -2305, -9907 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="EnemyTankAntiAir" parent="Wave5/TankPath3" instance=ExtResource( 13 )]
+position = Vector2( -56, 54 )
+
+[node name="Path" type="Path2D" parent="Wave5/TankPath3"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 10 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankPath3/Path"]
+position = Vector2( 438, -67.8701 )
+rotation = 0.98781
+
+[node name="TankMissilePath1" type="Node2D" parent="Wave5"]
+position = Vector2( -1316, -9905 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="Path" type="Path2D" parent="Wave5/TankMissilePath1"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 11 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankMissilePath1/Path"]
+position = Vector2( 409, -71.9854 )
+rotation = 1.97638
+
+[node name="EnemyTankSam" parent="Wave5/TankMissilePath1" instance=ExtResource( 15 )]
+position = Vector2( 82, 45 )
+
+[node name="TankMissilePath2" type="Node2D" parent="Wave5"]
+position = Vector2( -1829, -9902 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="Path" type="Path2D" parent="Wave5/TankMissilePath2"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 11 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankMissilePath2/Path"]
+position = Vector2( 409, -71.9854 )
+rotation = 1.97638
+
+[node name="EnemyTankSam" parent="Wave5/TankMissilePath2" instance=ExtResource( 15 )]
+position = Vector2( 99, 46 )
+
+[node name="TankMissilePath3" type="Node2D" parent="Wave5"]
+position = Vector2( -2320, -9909 )
+script = ExtResource( 12 )
+CompletionTime = 1.0
+
+[node name="Path" type="Path2D" parent="Wave5/TankMissilePath3"]
+position = Vector2( -427, 53.957 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 11 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave5/TankMissilePath3/Path"]
+position = Vector2( 409, -71.9854 )
+rotation = 1.97638
+
+[node name="EnemyTankSam" parent="Wave5/TankMissilePath3" instance=ExtResource( 15 )]
+position = Vector2( 99, 46 )
+
+[node name="Wave6" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="TankPath1" type="Node2D" parent="Wave6"]
+position = Vector2( -1287, -9905 )
+script = ExtResource( 12 )
+Proportion = -0.325
+CompletionTime = 180.0
+LoopType = 1
+
+[node name="BossCommandTank" parent="Wave6/TankPath1" instance=ExtResource( 21 )]
+position = Vector2( -1327, 1227 )
+
+[node name="Path" type="Path2D" parent="Wave6/TankPath1"]
+position = Vector2( -444, 116 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 13 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Wave6/TankPath1/Path"]
+position = Vector2( -1401.94, 3612.53 )
+rotation = 0.110796
+offset = 3950.31
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 541, 318 )
+Health = 200.0
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )

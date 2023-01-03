@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Sprites/Backgrounds/Grass.png" type="Texture" id=1]
+
+[node name="BackgroundGrassLow" type="ParallaxBackground"]
+
+[node name="GrassLandscape" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 2400, 2400 )
+motion_mirroring = Vector2( 2400, 2400 )
+
+[node name="Landscape" type="Sprite" parent="GrassLandscape"]
+position = Vector2( 1199, 1204 )
+texture = ExtResource( 1 )

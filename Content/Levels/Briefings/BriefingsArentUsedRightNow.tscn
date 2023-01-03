@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Content/Levels/Briefings/Level1Briefing.cs" type="Script" id=1]
+[ext_resource path="res://Content/Levels/Briefings/ContinueButton.cs" type="Script" id=2]
+[ext_resource path="res://Content/TextTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Content/Main/MenuButtonFont.tres" type="DynamicFont" id=4]
+
+[node name="Level1Briefing" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Pages" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 1.0
+margin_bottom = -3.0
+
+[node name="Page1" type="Control" parent="Pages"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Page1"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Pages/Page1"]
+margin_left = 222.0
+margin_top = 107.0
+margin_right = 1467.0
+margin_bottom = 854.0
+theme = ExtResource( 3 )
+text = "Page 1
+The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater), it obtains a difference, or deviation. The guidance subsystem uses deviations to generate corrective commands to drive the missile from a position where it is to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position that it was, is now the position that it isn't.
+In the event that the position that it is in is not the position that it wasn't, the system has acquired a variation, the variation being the difference between where the missile is, and where it wasn't. If variation is considered to be a significant factor, it too may be corrected by the GEA. However, the missile must also know where it was.
+The missile guidance computer scenario works as follows. Because a variation has modified some of the information the missile has obtained, it is not sure just where it is. However, it is sure where it isn't, within reason, and it knows where it was. It now subtracts where it should be from where it wasn't, or vice-versa, and by differentiating this from the algebraic sum of where it shouldn't be, and where it was, it is able to obtain the deviation and its variation, which is called error.
+
+"
+
+[node name="Page2" type="Control" parent="Pages"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Page2"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Pages/Page2"]
+margin_left = 222.0
+margin_top = 107.0
+margin_right = 1467.0
+margin_bottom = 854.0
+theme = ExtResource( 3 )
+text = "Page 2
+The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater), it obtains a difference, or deviation. The guidance subsystem uses deviations to generate corrective commands to drive the missile from a position where it is to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position that it was, is now the position that it isn't.
+In the event that the position that it is in is not the position that it wasn't, the system has acquired a variation, the variation being the difference between where the missile is, and where it wasn't. If variation is considered to be a significant factor, it too may be corrected by the GEA. However, the missile must also know where it was.
+The missile guidance computer scenario works as follows. Because a variation has modified some of the information the missile has obtained, it is not sure just where it is. However, it is sure where it isn't, within reason, and it knows where it was. It now subtracts where it should be from where it wasn't, or vice-versa, and by differentiating this from the algebraic sum of where it shouldn't be, and where it was, it is able to obtain the deviation and its variation, which is called error.
+
+"
+
+[node name="ContinueButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1711.0
+margin_top = 1020.0
+margin_right = -38.0
+margin_bottom = -20.0
+custom_fonts/font = ExtResource( 4 )
+text = "Continue"
+script = ExtResource( 2 )

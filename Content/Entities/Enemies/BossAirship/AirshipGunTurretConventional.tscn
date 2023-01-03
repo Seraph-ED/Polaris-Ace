@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/BossAirship/AirshipGunTurretConventional.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipGunTurretBroken.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Enemies/BossAirship/AirshipGunTurret.png" type="Texture" id=3]
+[ext_resource path="res://Content/Entities/Enemies/FiringCrosshair.cs" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "default",
+"speed": 0.0
+} ]
+
+[node name="AirshipGunTurretConventional" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 1 )
+Health = 150.0
+
+[node name="FiringCrosshair" type="Line2D" parent="."]
+scale = Vector2( 0.171147, 0.171147 )
+points = PoolVector2Array( 0, 0, 6000, 0 )
+width = 20.0
+default_color = Color( 1, 0, 0, 0.501961 )
+script = ExtResource( 4 )
+
+[node name="FiringArc" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FiringArc"]
+polygon = PoolVector2Array( 0, 0, 990, -150, 990, 150 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.75, 0.75 )
+polygon = PoolVector2Array( 18, -1, 2, 23, -24, 22, -45, 1, -22, -25, 2, -25 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.76, 0.76 )
+frames = SubResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true

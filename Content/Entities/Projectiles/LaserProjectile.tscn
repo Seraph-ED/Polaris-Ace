@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Sprites/Projectiles/LaserSegment.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Projectiles/LaserProjectile.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/SFX/cannon_t_160_loop_lastshot.wav" type="AudioStream" id=3]
+[ext_resource path="res://Content/Entities/Projectiles/LaserProjectileDrawer.cs" type="Script" id=4]
+[ext_resource path="res://Content/Entities/Projectiles/LaserLengthRaycast.cs" type="Script" id=5]
+
+[sub_resource type="RayShape2D" id=1]
+length = 5000.0
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[node name="LaserProjectile" type="Area2D"]
+collision_layer = 12
+collision_mask = 12
+script = ExtResource( 2 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -30.0
+bus = "SFX"
+
+[node name="LaserProjectileDrawer" type="Sprite" parent="."]
+material = SubResource( 2 )
+position = Vector2( 10, 6.50521e-19 )
+rotation = 1.5708
+scale = Vector2( 0.1, 0.1 )
+z_index = -5
+texture = ExtResource( 1 )
+script = ExtResource( 4 )
+
+[node name="LengthRaycast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 5000, 0 )
+collision_mask = 4
+script = ExtResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="SetAsColliding"]
+[connection signal="body_exited" from="." to="." method="UnsetAsColliding"]

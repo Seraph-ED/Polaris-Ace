@@ -1,0 +1,132 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Content/VFX/ContrailParticles.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Sprites/EnemyBomber.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/BomberTurret.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Sprites/BomberPropeller.png" type="Texture" id=6]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBomber.cs" type="Script" id=7]
+[ext_resource path="res://Content/Entities/CharacterParticles.cs" type="Script" id=8]
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 70, 40 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 40, 70, 40 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
+
+[node name="EnemyBomber" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.39625, 0.39625 )
+texture = ExtResource( 2 )
+
+[node name="TurretSprite" type="Sprite" parent="."]
+position = Vector2( 0, 22 )
+scale = Vector2( 0.416667, 0.416667 )
+texture = ExtResource( 3 )
+offset = Vector2( 0, -15 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="." groups=["HostileEntity", "Main"]]
+visible = false
+polygon = PoolVector2Array( 0, 118, 37, 100, 5, 69, 9, 32, 17, -21, 123, 27, 123, 9, 9, -80, 9, -127, -7, -127, -8, -80, -125, 9, -126, 26, -17, -22, -8, 32, -5, 69, -38, 102 )
+
+[node name="Propellers" type="Node2D" parent="."]
+
+[node name="Prop1" type="AnimatedSprite" parent="Propellers"]
+position = Vector2( -32, -77 )
+scale = Vector2( 0.475, 0.475 )
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="Prop2" type="AnimatedSprite" parent="Propellers"]
+position = Vector2( -61, -60 )
+scale = Vector2( 0.475, 0.475 )
+frames = SubResource( 4 )
+playing = true
+
+[node name="Prop3" type="AnimatedSprite" parent="Propellers"]
+position = Vector2( 32, -77 )
+scale = Vector2( 0.475, 0.475 )
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="Prop4" type="AnimatedSprite" parent="Propellers"]
+position = Vector2( 61, -61 )
+scale = Vector2( 0.475, 0.475 )
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="Contrails" type="Node2D" parent="."]
+
+[node name="Contrail1" type="Particles2D" parent="Contrails"]
+material = ExtResource( 5 )
+position = Vector2( -35, -70 )
+amount = 600
+lifetime = 3.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 8 )
+
+[node name="Contrail2" type="Particles2D" parent="Contrails"]
+material = ExtResource( 5 )
+position = Vector2( -64, -53 )
+amount = 600
+lifetime = 3.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 8 )
+
+[node name="Contrail3" type="Particles2D" parent="Contrails"]
+material = ExtResource( 5 )
+position = Vector2( 35, -70 )
+amount = 600
+lifetime = 3.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 8 )
+
+[node name="Contrail4" type="Particles2D" parent="Contrails"]
+material = ExtResource( 5 )
+position = Vector2( 64, -54 )
+amount = 600
+lifetime = 3.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 4 )
+script = ExtResource( 8 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true
+
+[node name="MissileTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 5.0
+autostart = true

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Fonts/ROGFonts-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Content/UI/BossWarningLabel.cs" type="Script" id=2]
+[ext_resource path="res://Content/UI/BossWarning.cs" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 96
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="BossWarning" type="Control"]
+light_mask = 0
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="BossWarningLabel" type="Label" parent="."]
+margin_left = 428.0
+margin_top = 291.0
+margin_right = 1491.0
+margin_bottom = 526.0
+theme = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "WARNING
+THREAT INBOUND"
+align = 1
+script = ExtResource( 2 )

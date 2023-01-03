@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Sprites/Projectiles/MissileLongRange.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=2]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=3]
+[ext_resource path="res://Content/VFX/JetExhaustParticleMaterialBlue.tres" type="Material" id=4]
+[ext_resource path="res://Assets/Sounds/SFX/MissileLaunch.wav" type="AudioStream" id=5]
+[ext_resource path="res://Content/Entities/Projectiles/MissileHostileLongRange.cs" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.0
+height = 52.0
+
+[node name="MissileHostileLongRange" type="Area2D"]
+collision_layer = 3
+monitorable = false
+script = ExtResource( 6 )
+Lifespan = 16.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 4.76837e-07, 1.90735e-06 )
+scale = Vector2( 0.221481, 0.221481 )
+texture = ExtResource( 1 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 1 )
+
+[node name="Exhaust" type="Particles2D" parent="."]
+show_behind_parent = true
+material = ExtResource( 3 )
+position = Vector2( -31, 0 )
+rotation = 1.5708
+amount = 1800
+lifetime = 2.0
+preprocess = 1.0
+speed_scale = 0.76
+randomness = 0.36
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 4 )
+texture = ExtResource( 2 )
+
+[node name="SeekerCheck" type="Area2D" parent="."]
+visible = false
+collision_layer = 6
+collision_mask = 4
+monitorable = false
+
+[node name="SeekerHitbox" type="CollisionPolygon2D" parent="SeekerCheck"]
+visible = false
+polygon = PoolVector2Array( 2.79753e-06, -16, 300, -384, 9.8438e-05, -563, -300, -384 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -10.0
+autoplay = true
+max_distance = 1200.0
+attenuation = 1.27456
+bus = "SFX"
+
+[connection signal="body_entered" from="." to="." method="OnHit"]

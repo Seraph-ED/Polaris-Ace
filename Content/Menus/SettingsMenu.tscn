@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Fonts/ROGFonts-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Content/Main/MenuButtonFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/Sprites/Menu/Sound.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Menu/Music.png" type="Texture" id=4]
+[ext_resource path="res://Content/Menus/MenuReturnButton.cs" type="Script" id=5]
+[ext_resource path="res://Content/Menus/SaveSettingsButton.cs" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+
+[node name="SettingsMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 2.0
+margin_right = 3.0
+margin_bottom = 2.0
+
+[node name="Title" type="Label" parent="."]
+margin_left = 252.0
+margin_top = 51.0
+margin_right = 1644.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 1 )
+text = "Settings"
+align = 1
+
+[node name="SoundSliderContainer" type="PanelContainer" parent="."]
+anchor_left = 0.046
+anchor_top = -0.038
+anchor_right = 1.043
+anchor_bottom = 0.954
+margin_left = 646.68
+margin_top = 229.04
+margin_right = -840.56
+margin_bottom = -709.32
+
+[node name="MuteButtonContainer" type="VBoxContainer" parent="SoundSliderContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 420.0
+margin_bottom = 126.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="SoundSliderContainer/MuteButtonContainer"]
+margin_right = 413.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="PanelContainer" parent="SoundSliderContainer/MuteButtonContainer/MusicVolumeContainer"]
+margin_right = 204.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="SoundSliderContainer/MuteButtonContainer/MusicVolumeContainer/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 197.0
+margin_bottom = 50.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 6
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SoundSliderContainer/MuteButtonContainer/MusicVolumeContainer"]
+margin_left = 208.0
+margin_right = 413.0
+margin_bottom = 57.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = SubResource( 2 )
+max_value = 1.0
+step = 0.01
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="SoundSliderContainer/MuteButtonContainer"]
+margin_top = 61.0
+margin_right = 413.0
+margin_bottom = 119.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="PanelContainer" parent="SoundSliderContainer/MuteButtonContainer/SFXVolumeContainer"]
+margin_right = 204.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="SoundSliderContainer/MuteButtonContainer/SFXVolumeContainer/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 197.0
+margin_bottom = 51.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="SFXVolumeSlider" type="HSlider" parent="SoundSliderContainer/MuteButtonContainer/SFXVolumeContainer"]
+margin_left = 208.0
+margin_right = 413.0
+margin_bottom = 58.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+
+[node name="SaveSettingsButton" type="Button" parent="."]
+anchor_left = 0.06
+anchor_top = -0.035
+anchor_right = 1.039
+anchor_bottom = 0.954
+margin_left = 714.8
+margin_top = 857.8
+margin_right = -904.88
+margin_bottom = -160.32
+custom_fonts/font = ExtResource( 2 )
+text = "Save Settings"
+script = ExtResource( 6 )
+
+[node name="MenuReturnButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 830.0
+margin_top = 907.0
+margin_right = -830.0
+margin_bottom = -123.0
+custom_fonts/font = ExtResource( 2 )
+text = "Return"
+script = ExtResource( 5 )

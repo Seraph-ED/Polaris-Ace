@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fusion.ogg-51ec34d18eb085aecf956a3e6b576da1.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/Fusion.ogg"
+dest_files=[ "res://.import/Fusion.ogg-51ec34d18eb085aecf956a3e6b576da1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

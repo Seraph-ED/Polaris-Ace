@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/Backgrounds/Cloud3.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Backgrounds/Cloud1.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Backgrounds/Cloud2.png" type="Texture" id=3]
+
+[node name="ForegroundClouds" type="ParallaxBackground"]
+layer = 100
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 600, 600.027 )
+motion_mirroring = Vector2( 2400, 2400 )
+
+[node name="CloudGroup" type="Node2D" parent="Clouds"]
+position = Vector2( -5, 4 )
+
+[node name="Cloud5" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 1183, 1013 )
+scale = Vector2( 1.29875, 1.82731 )
+texture = ExtResource( 2 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud8" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 1347, 2257 )
+scale = Vector2( 1.29875, 1.82731 )
+texture = ExtResource( 2 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud6" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 1795, 370 )
+scale = Vector2( 0.965617, 0.985831 )
+texture = ExtResource( 3 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud7" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 2105, 1766 )
+scale = Vector2( 0.965617, 0.985831 )
+texture = ExtResource( 3 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud4" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 387, 1962 )
+rotation = 1.86925
+scale = Vector2( 1.63241, 1.0048 )
+texture = ExtResource( 1 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud3" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 1441, 1618 )
+rotation = 2.18166
+scale = Vector2( 1.425, 1.41844 )
+texture = ExtResource( 2 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 827, 508 )
+scale = Vector2( 0.90875, 1.70563 )
+texture = ExtResource( 3 )
+offset = Vector2( -18.2326, -16 )
+
+[node name="Cloud2" type="Sprite" parent="Clouds/CloudGroup"]
+position = Vector2( 165, 1099 )
+scale = Vector2( 0.915832, 1.28855 )
+texture = ExtResource( 1 )
+offset = Vector2( -18.2326, -16 )

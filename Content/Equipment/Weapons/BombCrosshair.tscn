@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Content/Equipment/Weapons/WeaponCrosshair.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Extra/Crosshair.png" type="Texture" id=4]
+[ext_resource path="res://Content/Equipment/Weapons/WeaponCrosshairBomb.cs" type="Script" id=5]
+
+[node name="CrosshairBomb" type="Node2D"]
+script = ExtResource( 1 )
+WeaponName = "Bomb"
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 4 )
+script = ExtResource( 5 )

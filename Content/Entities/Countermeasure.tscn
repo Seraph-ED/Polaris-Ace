@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Sprites/Star.png" type="Texture" id=2]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0.0267062, 0.121662, 0.237389, 0.5727 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.979492, 0.946948, 0.723141, 1, 0.772461, 0.570458, 0.277603, 1, 0.28418, 0.250261, 0.200924, 0.0666667 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.0693182 ), 0.0, 42.5454, 0, 0, Vector2( 0.105556, 0.360227 ), -1.11962, -1.11962, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 67.71
+angular_velocity = 280.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.98
+damping = 77.08
+angle = 720.0
+angle_random = 1.0
+scale = 0.5
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[node name="Countermeasure" type="Node2D"]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+material = ExtResource( 1 )
+amount = 40
+lifetime = 0.3
+local_coords = false
+process_material = SubResource( 5 )
+texture = ExtResource( 2 )

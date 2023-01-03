@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/Base/TargetRadarAntenna.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetRadar.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/Enemies/Base/TargetRadarBase.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31, 35 )
+
+[node name="TargetRadar" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 2 )
+Health = 450.0
+
+[node name="Base" type="Sprite" parent="."]
+position = Vector2( -0.0257362, -1.02574 )
+scale = Vector2( 0.406495, 0.406495 )
+texture = ExtResource( 3 )
+
+[node name="Antenna" type="Sprite" parent="."]
+position = Vector2( -7.62939e-06, -7.62939e-06 )
+scale = Vector2( 0.398907, 0.398907 )
+texture = ExtResource( 1 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["HostileEntity", "Main"]]
+shape = SubResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true
+
+[node name="DetectionArc" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectionArc"]
+polygon = PoolVector2Array( 0, -6, -1500, -7990, 1500, -7990 )

@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Fonts/ROGFonts-Regular.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://Content/Menus/LevelSelect.cs" type="Script" id=2]
+[ext_resource path="res://Content/Main/MenuButtonFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Content/Menus/MenuReturnButton.cs" type="Script" id=4]
+[ext_resource path="res://Content/Menus/CustomisationButton.cs" type="Script" id=5]
+[ext_resource path="res://Content/Menus/LevelStartButton.cs" type="Script" id=6]
+[ext_resource path="res://Content/TextTheme.tres" type="Theme" id=7]
+[ext_resource path="res://Content/Menus/DescriptionBox.cs" type="Script" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 1 )
+
+[node name="LevelSelect" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 252.0
+margin_top = 51.0
+margin_right = 1644.0
+margin_bottom = 134.0
+custom_fonts/font = SubResource( 1 )
+text = "Mission Select"
+align = 1
+
+[node name="DescriptionBox" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 663.0
+margin_top = 166.0
+margin_right = -377.0
+margin_bottom = -262.0
+theme = ExtResource( 7 )
+text = "DEFAULT"
+script = ExtResource( 8 )
+
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 199.0
+margin_top = 161.0
+margin_right = 523.0
+margin_bottom = 823.0
+
+[node name="LevelButtonContainer" type="GridContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 317.0
+margin_bottom = 655.0
+
+[node name="MenuReturnButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 224.0
+margin_top = 924.0
+margin_right = -1430.0
+margin_bottom = -105.0
+custom_fonts/font = ExtResource( 3 )
+text = "Return"
+script = ExtResource( 4 )
+
+[node name="CustomisationButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 221.0
+margin_top = 850.0
+margin_right = -1433.0
+margin_bottom = -179.0
+custom_fonts/font = ExtResource( 3 )
+text = "Aircraft"
+script = ExtResource( 5 )
+
+[node name="StartButton" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1421.0
+margin_top = 912.0
+margin_right = -233.0
+margin_bottom = -117.0
+custom_fonts/font = ExtResource( 3 )
+text = "Start Mission"
+script = ExtResource( 6 )

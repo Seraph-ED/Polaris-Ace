@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Content/Entities/CollisionAvoidance.cs" type="Script" id=1]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBasic.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/JetMig21.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/JetExhaustParticles1.tres" type="Material" id=6]
+[ext_resource path="res://Content/Entities/CharacterParticles.cs" type="Script" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 44.0
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 23.0
+height = 66.0
+
+[node name="EnemyBasic" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.171147, 0.171147 )
+texture = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="." groups=["HostileEntity", "Main"]]
+visible = false
+position = Vector2( 1, 2 )
+shape = SubResource( 1 )
+
+[node name="Afterburners" type="Node2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="Afterburners"]
+material = ExtResource( 5 )
+position = Vector2( 0, 34 )
+amount = 1200
+lifetime = 2.0
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 6 )
+texture = ExtResource( 4 )
+script = ExtResource( 7 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.251
+autostart = true
+
+[node name="FiringArc" type="Area2D" parent="."]
+position = Vector2( 0, -17 )
+monitorable = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FiringArc"]
+polygon = PoolVector2Array( 0, -6, -150, -990, 150, -990 )
+
+[node name="CollisionAvoidance" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 32
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoidance"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="FiringArc" to="." method="SetTargetInArc"]
+[connection signal="body_exited" from="FiringArc" to="." method="UnsetTargetInArc"]

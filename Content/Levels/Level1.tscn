@@ -1,0 +1,161 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Content/Levels/Level1.cs" type="Script" id=1]
+[ext_resource path="res://Content/VFX/Background.cs" type="Script" id=2]
+[ext_resource path="res://Content/Main/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBasic.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Content/VFX/BackgroundOceanHigh.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sounds/Music/InterdictorIngame.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=8]
+[ext_resource path="res://Content/Entities/Enemies/FlightWaypoint.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBomber.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=11]
+[ext_resource path="res://Content/Entities/Enemies/BossAirSuperiority.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Content/Entities/Enemies/EnemyAirDefenseFighter.tscn" type="PackedScene" id=13]
+
+[node name="Level1" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 1 )
+LevelName = "Mission 1"
+Description = "War has been declared! Our neighboring nation to the south has had its military hijacked by a faction of militant extremists known as the Dark Sun organization. The elected government in exile has fled here and asked us to provide military assistance, but Dark Sun forces have crossed the border in an attempt to snuff out the opposition. Your task is to perform combat air patrol and intercept any hostile air assets crossing the border over the Southern Gulf, Godspeed."
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="Player" parent="." instance=ExtResource( 6 )]
+position = Vector2( 541, 318 )
+Health = 200.0
+
+[node name="GameCamera" parent="." groups=["Main"] instance=ExtResource( 3 )]
+position = Vector2( 1, -5 )
+
+[node name="Background" parent="." instance=ExtResource( 5 )]
+script = ExtResource( 2 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 7 )
+volume_db = -15.0
+autoplay = true
+bus = "Music"
+script = ExtResource( 8 )
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )
+
+[node name="Waypoints" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Wave1" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Enemy" parent="Wave1" instance=ExtResource( 4 )]
+position = Vector2( 943, -7909 )
+rotation = -3.09273
+
+[node name="Wave2" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="Enemy" parent="Wave2" instance=ExtResource( 4 )]
+position = Vector2( 9111, -4631 )
+rotation = -2.4295
+
+[node name="Enemy2" parent="Wave2" instance=ExtResource( 4 )]
+position = Vector2( 9054, -5709 )
+rotation = 3.74199
+
+[node name="Enemy3" parent="Wave2" instance=ExtResource( 4 )]
+position = Vector2( 9899, -4857 )
+rotation = 3.14159
+
+[node name="Wave3" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="FlightWaypoint" parent="Wave3" instance=ExtResource( 9 )]
+position = Vector2( -5214, 1207 )
+
+[node name="EnemyBomber1" parent="Wave3/FlightWaypoint" instance=ExtResource( 10 )]
+position = Vector2( 746, 4 )
+IsEnemy = true
+
+[node name="Enemy" parent="Wave3" instance=ExtResource( 4 )]
+position = Vector2( -4813, 1556 )
+
+[node name="Enemy2" parent="Wave3" instance=ExtResource( 4 )]
+position = Vector2( -3920, 1513 )
+
+[node name="Wave4" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="FlightWaypoint" parent="Wave4" instance=ExtResource( 9 )]
+position = Vector2( -2056, -3329 )
+
+[node name="EnemyBomber1" parent="Wave4/FlightWaypoint" instance=ExtResource( 10 )]
+position = Vector2( 856, -3 )
+IsEnemy = true
+
+[node name="FlightWaypoint2" parent="Wave4" instance=ExtResource( 9 )]
+position = Vector2( 1094, -3508 )
+
+[node name="EnemyBomber1" parent="Wave4/FlightWaypoint2" instance=ExtResource( 10 )]
+position = Vector2( 826, -65 )
+IsEnemy = true
+
+[node name="FlightWaypoint3" parent="Wave4" instance=ExtResource( 9 )]
+position = Vector2( -58, -4436 )
+
+[node name="EnemyBomber1" parent="Wave4/FlightWaypoint3" instance=ExtResource( 10 )]
+position = Vector2( -1768, 429 )
+IsEnemy = true
+
+[node name="Wave5" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="EnemyMig29-01" parent="Wave5" instance=ExtResource( 13 )]
+position = Vector2( 2615, -5708 )
+rotation = 3.29344
+
+[node name="EnemyMig39-02" parent="Wave5" instance=ExtResource( 13 )]
+position = Vector2( 3369, -5600 )
+rotation = 3.29344
+
+[node name="Wave6" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="EnemyMig29-01" parent="Wave6" instance=ExtResource( 13 )]
+position = Vector2( -9734, -5289 )
+rotation = 2.77333
+
+[node name="EnemyMig29-02" parent="Wave6" instance=ExtResource( 13 )]
+position = Vector2( -11216, 4432 )
+rotation = 0.799361
+
+[node name="EnemyMig39-02" parent="Wave6" instance=ExtResource( 13 )]
+position = Vector2( -8105, -6875 )
+rotation = 2.54469
+
+[node name="Enemy" parent="Wave6" instance=ExtResource( 4 )]
+position = Vector2( 9011, 3038 )
+rotation = -0.727802
+
+[node name="Enemy2" parent="Wave6" instance=ExtResource( 4 )]
+position = Vector2( 7500, 5376 )
+rotation = -0.727802
+
+[node name="Enemy3" parent="Wave6" instance=ExtResource( 4 )]
+position = Vector2( 9610, 5319 )
+rotation = -0.727802
+
+[node name="Enemy4" parent="Wave6" instance=ExtResource( 4 )]
+position = Vector2( 12090, -7767 )
+rotation = -2.28638
+
+[node name="Wave7" type="Node2D" parent="."]
+script = ExtResource( 11 )
+
+[node name="BossAirSuperiority" parent="Wave7" instance=ExtResource( 12 )]
+position = Vector2( 0, -9571 )

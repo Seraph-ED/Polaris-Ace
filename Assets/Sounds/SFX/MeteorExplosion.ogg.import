@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MeteorExplosion.ogg-0670b6df6d38da25db24987c7a1a9f4b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/MeteorExplosion.ogg"
+dest_files=[ "res://.import/MeteorExplosion.ogg-0670b6df6d38da25db24987c7a1a9f4b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

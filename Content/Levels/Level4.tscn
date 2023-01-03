@@ -1,0 +1,68 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Content/Levels/LevelTest.cs" type="Script" id=1]
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=2]
+[ext_resource path="res://Content/Main/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Content/VFX/BackgroundOceanLow.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=6]
+[ext_resource path="res://Content/Entities/Enemies/EnemyNavalFighter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Sounds/Music/RedWings.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Content/Entities/TerrainElement.cs" type="Script" id=9]
+[ext_resource path="res://Content/Entities/Enemies/Ships/AegisRadar.tscn" type="PackedScene" id=10]
+
+[node name="Level4" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 1 )
+LevelName = "Test Mission"
+
+[node name="BackgroundOceanLow" parent="." instance=ExtResource( 5 )]
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="GameCamera" parent="." groups=["Main"] instance=ExtResource( 3 )]
+position = Vector2( 1, -5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 8 )
+volume_db = -15.0
+autoplay = true
+bus = "Music"
+script = ExtResource( 2 )
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="Island1" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 1000, -1000 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island1"]
+polygon = PoolVector2Array( -20, 82, 104, 55, 112, -59, -3, -122, -60, -45, -142, 17, -111, 77 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island1"]
+polygon = PoolVector2Array( -20, 82, 104, 55, 112, -59, -3, -122, -60, -45, -142, 17, -111, 77 )
+
+[node name="Wave" type="Node2D" parent="."]
+script = ExtResource( 6 )
+Active = true
+
+[node name="EnemyNavalFighter" parent="Wave" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( -518, -824 )
+
+[node name="AegisRadar" parent="Wave" instance=ExtResource( 10 )]
+position = Vector2( -208, -1614 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 541, 318 )
+Health = 200.0
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )

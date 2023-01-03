@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Content/VFX/JetExhaustParticles1.tres" type="Material" id=1]
+[ext_resource path="res://Assets/Sprites/DroneFriendly.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Afterburner.cs" type="Script" id=3]
+[ext_resource path="res://Content/Entities/DroneFriendly.cs" type="Script" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=7]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 41.0
+
+[node name="DroneFriendly" type="KinematicBody2D" groups=["Main"]]
+collision_mask = 0
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 2 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[node name="MissileTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="DefenseTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="Afterburner" type="Particles2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( 0, 30 )
+amount = 1800
+lifetime = 2.0
+speed_scale = 0.75
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = ExtResource( 1 )
+texture = ExtResource( 7 )
+script = ExtResource( 3 )

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Content/Equipment/Weapons/WeaponCrosshair.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sounds/SFX/MissileLock.ogg" type="AudioStream" id=2]
+[ext_resource path="res://Content/Equipment/Weapons/WeaponCrosshairSoundPlayer.cs" type="Script" id=3]
+
+[node name="CrosshairMissile" type="Node2D"]
+script = ExtResource( 1 )
+WeaponName = "Missile"
+
+[node name="Polygon" type="Polygon2D" parent="."]
+scale = Vector2( 10, 10 )
+color = Color( 0.972549, 0, 0, 0.305882 )
+polygon = PoolVector2Array( 0, 0, 19, -102, 0, -104, -19, -102 )
+
+[node name="Tone" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 2 )
+volume_db = -30.0
+autoplay = true
+bus = "SFX"
+script = ExtResource( 3 )
