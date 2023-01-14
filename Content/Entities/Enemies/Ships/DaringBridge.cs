@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public class VLSLongRange : Character { 
+public class DaringBridge : Character
+{
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";

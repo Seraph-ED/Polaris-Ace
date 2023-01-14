@@ -48,6 +48,8 @@ public class Character : KinematicBody2D, IActivateable
 
     public bool removeOnDeath = true;
 
+    public bool MissionKill = false;
+
     public float InvinTime = 0;
 
     public KinematicCollision2D CollisionData = null;
@@ -60,7 +62,7 @@ public class Character : KinematicBody2D, IActivateable
         return Active;
     }
 
-    public bool DealDamage(float damage)
+    public virtual bool DealDamage(float damage, int specialCircumstances = 0)
     {
         if (InvinTime > 0)
         {
@@ -105,8 +107,8 @@ public class Character : KinematicBody2D, IActivateable
         var scene = GD.Load<PackedScene>("res://Content/VFX/Explosion.tscn");
 
         Explosion instance = scene.Instance() as Explosion;
-        GetParent().AddChild(instance);
-        instance.Position = Position;
+        Game.CurrentLevel.AddChild(instance);
+        instance.GlobalPosition = GlobalPosition;
         QueueFree();
     }
 

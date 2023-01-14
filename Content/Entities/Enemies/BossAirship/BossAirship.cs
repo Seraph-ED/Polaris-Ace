@@ -15,7 +15,7 @@ public class BossAirship : Character
 
     public bool Vulnerable = false;
 
-    public bool Dead = false;
+    
 
     public float DeathTimer = 0f;
 
@@ -84,7 +84,7 @@ public class BossAirship : Character
 
     public override void Kill()
     {
-        Dead = true;
+        MissionKill = true;
         Node turretContainer = GetNode("Turrets");
         for (int i = 0; i < turretContainer.GetChildCount(); i++)
         {
@@ -141,7 +141,7 @@ public class BossAirship : Character
 
         Rotation = Velocity.Angle() + (float)Utils.Pi / 2f;
 
-        if (Dead)
+        if (MissionKill)
         {
 
             DeathTimer += delta;

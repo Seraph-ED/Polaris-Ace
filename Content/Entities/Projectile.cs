@@ -2,6 +2,12 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+
+public enum ProjectileDamageCondition : int
+{
+    Default = 0,
+    AntiShip = 1,
+}
 public class Projectile : Area2D
 {
     // Declare member variables here. Examples:

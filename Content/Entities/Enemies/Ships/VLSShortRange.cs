@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public class VLSLongRange : Character { 
+public class VLSShortRange : KinematicBody2D
+{
 	// Declare member variables here. Examples:
 	// private int a = 2;
 	// private string b = "text";
