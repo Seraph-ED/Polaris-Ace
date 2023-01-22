@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Policy;
 
-public class AegisRadar : Character
+public class AegisRadar : ShipComponent
 {
     // Declare member variables here. Examples:
     // private int a = 2;

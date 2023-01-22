@@ -9,7 +9,7 @@
 [ext_resource path="res://Content/Entities/Enemies/EnemyNavalFighter.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Sounds/Music/RedWings.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Content/Entities/TerrainElement.cs" type="Script" id=9]
-[ext_resource path="res://Content/Entities/Enemies/Ships/AegisRadar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DestroyerDaring.tscn" type="PackedScene" id=10]
 
 [node name="Level4" type="Node2D" groups=["Level", "Main"]]
 pause_mode = 1
@@ -57,8 +57,8 @@ Active = true
 visible = false
 position = Vector2( -518, -824 )
 
-[node name="AegisRadar" parent="Wave" instance=ExtResource( 10 )]
-position = Vector2( -208, -1614 )
+[node name="DestroyerDaring" parent="Wave" instance=ExtResource( 10 )]
+position = Vector2( 165, -3156 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 541, 318 )

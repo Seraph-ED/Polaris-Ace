@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class VLSShortRange : KinematicBody2D
+public class VLSShortRange : ShipComponent
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;

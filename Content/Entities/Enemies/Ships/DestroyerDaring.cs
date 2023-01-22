@@ -20,6 +20,8 @@ public class DestroyerDaring : Ship
 
 	public Character Bridge;
 
+	public bool RadarLock = false;
+
 	
 
 	public override void _Ready()
@@ -38,9 +40,20 @@ public class DestroyerDaring : Ship
 
 	}
 
+	public void CheckRadarLock()
+	{
+		RadarLock = LongRangeRadar!= null && !LongRangeRadar.MissionKill && (LongRangeRadar as AegisRadar).Target!=null;
+	}
+
 	public override void Behavior(float delta)
 	{
-		base.Behavior(delta);
+		CheckRadarLock();
+
+		if(RadarLock)
+		{
+			(LongRangeVLS as VLSLongRange).QueueShootMissiles(5);
+
+		}
 	}
 
 

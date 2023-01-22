@@ -12,7 +12,7 @@ public class ShipComponent : Character
     [Export]
     public float SubsystemWeight = 1.0f;
 
-    [Export] public bool Pivotal = false;
+    [Export] public bool Critical = false;
 
 
    
@@ -25,6 +25,7 @@ public class ShipComponent : Character
         Explosion instance = scene.Instance() as Explosion;
         Game.CurrentLevel.AddChild(instance);
         instance.GlobalPosition = GlobalPosition;
+        MissionKill = true;
         
     }
 

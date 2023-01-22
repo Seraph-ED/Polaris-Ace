@@ -56,7 +56,7 @@ public class Ship : Character
         {
             ShipComponent comp = Components[i];
 
-            if (comp.Pivotal)
+            if (comp.Critical)
             {
                 if (!comp.MissionKill)
                 {
@@ -113,6 +113,8 @@ public class Ship : Character
             {
 
             }
+
+            Components[i].Kill();
 
         }
 
