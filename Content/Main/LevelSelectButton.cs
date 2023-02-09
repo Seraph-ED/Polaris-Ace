@@ -28,8 +28,8 @@ public class LevelSelectButton : Button
             Visible = false;
 
         }*/
-
-        ((Control)GetParent()).Visible = false;
+        ((Control)GetParent().GetParent()).Visible = false;
+        //((Control)GetParent()).Visible = false;
         (GetNode("/root/Game/Menus/LevelSelect") as LevelSelect).Initialize();
         (GetNode("/root/Game/Menus/LevelSelect") as Control).Visible = true;
 

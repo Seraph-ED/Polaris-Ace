@@ -13,7 +13,8 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource( 1 )
 Health = 7000.0
-MinComponentWeightForInvincibility = 5.0
+IsEnemy = true
+MinComponentWeightForInvincibility = 5.1
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -26,19 +27,23 @@ script = ExtResource( 4 )
 
 [node name="DaringBridge" parent="Parts" instance=ExtResource( 7 )]
 position = Vector2( 104, 1 )
+IsEnemy = true
 SubsystemWeight = 4.0
 Critical = true
 
 [node name="AegisRadar" parent="Parts" instance=ExtResource( 3 )]
 position = Vector2( -266, -1 )
 Health = 450.0
+IsEnemy = true
 
 [node name="VLSShortRange" parent="Parts" instance=ExtResource( 6 )]
 position = Vector2( 388, 22 )
 Health = 200.0
-SubsystemWeight = 2.0
+IsEnemy = true
+SubsystemWeight = 0.5
 
 [node name="VLSLongRange" parent="Parts" instance=ExtResource( 5 )]
 position = Vector2( 387, -20 )
 Health = 200.0
-SubsystemWeight = 2.0
+IsEnemy = true
+SubsystemWeight = 0.5

@@ -25,6 +25,7 @@ layer = 12
 visible = false
 
 [node name="BossWarning" parent="GameUI" instance=ExtResource( 7 )]
+visible = false
 
 [node name="Screens" type="CanvasLayer" parent="."]
 layer = 13

@@ -27,8 +27,11 @@ public class LevelButton : Button
         Text = LevelName;
     }
 
+   // public override 
+
     public override void _Pressed()
     {
+        GD.Print("Pressed level button corresponding to index: " + LevelIndexPointedTo);
         Game game = (GetNode("/root/Game") as Game);
         LevelSelect select = (GetNode("/root/Game/Menus/LevelSelect") as LevelSelect);
         if (LevelSelect.LevelIndexSelected != LevelIndexPointedTo)

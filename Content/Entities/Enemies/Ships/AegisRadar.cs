@@ -124,7 +124,7 @@ public class AegisRadar : ShipComponent
             antennaRotation += Mathf.Deg2Rad(1f) * delta * 60;
         }
 
-        (GetNode("Antenna") as Sprite).Rotation = antennaRotation + (Mathf.Pi / 2f);
+        (GetNode("Antenna") as Sprite).Rotation = antennaRotation;
         (GetNode("RadarCasts") as Node2D).Rotation = antennaRotation;// + (Mathf.Pi / 2f);
     }
 

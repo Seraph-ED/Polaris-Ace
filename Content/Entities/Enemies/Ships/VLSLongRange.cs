@@ -46,7 +46,7 @@ public class VLSLongRange : ShipComponent {
     {
         if (FiringState <= 0)
         {
-            return;
+            
         }
         else
         {

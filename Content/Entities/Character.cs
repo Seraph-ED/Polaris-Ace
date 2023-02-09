@@ -64,7 +64,7 @@ public class Character : KinematicBody2D, IActivateable
 
     public virtual bool DealDamage(float damage, int specialCircumstances = 0)
     {
-        if (InvinTime > 0)
+        if (InvinTime > 0||MissionKill)
         {
             return false;
         }

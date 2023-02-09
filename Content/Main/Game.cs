@@ -183,8 +183,8 @@ public class Game : Node2D
 		this.AddChild(instance);
 		((AudioStreamPlayer)GetNode("Menus/TitleScreen/TitleMusic")).Playing = false;
 		(GetNode("GameUI/GameHUD") as Control).Visible = true;
-
-		UpdateCurrentLevel();
+        (GetNode("GameUI/BossWarning") as Control).Visible = true;
+        UpdateCurrentLevel();
 
 
 
@@ -214,8 +214,9 @@ public class Game : Node2D
 		GetNode("LevelBriefings").AddChild(instance);
 		
 		((AudioStreamPlayer)GetNode("Menus/TitleScreen/TitleMusic")).Playing = false;
-		//(GetNode("GameUI/GameHUD") as Control).Visible = true;
-		ActiveBriefing = levelNum;
+        //(GetNode("GameUI/GameHUD") as Control).Visible = true;
+        (GetNode("GameUI/BossWarning") as Control).Visible = false;
+        ActiveBriefing = levelNum;
 		UpdateCurrentLevel();
 
 
