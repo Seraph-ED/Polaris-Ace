@@ -43,6 +43,7 @@ public class DestroyerDaring : Ship
 	public void CheckRadarLock()
 	{
 		RadarLock = LongRangeRadar!= null && !LongRangeRadar.MissionKill && (LongRangeRadar as AegisRadar).Target!=null;
+		//GD.Print("Ship radar lock: " + RadarLock);
 	}
 
 	public override void Behavior(float delta)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Sprites/Backgrounds/DecorativeTitleJets/XTE08Decorative.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=2]
+[ext_resource path="res://Content/VFX/ContrailParticles.tres" type="Material" id=3]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=4]
+
+[node name="XTE08Decorative" type="Node2D"]
+
+[node name="Exhaust" type="Particles2D" parent="."]
+modulate = Color( 1, 1, 1, 0.45098 )
+material = ExtResource( 4 )
+position = Vector2( -154, 64 )
+rotation = 1.5708
+scale = Vector2( 2, 2 )
+amount = 1600
+lifetime = 2.0
+preprocess = 0.05
+speed_scale = 2.0
+visibility_rect = Rect2( -2500, -2500, 5000, 5000 )
+local_coords = false
+process_material = ExtResource( 3 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 29, -5 )
+scale = Vector2( 0.902195, 0.902195 )
+texture = ExtResource( 1 )

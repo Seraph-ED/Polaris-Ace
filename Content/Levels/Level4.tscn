@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Content/Levels/LevelTest.cs" type="Script" id=1]
 [ext_resource path="res://Content/Levels/Music.cs" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Assets/Sounds/Music/RedWings.ogg" type="AudioStream" id=8]
 [ext_resource path="res://Content/Entities/TerrainElement.cs" type="Script" id=9]
 [ext_resource path="res://Content/Entities/Enemies/Ships/DestroyerDaring.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Levels/TerrainContainer.cs" type="Script" id=11]
+[ext_resource path="res://Content/VFX/ForegroundClouds.tscn" type="PackedScene" id=12]
 
 [node name="Level4" type="Node2D" groups=["Level", "Main"]]
 pause_mode = 1
@@ -18,6 +20,9 @@ script = ExtResource( 1 )
 LevelName = "Test Mission"
 
 [node name="BackgroundOceanLow" parent="." instance=ExtResource( 5 )]
+
+[node name="ForegroundClouds" parent="." instance=ExtResource( 12 )]
+layer = 2
 
 [node name="LevelTimer" type="Timer" parent="."]
 wait_time = 900.0
@@ -36,6 +41,7 @@ bus = "Music"
 script = ExtResource( 2 )
 
 [node name="Terrain" type="Node2D" parent="."]
+script = ExtResource( 11 )
 
 [node name="Island1" type="StaticBody2D" parent="Terrain"]
 position = Vector2( 1000, -1000 )
@@ -49,6 +55,18 @@ polygon = PoolVector2Array( -20, 82, 104, 55, 112, -59, -3, -122, -60, -45, -142
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/Island1"]
 polygon = PoolVector2Array( -20, 82, 104, 55, 112, -59, -3, -122, -60, -45, -142, 17, -111, 77 )
 
+[node name="Island2" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -2485, -5000 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island2"]
+polygon = PoolVector2Array( -2109, 27, -1475, -653, -1029, -509, -757, -1204, 58, -1181, 360, -668, 1191, -819, 1923, -1212, 2943, -857, 3365, -230, 3116, 268, 2550, -207, 1772, 367, 1689, 978, 1002, 1001, 594, 850, -191, 1099, -848, 669, -954, 178, -1656, 367 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island2"]
+polygon = PoolVector2Array( -2109, 27, -1475, -653, -1029, -509, -757, -1204, 58, -1181, 360, -668, 1191, -819, 1923, -1212, 2943, -857, 3175.67, -511.303, 3365, -230, 3116, 268, 2550, -207, 1772, 367, 1689, 978, 1002, 1001, 594, 850, -191, 1099, -848, 669, -954, 178, -1656, 367 )
+
 [node name="Wave" type="Node2D" parent="."]
 script = ExtResource( 6 )
 Active = true
@@ -58,7 +76,7 @@ visible = false
 position = Vector2( -518, -824 )
 
 [node name="DestroyerDaring" parent="Wave" instance=ExtResource( 10 )]
-position = Vector2( 165, -3156 )
+position = Vector2( 165, -9560 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 541, 318 )

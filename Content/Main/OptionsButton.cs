@@ -15,8 +15,16 @@ public class OptionsButton : Button
 
     public override void _Pressed()
     {
-        ((Control)GetParent()).Visible = false;
-       // (GetNode("/root/Game/Menus/LevelSelect") as LevelSelect).Initialize();
+        Node menuContainer = GetNode("/root/Game/Menus");
+
+        for (int i = 0; i < menuContainer.GetChildCount(); ++i)
+        {
+            if (menuContainer.GetChild(i) is Control)
+            {
+                (menuContainer.GetChild(i) as Control).Visible = false;
+            }
+        }
+        // (GetNode("/root/Game/Menus/LevelSelect") as LevelSelect).Initialize();
         (GetNode("/root/Game/Menus/SettingsMenu") as Control).Visible = true;
     }
 

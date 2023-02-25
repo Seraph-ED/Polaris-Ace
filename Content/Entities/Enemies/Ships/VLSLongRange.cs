@@ -7,7 +7,7 @@ public class VLSLongRange : ShipComponent {
     // private string b = "text";
 
     // Called when the node enters the scene tree for the first time.
-    public static PackedScene MissileScene = GD.Load<PackedScene>("res://Content/Entities/Projectiles/MissileHostileLongRange.tscn");
+    public static PackedScene MissileScene = null;
 
     public Timer Cooldown;
 
@@ -28,7 +28,8 @@ public class VLSLongRange : ShipComponent {
 	public override void _Ready()
 	{
 		Cooldown = GetNode("Cooldown") as Timer;
-	}
+        MissileScene = GD.Load<PackedScene>("res://Content/Entities/Projectiles/MissileHostileLongRange.tscn");
+    }
 
     public void QueueShootMissiles(int num)
     {
@@ -46,16 +47,23 @@ public class VLSLongRange : ShipComponent {
     {
         if (FiringState <= 0)
         {
-            
+           
         }
         else
         {
             FiringState--;
 
+            if (MissileScene == null)
+            {
+                MissileScene = GD.Load<PackedScene>("res://Content/Entities/Projectiles/MissileHostileLongRange.tscn");
+            }
+
 
             Game.CurrentLevel.SpawnProjectile(MissileScene, LevelRelativePosition, Vector2.Zero, 0, MissileDamage);
 
         }
+
+        
 
         if (FiringState <= 0)
         {
@@ -64,6 +72,7 @@ public class VLSLongRange : ShipComponent {
         }
         else
         {
+            
             Cooldown.Start(MissileSalvoCooldown);
         }
 
@@ -73,7 +82,7 @@ public class VLSLongRange : ShipComponent {
     {
         CanShoot = FiringState== 0&&Cooldown.TimeLeft>0;
 
-        if (Cooldown.TimeLeft > 0)
+        if (Cooldown.TimeLeft <= 0)
         {
             ShootMissile();
         }

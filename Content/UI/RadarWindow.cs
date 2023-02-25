@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Security.Policy;
 
 public class RadarWindow : Panel
 {
@@ -10,6 +11,15 @@ public class RadarWindow : Panel
 
     // Called when the node enters the scene tree for the first time.
     //private Texture _texture;
+
+    public List<List<Vector2>> PolygonPoints;
+
+
+    public List<List<Vector2>> RelativePolygonPoints;
+
+    [Export]
+    public float RadarRange = 10000;
+
     public Texture BlipTexture;
     public Texture BlipTextureStructure;
     public Texture MissileWarnTexture;
@@ -21,6 +31,11 @@ public class RadarWindow : Panel
     public List<Vector3> RelativeEnemyPositions;
 
     public List<Vector2> RelativeProjectilePositions;
+
+    public Color[] radarPolyColors = new Color[] { new Color(1, 1, 1) };
+
+
+    public bool ConstructedTerrain = false;
 
     public override void _Ready()
     {
@@ -65,7 +80,7 @@ public class RadarWindow : Panel
         if (currentLevel == null)
         {
             //GetCurrentLevel();
-            
+
             return;
         }
 
@@ -90,7 +105,7 @@ public class RadarWindow : Panel
 
             //GD.Print(i, ", Node type: ",n.GetType());
 
-            if ((n is Character)&&(n as Character).Active&&((n as Character).IsEnemy || (n as Character).IsStructure))
+            if ((n is Character) && (n as Character).Active && ((n as Character).IsEnemy || (n as Character).IsStructure))
             {
                 //Vector2 enemylevelRelativePosition = (n as Character).r - lv.GlobalPosition;
                 Vector2 rel = (n as Character).LevelRelativePosition - currentPlayer.LevelRelativePosition;
@@ -101,7 +116,7 @@ public class RadarWindow : Panel
 
 
 
-           
+
 
 
         }
@@ -139,7 +154,7 @@ public class RadarWindow : Panel
             return;
         }
 
-        for(int i = 0; i < currentPlayer.IncomingProjectiles.Count; i++)
+        for (int i = 0; i < currentPlayer.IncomingProjectiles.Count; i++)
         {
             Projectile p = currentPlayer.IncomingProjectiles[i];
 
@@ -154,22 +169,200 @@ public class RadarWindow : Panel
 
         if (lv != null)
         {
-            
+
         }
     }
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-  public override void _Process(float delta)
-  {
+
+
+    public void FindTerrainElements()
+    {
+        if (Game.CurrentLevel == null)
+        {
+            return;
+        }
+
+        PolygonPoints = new List<List<Vector2>>();
+
+        //bool LevelHasTerrain = false;
+
+        TerrainContainer terrain = null;
+
+
+        for (int i = 0; i < Game.CurrentLevel.GetChildCount(); ++i)
+        {
+            if (Game.CurrentLevel.GetChild(i) is TerrainContainer)
+            {
+                terrain = Game.CurrentLevel.GetChild(i) as TerrainContainer;
+            }
+
+        }
+
+        if (terrain == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < terrain.GetChildCount(); ++i)
+        {
+            Node n = terrain.GetChild(i);
+
+            if (!(n is TerrainElement))
+            {
+                continue;
+            }
+
+            TerrainElement t = n as TerrainElement;
+
+            if (t.AbsoluteCoordsCollisionVectors != null && t.AbsoluteCoordsCollisionVectors.Count > 0)
+            {
+                PolygonPoints.Add(t.AbsoluteCoordsCollisionVectors);
+            }
+        }
+
+        GD.Print("Constructed Absolute Polygon Point List of length: " + PolygonPoints.Count);
+
+        if (PolygonPoints.Count > 0)
+        {
+            GD.Print("Number of points in first object in list: " + PolygonPoints[0].Count);
+        }
+
+        ConstructedTerrain = true;
+
+    }
+
+    public void GetTerrainPositions()
+    {
+
+        if (Game.CurrentLevel == null)
+        {
+            return;
+        }
+
+        currentPlayer = Game.CurrentLevel.player;
         
+        if (PolygonPoints == null || !ConstructedTerrain )
+        {
+           // GD.Print("Requesting new terrain constructions");
+            ConstructedTerrain = false;
+            return;
+        }
+
+        if (PolygonPoints.Count == 0)
+        {
+           // GD.Print("cannot draw radar terrain bc there is no terraiin to draw");
+            return;
+        }
+
+        if (currentPlayer == null)
+        {
+           // GD.Print("cannot draw radar terrain bc the player is not defined");
+            return;
+        }
+
+        //GD.Print("trying terrain pos update");
+
+        if (RelativePolygonPoints == null)
+        {
+            RelativePolygonPoints = new List<List<Vector2>>();
+        }
+        else
+        {
+            RelativePolygonPoints.Clear();
+        }
+
+        for(int j = 0; j < PolygonPoints.Count; ++j)
+        {
+            List<Vector2> poly = PolygonPoints[j];
+
+            List<Vector2> poly2 = new List<Vector2>();
+
+            for (int i = 0; i < poly.Count; ++i)
+            {
+
+                //GD.Print("Attempting addition of point [" + j + "][" + i + "]");
+
+                Vector2 relativeV = new Vector2(120, 120) + ((poly[i] - currentPlayer.GlobalPosition) * 120f / (float)RadarRange);
+
+
+                poly2.Add( relativeV );
+            }
+            RelativePolygonPoints.Add(poly2);
+
+        }
+
+
+
+    }
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+  {
+        if (Game.CurrentLevel == null)
+        {
+            ConstructedTerrain = false;
+        }
+        else
+        {
+            if (!ConstructedTerrain)
+            {
+                FindTerrainElements();
+            }
+            else
+            {
+
+            }
+
+        }
+
+
+
+
+
 
         GetPlayerAndEnemyPositions();
+
+        
+        GetTerrainPositions();
+        
+
+       
+
 
         Update();
     }
 
+
+    public void DrawTerrainOnWindow()
+    {
+        if (RelativePolygonPoints == null||RelativePolygonPoints.Count==0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < RelativePolygonPoints.Count; ++i)
+        {
+
+           
+
+            
+            Vector2 MeanPosition = Vector2.Zero;
+
+            for(int j = 0; j < RelativePolygonPoints[i].Count; ++j)
+            {
+                MeanPosition += RelativePolygonPoints[i][j];
+            }
+
+            if ((MeanPosition / (RelativePolygonPoints[i].Count)).Length()< 100)
+            {
+                DrawPolygon(RelativePolygonPoints[i].ToArray(), radarPolyColors);
+            }
+        }
+
+
+    }
+
     public override void _Draw()
     {
-
+        DrawTerrainOnWindow();
        // GD.Print(" Current amount of enemies with positions detected: ", RelativeEnemyPositions.Count);
         for(int i = 0; i < RelativeEnemyPositions.Count; ++i)
         {
@@ -177,7 +370,7 @@ public class RadarWindow : Panel
 
             Vector2 relative = new Vector2(a.x, a.y);
 
-            float maxRadarDist = 10000;
+            float maxRadarDist = RadarRange;
 
             if (Math.Abs(relative.x) > maxRadarDist)
             {
@@ -212,6 +405,7 @@ public class RadarWindow : Panel
             {
                 DrawTextureRect(BlipTextureStructure, new Rect2(drawPosition, Vector2.One * rectSize), false);
             }
+            
 
         }
 

@@ -347,7 +347,7 @@ public class Player : Character
                 if (EquipmentHandler.Instance.equippedDefense != null)
                 {
                     EquipmentHandler.Instance.equippedDefense.EndPassiveEffect(this);
-                    GD.Print("Passive Effect Ended");
+                    //GD.Print("Passive Effect Ended");
                 }
             }
         }
@@ -364,7 +364,7 @@ public class Player : Character
 
         if (CollisionData != null)
         {
-            GD.Print("PlayerColliding");
+            //GD.Print("PlayerColliding");
 
             if(CollisionData.Collider is TerrainElement)
             {
@@ -375,7 +375,7 @@ public class Player : Character
         }
         else
         {
-            GD.Print("PlayerNotColliding");
+            //GD.Print("PlayerNotColliding");
         }
 
     }

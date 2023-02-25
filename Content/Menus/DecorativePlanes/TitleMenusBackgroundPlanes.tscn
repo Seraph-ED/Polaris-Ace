@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Content/Menus/DecorativePlanes/TitleMenusBackgroundPlanes.cs" type="Script" id=1]
+[ext_resource path="res://Content/Menus/DecorativePlanes/F35Decorative.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Content/Menus/DecorativePlanes/XTE08Decorative.tscn" type="PackedScene" id=3]
+
+[node name="TitleMenusBackgroundPlanes" type="ParallaxBackground"]
+layer = -127
+script = ExtResource( 1 )
+frequency = 20.0
+
+[node name="Aircraft" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 600, 600.027 )
+motion_mirroring = Vector2( 4800, 3600 )
+
+[node name="AircraftGroup" type="Node2D" parent="Aircraft"]
+position = Vector2( -5, 4 )
+
+[node name="F35Decorative" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 273, 208 )
+
+[node name="F35Decorative2" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 550, 399 )
+
+[node name="F35Decorative3" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( -221, 1268 )
+
+[node name="F35Decorative4" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 385, 2004 )
+
+[node name="F35Decorative8" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 2589, 2242 )
+
+[node name="F35Decorative9" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 3194, 485 )
+
+[node name="F35Decorative10" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 2025, 1388 )
+
+[node name="F35Decorative11" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 446, 2595 )
+
+[node name="F35Decorative12" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 1064, 3055 )
+
+[node name="F35Decorative13" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 2915, 483 )
+
+[node name="F35Decorative14" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 1930, 665 )
+
+[node name="F35Decorative15" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 3291, 1567 )
+
+[node name="F35Decorative5" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 366, 631 )
+
+[node name="F35Decorative6" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 723, 3499 )
+
+[node name="F35Decorative7" parent="Aircraft/AircraftGroup" instance=ExtResource( 2 )]
+position = Vector2( 2801, 3039 )
+
+[node name="XTE08Decorative" parent="Aircraft/AircraftGroup" instance=ExtResource( 3 )]
+position = Vector2( 1578, 1713 )
