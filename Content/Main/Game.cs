@@ -17,9 +17,9 @@ public class Game : Node2D
 
 	public static float MusicVolume = 0.4f;
 
-	public static List<string> Levelnames = new List<string> { "Level1", "Level2", "Level3", "Level4", "LevelTest" };
+	public static List<string> Levelnames = new List<string> { "Level1", "Level2", "Level3" };//, "Level4", "LevelTest"
 
-	public List<PackedScene> Levels = new List<PackedScene>();
+    public List<PackedScene> Levels = new List<PackedScene>();
 
 	public List<PackedScene> Briefings = new List<PackedScene>();
 

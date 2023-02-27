@@ -81,7 +81,7 @@ _data = {
 pause_mode = 1
 process_priority = 1
 script = ExtResource( 1 )
-LevelName = "Test mission 2"
+LevelName = "Mission 2"
 Description = "We have been able to stall the enemy offensive, but our troops are taking heavy fire from enemy air support and armoured columns, they are being supported from a Forward Operating Base near the border. Neutralize the base and any armoured columns leaving its premises. Beware its air defense systems and interceptor fighters."
 
 [node name="LevelTimer" type="Timer" parent="."]
