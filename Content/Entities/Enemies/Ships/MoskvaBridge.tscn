@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipCriticalComponent.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/MoskvaBridge.png" type="Texture" id=2]
+
+[node name="MoskvaBridge" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 1 )
+Health = 200.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 4, 0 )
+polygon = PoolVector2Array( 128, 30, 128, -30, 100, -55, 65, -54, -28, -101, -80, -96, -128, 0, -80, 96, -28, 101, 65, 54, 100, 55 )

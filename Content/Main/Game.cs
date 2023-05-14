@@ -13,11 +13,11 @@ public class Game : Node2D
 
 	public static bool DevMode = false;
 
-	public static float SoundVolume = 0.4f;
+	public static float SoundVolume = 0f;
 
-	public static float MusicVolume = 0.4f;
+	public static float MusicVolume = 0f;
 
-	public static List<string> Levelnames = new List<string> { "Level1", "Level2", "Level3" };//, "Level4", "LevelTest"
+	public static List<string> Levelnames = new List<string> { "Level1", "Level2", "Level3", "Level4", "Level5", "Level6", "LevelTestBonus" };
 
     public List<PackedScene> Levels = new List<PackedScene>();
 
@@ -105,7 +105,9 @@ public class Game : Node2D
 		if (CurrentLevel != null)
 		{
 			(CurrentLevel.GetNode("GameCamera") as Camera2D).Current = false;
-			CurrentLevel.QueueFree();
+
+            CurrentLevel.GetNode("ProjectileContainer").QueueFree();
+            CurrentLevel.QueueFree();
 		}
 
 		((Control)GetNode("Menus/TitleScreen")).Visible = true;
@@ -127,6 +129,16 @@ public class Game : Node2D
 		if (CurrentLevel != null)
 		{
 			(CurrentLevel.GetNode("GameCamera") as Camera2D).Current = false;
+			if (CurrentLevel.HasNode("ProjectileContainer"))
+			{
+				CurrentLevel.GetNode("ProjectileContainer").QueueFree();
+
+			}
+			for(int i = 0; i < CurrentLevel.GetChildCount(); ++i)
+			{
+				if(CurrentLevel.GetChild(i) is EntityContainer) { CurrentLevel.GetChild(i).QueueFree(); }
+			}
+
 			CurrentLevel.QueueFree();
 		}
 
@@ -297,6 +309,7 @@ public class Game : Node2D
 	{
 		UpdateCurrentLevel();
 		DevMode = DeveloperMode;
+		//GD.Print("Devmode:" + DevMode);
 
 		if (CurrentLevel != null && !(CurrentLevel.Won||CurrentLevel.Lost) && Input.IsActionJustPressed("Pause"))
 		{

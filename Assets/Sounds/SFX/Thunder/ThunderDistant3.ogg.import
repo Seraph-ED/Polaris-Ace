@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ThunderDistant3.ogg-68ab26e4218a3ce8796a16160afb2119.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/Thunder/ThunderDistant3.ogg"
+dest_files=[ "res://.import/ThunderDistant3.ogg-68ab26e4218a3ce8796a16160afb2119.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -12,7 +12,7 @@ radius = 5.0
 height = 52.0
 
 [node name="MissileHostileLongRange" type="Area2D"]
-collision_layer = 3
+collision_layer = 131
 monitorable = false
 script = ExtResource( 6 )
 Lifespan = 16.0

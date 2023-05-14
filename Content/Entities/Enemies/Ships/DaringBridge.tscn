@@ -1,13 +1,16 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Content/Entities/Enemies/Ships/DaringBridge.cs" type="Script" id=1]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipCriticalComponent.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringBridge.png" type="Texture" id=2]
 
 [node name="DaringBridge" type="KinematicBody2D"]
 collision_layer = 12
 collision_mask = 0
 script = ExtResource( 1 )
-Health = 300.0
+Health = 400.0
+IsEnemy = true
+SubsystemWeight = 4.0
+Critical = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

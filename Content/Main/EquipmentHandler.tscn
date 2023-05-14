@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Content/Equipment/Weapons/Missile.cs" type="Script" id=1]
 [ext_resource path="res://Content/Main/EquipmentHandler.cs" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Content/Equipment/Components/ImprovedCooling.cs" type="Script" id=6]
 [ext_resource path="res://Content/Equipment/Weapons/Bomb.cs" type="Script" id=7]
 [ext_resource path="res://Content/Equipment/Weapons/Drones.cs" type="Script" id=8]
+[ext_resource path="res://Content/Equipment/Weapons/AntiShipMissileEquipment.cs" type="Script" id=9]
 
 [node name="EquipmentManager" type="Node"]
 script = ExtResource( 2 )
@@ -25,6 +26,9 @@ script = ExtResource( 3 )
 
 [node name="Drones" type="Node" parent="Weapons"]
 script = ExtResource( 8 )
+
+[node name="AntiShipMissile" type="Node" parent="Weapons"]
+script = ExtResource( 9 )
 
 [node name="Defenses" type="Node" parent="."]
 

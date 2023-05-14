@@ -58,7 +58,7 @@ public class Flares : DefenseItem
             
             int roundedTime = ((int)((c as Player).DefenseUseTimer * 60));
 
-            GD.Print("Timers: " + ((c as Player).DefenseUseTimer) + ", " + roundedTime) ;
+           // GD.Print("Timers: " + ((c as Player).DefenseUseTimer) + ", " + roundedTime) ;
 
             if (roundedTime % 10 == 0)
             {

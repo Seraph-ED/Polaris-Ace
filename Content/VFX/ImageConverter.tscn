@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Content/VFX/ImageConverter.gd" type="Script" id=1]
+
+[node name="ImageConverter" type="Sprite"]
+script = ExtResource( 1 )
+image_path = "res://Assets/Sprites/Terrain/TextureRocks.png"

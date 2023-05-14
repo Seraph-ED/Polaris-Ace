@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Content/Entities/Enemies/Ships/DestroyerDaring.cs" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringHull.png" type="Texture" id=2]
@@ -7,6 +7,17 @@
 [ext_resource path="res://Content/Entities/Enemies/Ships/VLSLongRange.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Content/Entities/Enemies/Ships/VLSShortRange.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Content/Entities/Enemies/Ships/DaringBridge.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DaringCWIS.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringCwisBase.png" type="Texture" id=9]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DaringDeckGunLarge.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=11]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=12]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=13]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DaringDeckGunSmall.tscn" type="PackedScene" id=14]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
 
 [node name="DestroyerDaring" type="KinematicBody2D"]
 collision_layer = 16
@@ -14,12 +25,26 @@ collision_mask = 0
 script = ExtResource( 1 )
 Health = 7000.0
 IsEnemy = true
-MinComponentWeightForInvincibility = 5.1
+MinComponentWeightForInvincibility = 9.3
+LengthForDeathAnim = 1500.0
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
+[node name="AdditionalSprites" type="Node2D" parent="."]
+
+[node name="CWISbase1" type="Sprite" parent="AdditionalSprites"]
+position = Vector2( -50, 80 )
+scale = Vector2( 0.630435, 0.630435 )
+texture = ExtResource( 9 )
+
+[node name="CWISbase2" type="Sprite" parent="AdditionalSprites"]
+position = Vector2( -50, -80 )
+scale = Vector2( 0.630435, 0.630435 )
+texture = ExtResource( 9 )
+
 [node name="Hitbox" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( 760, 0, 650, 48, 265, 99, -27, 101, -310, 101, -723, 85, -723, -85, -310, -101, -27, -101, 267, -99, 650, -48 )
 
 [node name="Parts" type="Node2D" parent="."]
@@ -27,23 +52,69 @@ script = ExtResource( 4 )
 
 [node name="DaringBridge" parent="Parts" instance=ExtResource( 7 )]
 position = Vector2( 104, 1 )
-IsEnemy = true
-SubsystemWeight = 4.0
-Critical = true
 
 [node name="AegisRadar" parent="Parts" instance=ExtResource( 3 )]
 position = Vector2( -266, -1 )
 Health = 450.0
 IsEnemy = true
+SubsystemWeight = 3.0
 
 [node name="VLSShortRange" parent="Parts" instance=ExtResource( 6 )]
 position = Vector2( 388, 22 )
 Health = 200.0
-IsEnemy = true
-SubsystemWeight = 0.5
 
 [node name="VLSLongRange" parent="Parts" instance=ExtResource( 5 )]
 position = Vector2( 387, -20 )
 Health = 200.0
-IsEnemy = true
+
+[node name="DaringCWIS" parent="Parts" instance=ExtResource( 8 )]
+position = Vector2( -50, 80 )
 SubsystemWeight = 0.5
+
+[node name="DaringCWIS2" parent="Parts" instance=ExtResource( 8 )]
+position = Vector2( -50, -80 )
+SubsystemWeight = 0.5
+
+[node name="DaringDeckGun" parent="Parts" instance=ExtResource( 10 )]
+position = Vector2( 511, 2 )
+
+[node name="DaringDeckSmall" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( 54, 71 )
+rotation = 0.698132
+
+[node name="DaringDeckSmall2" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( 54, -71 )
+rotation = -0.698132
+
+[node name="MissionKillFire1" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 181, 85 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -666, 73 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire3" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -180, -89 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )

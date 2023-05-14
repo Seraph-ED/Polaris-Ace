@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringDeckGun.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipComponent.cs" type="Script" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipComponentDefaultFraming.cs" type="Script" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 14.0357
+
+[node name="DaringDeckGun" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 2 )
+IsEnemy = true
+SubsystemWeight = 0.1
+CompletelyDestroyed = true
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 10, -1 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true
+
+[node name="Node2D" type="Node2D" parent="."]

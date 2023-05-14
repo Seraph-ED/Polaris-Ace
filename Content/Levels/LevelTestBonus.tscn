@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Content/Levels/LevelTestBonus.cs" type="Script" id=1]
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=2]
+[ext_resource path="res://Content/Main/GameCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Content/VFX/BackgroundHillsHigh.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=6]
+[ext_resource path="res://Content/Entities/Enemies/EnemyDrone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Content/VFX/BackgroundSpace.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Sounds/Music/BuoyBase.ogg" type="AudioStream" id=9]
+
+[node name="LevelTestBonus" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 1 )
+LevelName = "Extra Mission"
+Description = "Urgent mission update from command. The Dark Sun Group has been eliminated and the next generation prototype recovered, and tests with it have proceeded on schedule, including for low orbit spaceflight. However we have recieved reports of contacts of new orbital weapon systems. These weapon systems, which could even include an Orion Orbital Battleship, belong to our national adversary, who is also thought to have funded and advised the Dark Sun Group's attempted takeover of our neighboring nation. We need you to take up the protoype to intercept the hostile spacecraft before it enters our airspace, You may engage if fired upon, best of luck Pilot."
+
+[node name="BackgroundHillsHigh" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="BackgroundSpace" parent="." instance=ExtResource( 8 )]
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="GameCamera" parent="." groups=["Main"] instance=ExtResource( 3 )]
+position = Vector2( 1, -5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 9 )
+volume_db = -15.0
+autoplay = true
+bus = "Music"
+script = ExtResource( 2 )
+
+[node name="Wave" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="EnemyDrone" parent="Wave" instance=ExtResource( 7 )]
+position = Vector2( -787, -2526 )
+Active = false
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 541, 318 )
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )

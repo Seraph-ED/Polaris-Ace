@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipCriticalComponent.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/BossCarrier/CarrierBridge.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipComponentDefaultFraming.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/Enemies/BossCarrier/CarrierBridgeDamaged.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=6]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
+
+[node name="CarrierBridge" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 1 )
+Health = 1000.0
+IsEnemy = true
+SubsystemWeight = 5.0
+Critical = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 1.456, 1.456 )
+frames = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 114, 58, 73, 94, 47, 96, 23, 112, 7, 112, 6, 60, -48, 59, -114, 43, -113, -43, -47, -65, 8, -66, 7, -113, 23, -113, 45, -95, 92, -96, 114, -72 )
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( 94, -61 )
+scale = Vector2( 0.6, 0.6 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 6 )
+texture = SubResource( 2 )
+script = ExtResource( 7 )
+
+[node name="MissionKillFire3" type="Particles2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( -24, 43 )
+scale = Vector2( 0.6, 0.6 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 6 )
+texture = SubResource( 2 )
+script = ExtResource( 7 )

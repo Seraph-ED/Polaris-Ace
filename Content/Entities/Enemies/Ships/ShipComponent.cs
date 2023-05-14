@@ -14,6 +14,8 @@ public class ShipComponent : Character
 
     [Export] public bool Critical = false;
 
+    [Export] public bool CompletelyDestroyed = false;
+
 
    
 
@@ -25,7 +27,14 @@ public class ShipComponent : Character
         Explosion instance = scene.Instance() as Explosion;
         Game.CurrentLevel.AddChild(instance);
         instance.GlobalPosition = GlobalPosition;
-        MissionKill = true;
+        if (CompletelyDestroyed)
+        {
+            QueueFree();
+        }
+        else
+        {
+            MissionKill = true;
+        }
         
     }
 

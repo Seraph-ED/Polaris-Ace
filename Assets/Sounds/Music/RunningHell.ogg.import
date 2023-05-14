@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/RunningHell.ogg-f388b7b0268a7f35059d96d76fd0a264.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/RunningHell.ogg"
+dest_files=[ "res://.import/RunningHell.ogg-f388b7b0268a7f35059d96d76fd0a264.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

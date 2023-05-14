@@ -40,7 +40,7 @@ public class BossHealthBar : Control
         ProgressBar bar = (GetNode("Healthbar") as ProgressBar);//.Value
 
         bar.RectPosition = new Vector2((1920 - bar.RectSize.x) / 2, BaseY + (Index * a));
-        bar.Value = (double)AttachedBoss.Health / (double)AttachedBoss.MaxHealth;
+        bar.Value = AttachedBoss.HandleBossBarValues();
 
 
 

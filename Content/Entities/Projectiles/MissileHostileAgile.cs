@@ -27,37 +27,12 @@ public class MissileHostileAgile : Projectile
     public void FindTarget()
     {
 
-        if (Game.CurrentLevel == null || Game.CurrentLevel.player == null)
+        if (Game.CurrentLevel == null || Game.CurrentLevel.player == null )
         {
             return;
         }
-        /*
-        Character closestTarget = null;
-        Vector2 currentDist = Vector2.Inf;
-
-        for(int i = 0; i < Game.CurrentLevel.Enemies.Count; ++i)
-        {
-
-            Character c = Game.CurrentLevel.Enemies[i];
-            if (!IsInstanceValid(c))
-            {
-                return;
-            }
-
-            Vector2 relative = (c.Position - Position);
-
-            if ((closestTarget==null||relative.Length() < currentDist.Length())&&(relative.Length()<SeekerRange)&& Mathf.Abs(relative.Angle()-(Rotation - (Mathf.Pi / 2f)))<Mathf.Deg2Rad(SeekerAngleDegrees))
-            {
-                closestTarget = c;
-                currentDist = (c.Position - Position);
-
-            }
-
-
-        }*/
-
         
-           target = Game.CurrentLevel.player;
+        target = Game.CurrentLevel.player;
         (target as Player).IncomingProjectileQueue.Add(this);
         
     }
@@ -87,6 +62,7 @@ public class MissileHostileAgile : Projectile
     public override void Behavior(float delta)
     {
         //base.AI(delta);
+        
 
         if (target == null||!IsInstanceValid(target))
         {
@@ -94,13 +70,17 @@ public class MissileHostileAgile : Projectile
         }
         else
         {
+            if (target.MissionKill)
+            {
+                DestroyProjectile();
+            }
 
             State = Lifespan < 4 && Lifespan > 3.5f ? 1 : 0;
-            
-            
-            
+
+
+            //Vector2 targetPosition = ();
             Vector2 toTarget = (target.LevelRelativePosition - LevelRelativePosition);
-            toTarget += (target.Velocity * 3 * (toTarget.Length() / SeekerRange));
+            toTarget += (target.Velocity * 10 * (toTarget.Length() / SeekerRange));
 
             toTarget = toTarget.Normalized();
 

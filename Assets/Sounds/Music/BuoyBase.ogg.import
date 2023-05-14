@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/BuoyBase.ogg-3b3c6e735e062d724eec37ede3e3da88.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/Music/BuoyBase.ogg"
+dest_files=[ "res://.import/BuoyBase.ogg-3b3c6e735e062d724eec37ede3e3da88.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,132 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/BossCarrier/CarrierHull.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/Ships/BossCarrier.cs" type="Script" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DaringCWIS.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=4]
+[ext_resource path="res://Content/Entities/Enemies/Ships/CarrierCatapult.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/Enemies/Ships/CarrierBridge.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=11]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=12]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=13]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
+
+[node name="BossCarrier" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 2 )
+Health = 15000.0
+IsEnemy = true
+IsBoss = true
+MinComponentWeightForInvincibility = 10.0
+LengthForDeathAnim = 3000.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.45648, 1.45648 )
+texture = ExtResource( 1 )
+
+[node name="AdditionalSprites" type="Node2D" parent="."]
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 1549, 112, 975, 178, 816, 206, 608, 372, -694, 379, -899, 473, -1094, 463, -1095, 385, -1459, 363, -1529, 7, -1532, -202, -1477, -364, -1240, -432, -770, -477, -604, -482, -518, -463, -504, -422, -241, -423, -206, -460, -179, -417, 100, -417, 196, -454, 194, -498, 551, -490, 830, -256, 888, -295, 987, -291, 1012, -238, 1546, -171 )
+
+[node name="Parts" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Catapults" type="Node2D" parent="Parts"]
+script = ExtResource( 4 )
+
+[node name="CarrierCatapult" parent="Parts/Catapults" instance=ExtResource( 5 )]
+position = Vector2( 418, -61 )
+rotation = -0.0471239
+
+[node name="CarrierCatapult2" parent="Parts/Catapults" instance=ExtResource( 5 )]
+position = Vector2( 449, 154 )
+rotation = -0.101229
+
+[node name="CarrierCatapult3" parent="Parts/Catapults" instance=ExtResource( 5 )]
+position = Vector2( -395, -220 )
+rotation = -0.101229
+
+[node name="CarrierCatapult4" parent="Parts/Catapults" instance=ExtResource( 5 )]
+position = Vector2( -557, -346 )
+
+[node name="CarrierBridge" parent="Parts" instance=ExtResource( 6 )]
+position = Vector2( -825, 274 )
+
+[node name="DaringCWIS" parent="Parts" instance=ExtResource( 3 )]
+position = Vector2( 826, 206 )
+
+[node name="DaringCWIS2" parent="Parts" instance=ExtResource( 3 )]
+position = Vector2( 881, -248 )
+
+[node name="DaringCWIS3" parent="Parts" instance=ExtResource( 3 )]
+position = Vector2( -1000, 410 )
+
+[node name="DaringCWIS4" parent="Parts" instance=ExtResource( 3 )]
+position = Vector2( -1258, -302 )
+
+[node name="MissionKillFire1" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 699, 226 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -1201, -395 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire3" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 358, -459 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire4" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -458, 99 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire5" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -1225, 301 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="JetLaunchTimer" type="Timer" parent="."]
+process_mode = 0
+wait_time = 30.0
+one_shot = true
+autostart = true

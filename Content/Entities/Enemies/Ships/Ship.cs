@@ -2,7 +2,6 @@ using Godot;
 using ShmupGame.Content.Entities;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 
 public class Ship : Character
 {
@@ -18,10 +17,15 @@ public class Ship : Character
 
     public int KillType = 0;
 
+    [Export]
+    public float LengthForDeathAnim = 0;
+
+    public int InitializationFrames = 10;
+
     public void UpdateComponentList()
     {
         Components.Clear();
-        CurrentComponentWeight = 0;
+       
         ComponentRecursiveTraversal(this);
     }
 
@@ -30,7 +34,7 @@ public class Ship : Character
         if (n is ShipComponent)
         {
             Components.Add(n as ShipComponent);
-            CurrentComponentWeight += (n as ShipComponent).SubsystemWeight;
+           
         }
 
         if (n is IActivateable && (n as IActivateable).IsActive())
@@ -51,21 +55,37 @@ public class Ship : Character
     public void CheckComponentList()
     {
         bool allPivotalsDead = true;
-        
-        for(int i = 0; i < Components.Count; ++i)
+
+        CurrentComponentWeight = 0;
+
+        for (int i = 0; i < Components.Count; ++i)
         {
             ShipComponent comp = Components[i];
 
+            if (!comp.MissionKill)
+            {
+                CurrentComponentWeight += comp.SubsystemWeight;
+            }
+
+
+        }
+
+        for (int i = 0; i < Components.Count; ++i)
+        {
+            ShipComponent comp = Components[i];
+
+
             if (comp.Critical)
             {
+                if (CurrentComponentWeight > MinComponentWeightForInvincibility)
+                {
+                    comp.InvinTime = 0.4f;
+                }
                 if (!comp.MissionKill)
                 {
                     allPivotalsDead = false;
                 }
-                if(CurrentComponentWeight > MinComponentWeightForInvincibility)
-                {
-                    comp.InvinTime = 0.1f;
-                }
+                
             }
 
         }
@@ -80,7 +100,18 @@ public class Ship : Character
 
     public override void Behavior(float delta)
     {
-        
+        if (MissionKill&&InitializationFrames==0)
+        {
+            return;
+        }
+
+        if (InitializationFrames > 0)
+        {
+            --InitializationFrames;
+            MissionKill = false;
+        }
+
+
         UpdateComponentList();
         CheckComponentList();
     }
@@ -89,6 +120,18 @@ public class Ship : Character
 
     public virtual void SpawnOnDeathExplosionPattern(int killType)
     {
+
+        float b = killType == 0 ? 50 : 200;
+
+        for(float i = -LengthForDeathAnim/2; i < LengthForDeathAnim/2; i += b)
+        {
+            Vector2 explpos = LevelRelativePosition + (Vector2.Right.Rotated(Rotation) * i);
+
+            Game.CurrentLevel.PlaceExplosion(explpos, b/100);
+
+
+        }
+
 
     }
 
@@ -99,23 +142,38 @@ public class Ship : Character
         
     }
 
+    public override bool DealDamage(float damage, int specialCircumstances = 0)
+    {
+        if (InvinTime > 0 || MissionKill)
+        {
+            return false;
+        }
+        if (!InHitFlash && HitFlash <= 0)
+        {
+            HandleHitFlash();
+        }
+
+        Health -= damage;
+
+        if (Health <= 0)
+        {
+            KillType = 0;
+            Kill();
+        }
+        return true;
+
+
+    }
+
     public override void Kill()
     {
         SpawnOnDeathExplosionPattern(KillType);
         
         for (int i = Components.Count-1; i >= 0; --i)
         {
-            if(KillType == 0)
-            {
-
-            }
-            else
-            {
-
-            }
+            
 
             Components[i].Kill();
-
         }
 
         if(KillType== 1)
@@ -124,9 +182,14 @@ public class Ship : Character
         }
         else
         {
-
+            for (int i = Components.Count - 1; i >= 0; --i)
+            {
+                Components[i].QueueFree();
+            }
+            QueueFree();
+            //base.Kill();
         }
-        base.Kill();
+        
     }
 
 

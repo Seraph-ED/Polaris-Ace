@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringCwisTurret.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/Ships/DaringCWIS.cs" type="Script" id=2]
+[ext_resource path="res://Content/Entities/Enemies/FiringCrosshair.cs" type="Script" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 17.0294
+
+[node name="DaringCWIS" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 2 )
+Health = 110.0
+IsEnemy = true
+SubsystemWeight = 0.1
+CompletelyDestroyed = true
+BulletDamage = 3.0
+
+[node name="FiringCrosshair" type="Line2D" parent="."]
+scale = Vector2( 0.171147, 0.171147 )
+points = PoolVector2Array( 0, 0, 6000, 0 )
+width = 15.0
+default_color = Color( 1, 0, 0, 0.560784 )
+script = ExtResource( 3 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 11, 0 )
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true

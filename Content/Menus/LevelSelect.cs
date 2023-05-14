@@ -22,9 +22,9 @@ public class LevelSelect : Control
 
     public void Initialize()
     {
-        for(int i = 0; i < GetNode("PanelContainer/LevelButtonContainer").GetChildCount(); i++)
+        for(int i = 0; i < GetNode("ButtonPanelContainer/LevelButtonContainer").GetChildCount(); i++)
         {
-            GetNode("PanelContainer/LevelButtonContainer").GetChild(i).QueueFree();
+            GetNode("ButtonPanelContainer/LevelButtonContainer").GetChild(i).QueueFree();
         }
         
         Game game = (GetNode("/root/Game") as Game);
@@ -35,7 +35,7 @@ public class LevelSelect : Control
             button.LevelIndexPointedTo = i;
             //button.Initialize();
 
-            GetNode("PanelContainer/LevelButtonContainer").AddChild(button);
+            GetNode("ButtonPanelContainer/LevelButtonContainer").AddChild(button);
 
 
         }

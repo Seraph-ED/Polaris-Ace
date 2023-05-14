@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/MoskvaVLSOpen.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/MoskvaVLSClosed.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/VLSAnimation.cs" type="Script" id=3]
+[ext_resource path="res://Content/Entities/Enemies/Ships/VLS.cs" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/MoskvaVLSDamaged.png" type="Texture" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 38.0296
+
+[node name="VLSMoskva" type="KinematicBody2D"]
+scale = Vector2( 0.45, 0.45 )
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 4 )
+Health = 60.0
+IsEnemy = true
+SubsystemWeight = 0.5
+MissileScenePath = "res://Content/Entities/Projectiles/MissileHostile.tscn"
+MissileSalvoCooldown = 0.3
+MissileReloadTime = 10.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+script = ExtResource( 3 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 2 )
+
+[node name="Cooldown" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.001
+one_shot = true
+autostart = true

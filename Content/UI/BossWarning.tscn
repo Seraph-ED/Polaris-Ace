@@ -31,3 +31,6 @@ text = "WARNING
 THREAT INBOUND"
 align = 1
 script = ExtResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = "SFX"

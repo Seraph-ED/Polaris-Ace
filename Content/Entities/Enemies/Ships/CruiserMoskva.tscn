@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/Ships/CruiserMoskva.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/MoskvaHull.png" type="Texture" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaBridge.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=4]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaSuperStructure.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaTrackingRadar.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaSearchRadarSingle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaSearchRadarDouble.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaMissileLauncher.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaDeckGun.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=11]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=12]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=13]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MoskvaCWIS.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Content/Entities/Enemies/Ships/VLSMoskva.tscn" type="PackedScene" id=15]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
+
+[node name="CruiserMoskva" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 1 )
+Health = 3000.0
+IsEnemy = true
+IsBoss = true
+MinComponentWeightForInvincibility = 12.0
+LengthForDeathAnim = 1700.0
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 2 )
+
+[node name="AdditionalSprites" type="Node2D" parent="."]
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+modulate = Color( 0, 0.0156863, 1, 1 )
+polygon = PoolVector2Array( 930, 0, 747, -70, 580, -105, -761, -105, -913, -73, -913, 73, -761, 106, 580, 105, 747, 70 )
+
+[node name="Parts" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="MoskvaCWIS3" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( -16, 90 )
+rotation = 1.10305
+StartTimeOffset = 3.0
+
+[node name="MoskvaCWIS4" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( -74, 91 )
+rotation = 1.10305
+collision_layer = 0
+StartTimeOffset = 1.0
+
+[node name="MoskvaMissileLauncher" parent="Parts" instance=ExtResource( 9 )]
+position = Vector2( 308, 78 )
+
+[node name="MoskvaCWIS5" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( -21, -90 )
+rotation = -1.10305
+
+[node name="MoskvaCWIS6" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( -74, -91 )
+rotation = -1.10305
+StartTimeOffset = -2.0
+
+[node name="MoskvaMissileLauncher2" parent="Parts" instance=ExtResource( 9 )]
+position = Vector2( 309, -79 )
+
+[node name="MoskvaBridge" parent="Parts" instance=ExtResource( 3 )]
+position = Vector2( 201, 0 )
+SubsystemWeight = 3.0
+
+[node name="MoskvaSuperstructure" parent="Parts" instance=ExtResource( 5 )]
+position = Vector2( -111, 0 )
+
+[node name="MoskvaTrackingRadar" parent="Parts" instance=ExtResource( 6 )]
+position = Vector2( -569, 0 )
+CompletelyDestroyed = true
+
+[node name="MoskvaSearch" parent="Parts" instance=ExtResource( 7 )]
+position = Vector2( 159, 0 )
+CompletelyDestroyed = true
+RotationSpeedDegrees = 3.0
+
+[node name="MoskvaSearch2" parent="Parts" instance=ExtResource( 8 )]
+position = Vector2( -42, -4 )
+CompletelyDestroyed = true
+RotationSpeedDegrees = -3.0
+
+[node name="MoskvaDeckGun" parent="Parts" instance=ExtResource( 10 )]
+position = Vector2( 633, 0 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="MoskvaCWIS" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( 543, 0 )
+
+[node name="MoskvaCWIS2" parent="Parts" instance=ExtResource( 14 )]
+position = Vector2( 485, 0 )
+StartTimeOffset = 3.0
+
+[node name="VLSMoskva" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -346, 32 )
+
+[node name="VLSMoskva5" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -344, -32 )
+
+[node name="VLSMoskva6" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -386, -31 )
+
+[node name="VLSMoskva7" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -426, -31 )
+
+[node name="VLSMoskva8" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -466, -32 )
+
+[node name="VLSMoskva2" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -386, 32 )
+
+[node name="VLSMoskva3" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -428, 30 )
+
+[node name="VLSMoskva4" parent="Parts" instance=ExtResource( 15 )]
+position = Vector2( -466, 31 )
+
+[node name="Node2D" type="Node2D" parent="Parts"]
+script = ExtResource( 4 )
+
+[node name="MissionKillFire1" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( 181, 85 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -666, 73 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )
+
+[node name="MissionKillFire3" type="Particles2D" parent="."]
+material = ExtResource( 12 )
+position = Vector2( -180, -89 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 13 )
+texture = SubResource( 1 )
+script = ExtResource( 11 )

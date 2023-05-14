@@ -19,10 +19,10 @@ public class LevelButton : Button
 
     public void Initialize()
     {
-        Game game = (GetNode("/root/Game") as Game);
+        //Game game = (GetNode("/root/Game") as Game);
 
 
-        LevelName = (game.Levels[LevelIndexPointedTo].Instance() as Level).LevelName;
+        LevelName = (Game.instance.Levels[LevelIndexPointedTo].Instance() as Level).LevelName;
 
         Text = LevelName;
     }

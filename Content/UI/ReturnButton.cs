@@ -30,6 +30,7 @@ public class ReturnButton : Button
             GetTree().Paused = false;
         }
 
+       
         (GetNode("/root/Game") as Game).QuitToMissionScreen();
         (GetParent() as Control).Visible = false;
 

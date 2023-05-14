@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Assets/Fonts/ROGFonts-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Content/Menus/LevelSelect.cs" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Content/Menus/MenuReturnButton.cs" type="Script" id=4]
 [ext_resource path="res://Content/Menus/CustomisationButton.cs" type="Script" id=5]
 [ext_resource path="res://Content/Menus/LevelStartButton.cs" type="Script" id=6]
-[ext_resource path="res://Content/TextTheme.tres" type="Theme" id=7]
 [ext_resource path="res://Content/Menus/DescriptionBox.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
@@ -14,6 +13,21 @@ size = 64
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0, 0, 0.211765 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
 
 [node name="LevelSelect" type="Control"]
 anchor_right = 1.0
@@ -29,28 +43,31 @@ custom_fonts/font = SubResource( 1 )
 text = "Mission Select"
 align = 1
 
-[node name="DescriptionBox" type="RichTextLabel" parent="."]
+[node name="DescriptionContainer" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 663.0
+margin_left = 653.0
 margin_top = 166.0
-margin_right = -377.0
-margin_bottom = -262.0
-theme = ExtResource( 7 )
+margin_right = -284.0
+margin_bottom = -194.0
+theme = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
+
+[node name="DescriptionBox" type="RichTextLabel" parent="DescriptionContainer"]
+margin_left = 10.0
+margin_right = 967.0
+margin_bottom = 709.0
+theme = SubResource( 5 )
 text = "DEFAULT"
 script = ExtResource( 8 )
 
-[node name="Background" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="ButtonPanelContainer" type="PanelContainer" parent="."]
 margin_left = 199.0
 margin_top = 161.0
 margin_right = 523.0
 margin_bottom = 823.0
 
-[node name="LevelButtonContainer" type="GridContainer" parent="PanelContainer"]
+[node name="LevelButtonContainer" type="GridContainer" parent="ButtonPanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 317.0

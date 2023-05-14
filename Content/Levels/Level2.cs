@@ -12,10 +12,7 @@ public class Level2 : Level
     //public override string LevelName => "Test mission 2";
 
     public int WaveNum = 0;
-    public override void _Ready()
-    {
-        
-    }
+    
 
     public override void OnReady()
     {

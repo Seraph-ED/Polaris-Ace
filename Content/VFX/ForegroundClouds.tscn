@@ -8,6 +8,7 @@
 layer = 100
 
 [node name="Clouds" type="ParallaxLayer" parent="."]
+modulate = Color( 1, 1, 1, 0.486275 )
 motion_offset = Vector2( 600, 600.027 )
 motion_mirroring = Vector2( 2400, 2400 )
 

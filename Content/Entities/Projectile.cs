@@ -20,8 +20,8 @@ public class Projectile : Area2D
     public Vector2 LevelRelativePosition
     {
 
-        get => GlobalPosition - Game.CurrentLevel.GlobalPosition;
-        set => GlobalPosition = Game.CurrentLevel.GlobalPosition + value;
+        get => Game.CurrentLevel !=null ? GlobalPosition - Game.CurrentLevel.GlobalPosition : Vector2.Zero;
+        set => GlobalPosition = Game.CurrentLevel != null ? Game.CurrentLevel.GlobalPosition + value : value;
     }
 
     public List<Character> collidingNodes = new List<Character>();
@@ -30,6 +30,9 @@ public class Projectile : Area2D
     public float Damage = 0;
     [Export]
     public float Lifespan = 3.0f;
+
+    [Export]
+    public bool AppearsOnRadar = false;
 
 
     public override void _Ready()
@@ -128,6 +131,11 @@ public class Projectile : Area2D
         base._PhysicsProcess(delta);
 
         Behavior(delta);
+        if (AppearsOnRadar && Game.CurrentLevel!=null && Game.CurrentLevel.player != null && !Game.CurrentLevel.player.IncomingProjectiles.Contains(this))
+        {
+            Game.CurrentLevel.player.IncomingProjectileQueue.Add(this);
+        }
+
         CheckHits();
 
         Position += Velocity * (delta * 60);

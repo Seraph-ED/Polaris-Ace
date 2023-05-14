@@ -1,0 +1,124 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=1]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Content/VFX/BackgroundFinalBoss.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Levels/Level6.cs" type="Script" id=4]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant0.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Content/VFX/CutscenePlayer.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=7]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant8.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant3.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant4.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant7.ogg" type="AudioStream" id=11]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant5.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant2.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant10.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant6.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Sounds/SFX/Thunder/ThunderDistant1.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Content/VFX/CutscenePrototype.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Content/Main/FinalBossCamera.cs" type="Script" id=18]
+[ext_resource path="res://Content/Levels/FinalBossIntroCutscene.cs" type="Script" id=19]
+[ext_resource path="res://Assets/Sounds/Music/Fusion.ogg" type="AudioStream" id=20]
+[ext_resource path="res://Content/Entities/Enemies/BossPrototype/BossPrototype.tscn" type="PackedScene" id=21]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0.264773 ), 0.0, 0.0443413, 0, 0, Vector2( 0.530364, 0.646591 ), 1.90114, 1.90114, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0.477733, 0 ), 0.0, -3.06198, 0, 0, Vector2( 0.712551, 0.981818 ), -2.24545, 0.0, 0, 0 ]
+
+[node name="Level6" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 4 )
+TimeLeft = 219.0
+LevelName = "Mission 6"
+Description = "Polaris One, Respond immediately! The enemy has gotten the prototype in the air. The aircraft is equipped with nuclear weapons and is vectored towards populated areas. You are the only pilot still in the area. You must shoot it down or millions will perish."
+LightningRarity = 360
+ThunderLoudness = 0.2
+LightningStrengthCurve = SubResource( 2 )
+LightningStormPath = NodePath("BackgroundFinalBoss")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+script = ExtResource( 18 )
+InterpCurve = SubResource( 3 )
+
+[node name="BackgroundFinalBoss" parent="." instance=ExtResource( 3 )]
+FlashLengthMultiplier = 1.8
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 20 )
+volume_db = -15.0
+bus = "Music"
+script = ExtResource( 1 )
+
+[node name="Wave" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="BossPrototype" parent="Wave" instance=ExtResource( 21 )]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 541, 318 )
+Active = false
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )
+
+[node name="Thunder" type="Node2D" parent="."]
+
+[node name="AudioStreamPlayer1" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 5 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 16 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 13 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 12 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 11 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer9" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 8 )
+bus = "SFX"
+
+[node name="AudioStreamPlayer10" type="AudioStreamPlayer" parent="Thunder"]
+stream = ExtResource( 14 )
+bus = "SFX"
+
+[node name="Cutscene" type="Node2D" parent="."]
+script = ExtResource( 19 )
+
+[node name="CutscenePlayer" parent="Cutscene" instance=ExtResource( 6 )]
+position = Vector2( 0, 12000 )
+
+[node name="CutscenePrototype" parent="Cutscene" instance=ExtResource( 17 )]
+position = Vector2( 0, -12000 )
+rotation = 3.14159

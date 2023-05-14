@@ -1,0 +1,62 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringDeckGunLarge.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipComponent.cs" type="Script" id=2]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringDeckGunLargeDamaged.png" type="Texture" id=4]
+[ext_resource path="res://Content/Entities/Enemies/Ships/ShipComponentDefaultFraming.cs" type="Script" id=5]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=6]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 37.0
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
+
+[node name="DaringDeckGun" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 2 )
+Health = 300.0
+IsEnemy = true
+SubsystemWeight = 2.0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 31, 0 )
+scale = Vector2( 0.8, 0.8 )
+frames = SubResource( 1 )
+script = ExtResource( 5 )
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 2, 0 )
+shape = SubResource( 2 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+autostart = true
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 6 )
+position = Vector2( -8, 17 )
+scale = Vector2( 0.6, 0.6 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 7 )
+texture = SubResource( 3 )
+script = ExtResource( 3 )

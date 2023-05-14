@@ -46,28 +46,6 @@ public class RadarWindow : Panel
         RelativeProjectilePositions = new List<Vector2>();
     }
 
-    public void GetCurrentLevel()
-    {
-        Node root = GetNode("/root/Game");
-
-        Level lv = null;
-
-        for (int i = 0; i < root.GetChildCount(); i++)
-        {
-            Node n = root.GetChild(i);
-
-            //GD.Print(i, ", Node type: ",n.GetType());
-
-            if ((n is Level))
-            {
-                lv = n as Level;
-                break;
-            }
-
-        }
-
-        currentLevel = lv;
-    }
 
 
 
@@ -133,7 +111,7 @@ public class RadarWindow : Panel
 
             //GD.Print(i, ", Node type: ",n.GetType());
 
-            if ((n is Character) && (n as Character).Active && ((n as Character).IsEnemy || (n as Character).IsStructure))
+            if ((n is Character) && (n as Character).Active && !(n as Character).MissionKill && ((n as Character).IsEnemy || (n as Character).IsStructure))
             {
                 //Vector2 enemylevelRelativePosition = (n as Character).r - lv.GlobalPosition;
                 Vector2 rel = (n as Character).LevelRelativePosition - currentPlayer.LevelRelativePosition;
@@ -233,7 +211,7 @@ public class RadarWindow : Panel
     public void GetTerrainPositions()
     {
 
-        if (Game.CurrentLevel == null)
+        if (Game.CurrentLevel == null||!Game.CurrentLevel.HasTerrain)
         {
             return;
         }
@@ -242,7 +220,7 @@ public class RadarWindow : Panel
         
         if (PolygonPoints == null || !ConstructedTerrain )
         {
-           // GD.Print("Requesting new terrain constructions");
+            //GD.Print("Requesting new terrain constructions");
             ConstructedTerrain = false;
             return;
         }
@@ -281,10 +259,16 @@ public class RadarWindow : Panel
 
                 //GD.Print("Attempting addition of point [" + j + "][" + i + "]");
 
-                Vector2 relativeV = new Vector2(120, 120) + ((poly[i] - currentPlayer.GlobalPosition) * 120f / (float)RadarRange);
+                Vector2 relativeV = ((poly[i] - currentPlayer.GlobalPosition) * 120f / (float)RadarRange);
 
 
-                poly2.Add( relativeV );
+                relativeV.x = Mathf.Clamp(relativeV.x, -120f, 120f);
+                relativeV.y = Mathf.Clamp(relativeV.y, -120f, 120f);
+
+
+
+
+                poly2.Add( relativeV + new Vector2(120f, 120f) );
             }
             RelativePolygonPoints.Add(poly2);
 
@@ -333,8 +317,9 @@ public class RadarWindow : Panel
 
     public void DrawTerrainOnWindow()
     {
-        if (RelativePolygonPoints == null||RelativePolygonPoints.Count==0)
+        if (!Game.CurrentLevel.HasTerrain||RelativePolygonPoints == null||RelativePolygonPoints.Count==0)
         {
+            //GD.Print("Polygon list not valid");
             return;
         }
 
@@ -348,10 +333,10 @@ public class RadarWindow : Panel
 
             for(int j = 0; j < RelativePolygonPoints[i].Count; ++j)
             {
-                MeanPosition += RelativePolygonPoints[i][j];
+                MeanPosition += ((RelativePolygonPoints[i][j])-new Vector2(120f, 120f));
             }
 
-            if ((MeanPosition / (RelativePolygonPoints[i].Count)).Length()< 100)
+            if ((MeanPosition / (RelativePolygonPoints[i].Count)).Length()< 12000)
             {
                 DrawPolygon(RelativePolygonPoints[i].ToArray(), radarPolyColors);
             }

@@ -19,7 +19,7 @@ public class DescriptionBox : RichTextLabel
 
     public override void _Process(float delta)
     {
-        LevelSelect levelSelect = (GetParent() as LevelSelect);
+        LevelSelect levelSelect = (GetParent().GetParent() as LevelSelect);
         Game game = (GetNode("/root/Game") as Game);
 
         if (LevelSelect.LevelIndexSelected != IndexCurrentlyShowing)

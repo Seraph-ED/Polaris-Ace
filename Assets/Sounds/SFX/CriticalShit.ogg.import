@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CriticalShit.ogg-9d818005be87004d04cf54ebf26569db.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/CriticalShit.ogg"
+dest_files=[ "res://.import/CriticalShit.ogg-9d818005be87004d04cf54ebf26569db.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

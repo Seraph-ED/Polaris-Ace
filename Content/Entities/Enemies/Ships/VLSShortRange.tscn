@@ -1,12 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringVLSOpen.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringVLSClosed.png" type="Texture" id=2]
 [ext_resource path="res://Content/Entities/Enemies/Ships/VLSShortRange.cs" type="Script" id=3]
+[ext_resource path="res://Content/Entities/Enemies/Ships/VLSAnimation.cs" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringVLSDamaged.png" type="Texture" id=5]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=6]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=7]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 1 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -15,14 +20,42 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 41, 10.5 )
 
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
+
 [node name="VLSShortRange" type="KinematicBody2D"]
 collision_layer = 12
 collision_mask = 0
 script = ExtResource( 3 )
+IsEnemy = true
+MissileScenePath = "res://Content/Entities/Projectiles/MissileHostileAgile.tscn"
+MissileDamage = 10.0
+MissileSalvoCooldown = 0.05
+MissileReloadTime = 12.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
+script = ExtResource( 4 )
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 0.5 )
 shape = SubResource( 2 )
+
+[node name="Cooldown" type="Timer" parent="."]
+process_mode = 0
+wait_time = 0.001
+one_shot = true
+autostart = true
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 7 )
+position = Vector2( -35, -9 )
+scale = Vector2( 0.6, 0.6 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 8 )
+texture = SubResource( 3 )
+script = ExtResource( 6 )

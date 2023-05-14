@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Content/Entities/Player.cs" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Jet.png" type="Texture" id=2]
 [ext_resource path="res://Content/Entities/Afterburner.cs" type="Script" id=3]
 [ext_resource path="res://Assets/Sprites/JetPlayer.png" type="Texture" id=4]
 [ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
@@ -19,16 +18,11 @@ height = 41.0
 collision_layer = 129
 collision_mask = 0
 script = ExtResource( 1 )
+Health = 200.0
 
 [node name="JetPlayer" type="Sprite" parent="."]
 scale = Vector2( 0.275, 0.275 )
 texture = ExtResource( 4 )
-
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-position = Vector2( 1.5, 1 )
-scale = Vector2( 0.1675, 0.1675 )
-texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )

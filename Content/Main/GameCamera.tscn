@@ -3,4 +3,5 @@
 [ext_resource path="res://Content/Main/GameCamera.cs" type="Script" id=1]
 
 [node name="GameCamera" type="Camera2D"]
+rotating = true
 script = ExtResource( 1 )

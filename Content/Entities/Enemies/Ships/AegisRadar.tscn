@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringAegisAntenna.png" type="Texture" id=1]
 [ext_resource path="res://Content/Entities/Enemies/Ships/AegisRadar.cs" type="Script" id=2]
 [ext_resource path="res://Assets/Sprites/Enemies/Ships/DaringAegisBase.png" type="Texture" id=3]
+[ext_resource path="res://Content/Entities/Enemies/Ships/MissionKillFire.cs" type="Script" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/DamageFireParticles.tres" type="Material" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 61, 49 )
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/Smoke.png-3d1294fcad7d8c53e9996a9a74a0f3cb.stex"
 
 [node name="AegisRadar" type="KinematicBody2D" groups=["HostileEntity", "Main"]]
 collision_layer = 12
@@ -75,6 +82,18 @@ collision_mask = 129
 collision_layer = 0
 
 [node name="RadarHitbox" type="CollisionPolygon2D" parent="RadarDetection"]
+
+[node name="MissionKillFire2" type="Particles2D" parent="."]
+material = ExtResource( 5 )
+position = Vector2( -21, -40 )
+scale = Vector2( 0.6, 0.6 )
+amount = 400
+lifetime = 5.0
+randomness = 0.39
+visibility_rect = Rect2( -2000, -2000, 4000, 4000 )
+process_material = ExtResource( 6 )
+texture = SubResource( 2 )
+script = ExtResource( 4 )
 
 [connection signal="body_entered" from="RadarDetection" to="." method="DetectObject"]
 [connection signal="body_exited" from="RadarDetection" to="." method="RemoveObject"]

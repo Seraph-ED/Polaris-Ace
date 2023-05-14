@@ -35,6 +35,7 @@ public class Character : KinematicBody2D, IActivateable
     public float Health = 100;
     
     public float MaxHealth = 100;
+
     [Export]
     public bool IsEnemy = false;
     [Export]
@@ -45,8 +46,6 @@ public class Character : KinematicBody2D, IActivateable
     public bool IsBoss = false;
 
     public bool MissileJamming = false;
-
-    public bool removeOnDeath = true;
 
     public bool MissionKill = false;
 
@@ -181,6 +180,11 @@ public class Character : KinematicBody2D, IActivateable
             //HitFlash = 0.05f;
             InHitFlash = false;
         }
+    }
+
+    public virtual double HandleBossBarValues()
+    {
+        return (double)Health / (double)MaxHealth;
     }
 
     public override void _PhysicsProcess(float delta)

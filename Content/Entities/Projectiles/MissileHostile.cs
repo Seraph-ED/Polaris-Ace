@@ -57,7 +57,7 @@ public class MissileHostile : Projectile
         
            target = Game.CurrentLevel.player;
         (target as Player).IncomingProjectileQueue.Add(this);
-        
+
     }
 
     public override void OnHit(Node body)

@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Content/Levels/Music.cs" type="Script" id=1]
+[ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Content/VFX/BackgroundMountainsLow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/VFX/ForegroundDarkClouds.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Content/Entities/Enemies/EnemyDrone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Content/Main/GameCamera.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=7]
+[ext_resource path="res://Content/Levels/Level5.cs" type="Script" id=8]
+[ext_resource path="res://Assets/Sounds/Music/RunningHell.ogg" type="AudioStream" id=9]
+
+[node name="Level5" type="Node2D" groups=["Level", "Main"]]
+pause_mode = 1
+process_priority = 1
+script = ExtResource( 8 )
+LevelName = "Mission 5"
+HasTerrain = true
+Description = "Another major breakthrough! The location of the Dark Sun Group leadership has been identified, and eliminating them is expected to cause the entire organization to lose cohesion, allowing for complete and total victory. Unfortunately, that location is within a weapons research and testing facility. This compound is built high in in the mountains, and contains advanced radars, missiles, and an experimental 6th generation fighter prototype capable of being equipped with nuclear missiles. Another low altitude flight profile will be needed for this mission and we must strike fast, before they get that prototype into the air and threaten nuclear destruction."
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 900.0
+one_shot = true
+autostart = true
+
+[node name="GameCamera" parent="." groups=["Main"] instance=ExtResource( 6 )]
+position = Vector2( 1, -5 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 9 )
+volume_db = -15.0
+autoplay = true
+bus = "Music"
+script = ExtResource( 1 )
+
+[node name="Wave" type="Node2D" parent="."]
+script = ExtResource( 7 )
+Active = true
+
+[node name="EnemyDrone" parent="Wave" instance=ExtResource( 5 )]
+position = Vector2( -787, -2526 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 541, 318 )
+
+[node name="ProjectileContainer" type="Node2D" parent="."]
+position = Vector2( 0, -8000 )
+
+[node name="BackgroundMountainsLow" parent="." instance=ExtResource( 3 )]
+
+[node name="ForegroundDarkClouds" parent="." instance=ExtResource( 4 )]

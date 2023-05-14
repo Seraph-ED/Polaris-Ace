@@ -18,11 +18,16 @@ public class Level : Node2D
     [Export]
     public string LevelName = "Mission";
 
+    [Export]
+    public bool HasTerrain = false;
+
     [Export(PropertyHint.MultilineText)]
     public string Description = "Description";
 
 
     public Node ProjectileContainer => GetNode("ProjectileContainer");
+
+    public Node SpawnedCharacterContainer => GetNode("SpawnedCharactersContainer");
 
     public List<Character> Enemies = new List<Character>();
 
@@ -43,7 +48,26 @@ public class Level : Node2D
         {
             player = GetNode("Player") as Player;
         }
+
+        if (SpawnedCharacterContainer == null)
+        {
+            PlaceSpawnedCharacterContainer();
+        }
+        
         OnReady();
+    }
+
+
+    public void PlaceSpawnedCharacterContainer()
+    {
+        var scene = GD.Load<PackedScene>("res://Content/Levels/SpawnedCharactersContainer.tscn");
+
+        Node n = scene.Instance();
+
+        n.Name = "SpawnedCharactersContainer";
+        (n as EntityContainer).Active = true;
+
+        this.AddChild(n);
     }
 
     public virtual void OnReady()
@@ -153,7 +177,21 @@ public class Level : Node2D
     public virtual bool CheckWinCondition()
     {
 
-        return Enemies.Count == 0;
+        bool haswon = true;
+
+        for(int i = 0; i < Enemies.Count; ++i)
+        {
+            if (!Enemies[i].MissionKill)
+            {
+                haswon = false;
+            }
+        }
+
+
+        
+        
+        
+        return haswon || Enemies.Count == 0;
     }
 
     public virtual bool CheckLoseCondition()
@@ -207,6 +245,42 @@ public class Level : Node2D
         return instance;
     }
 
+    public Character SpawnCharacter(string charScenePath, Vector2 position, Vector2 velocity, float rotation)
+    {
+        var scene = GD.Load<PackedScene>(charScenePath);
+
+        return SpawnCharacter(scene, position, velocity, rotation);
+    }
+
+    public Character SpawnCharacter(PackedScene charScene, Vector2 position, Vector2 velocity, float rotation)
+    {
+        var scene = charScene;
+
+        Node n = scene.Instance();
+
+        if (!(n is Character))
+        {
+            return null;
+        }
+
+        Character instance = n as Character;
+
+        if (SpawnedCharacterContainer == null)
+        {
+            GD.PrintErr("Spawned Character Container in level is null");
+            return null;
+        }
+
+        this.SpawnedCharacterContainer.AddChild(instance);
+
+        instance.LevelRelativePosition = position;
+        instance.Velocity = velocity;
+        instance.Rotation = rotation;
+        
+
+        return instance;
+    }
+
 
     public void UpdateBossHealthbars()
     {
@@ -254,7 +328,7 @@ public class Level : Node2D
         UpdateBossHealthbars();
 
         TimeLeft -= delta;
-        UpdateLevel(delta);
+        
 
         if (CheckWinCondition())
         {
@@ -292,6 +366,11 @@ public class Level : Node2D
         instance.Scale = Vector2.One * explScale;
     }
 
+    public override void _PhysicsProcess(float delta)
+    {
+        base._PhysicsProcess(delta);
+        UpdateLevel(delta);
+    }
     public virtual void UpdateLevel(float delta)
     {
 

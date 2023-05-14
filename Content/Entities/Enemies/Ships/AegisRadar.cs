@@ -94,10 +94,16 @@ public class AegisRadar : ShipComponent
         base.Behavior(delta);
 
         //FindTarget();
+        if (MissionKill)
+        {
+            DetectedObjects.Clear();
+            return;
+        }
 
         if (DetectedObjects.Contains(Game.CurrentLevel.player))
         {
             Target = Game.CurrentLevel.player;
+            Game.CurrentLevel.player.RWRWarning = 0.4f;
         }
         else
         {

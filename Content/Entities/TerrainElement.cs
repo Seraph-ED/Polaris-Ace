@@ -23,7 +23,7 @@ public class TerrainElement : StaticBody2D
             Vector2 globalPos = (GetNode("Hitbox") as CollisionPolygon2D).GlobalPosition;
             for (int i = 0; i < pointsrelative.Length; ++i)
             {
-                AbsoluteCoordsCollisionVectors.Add(pointsrelative[i] + GlobalPosition);
+                AbsoluteCoordsCollisionVectors.Add(pointsrelative[i].Rotated((GetNode("Hitbox") as CollisionPolygon2D).Rotation + Rotation) + GlobalPosition);
             }
         }
     }

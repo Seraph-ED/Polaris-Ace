@@ -36,7 +36,7 @@ public class GameCamera : Camera2D
         }
 
         Position = (GetParent() as Level).player.Position;
-
+        //Rotation += delta * Mathf.Deg2Rad(180);
         
     }
 }

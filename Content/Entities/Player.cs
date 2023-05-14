@@ -42,6 +42,9 @@ public class Player : Character
     [Export]
     public int CollisionDamage = 50;
 
+
+    public float RWRWarning = 0;
+
     public bool ShowCrosshair = false;
 
     public float WeaponUseTimer = 0f;
@@ -115,6 +118,7 @@ public class Player : Character
         ((Control)GetNode("/root/Game/GameUI/GameHUD")).Visible = false;
         GetParent().SetProcess(false);
         GetParent().SetPhysicsProcess(false);
+        MissionKill = true;
 
 
 
@@ -356,6 +360,23 @@ public class Player : Character
             DefenseUseTimer = 0;
         }
 
+        if (Game.DevMode)
+        {
+            Health = MaxHealth;
+            InvinTime = 1f;
+        }
+
+        if (RWRWarning > 0)
+        {
+            RWRWarning -= delta;
+        }
+        else
+        {
+            RWRWarning = 0;
+        }
+
+        
+
     }
 
     public override void PostBehavior(float delta)
@@ -377,6 +398,8 @@ public class Player : Character
         {
             //GD.Print("PlayerNotColliding");
         }
+
+       
 
     }
 
