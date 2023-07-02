@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Sprites/Enemies/BossPrototype/BossPrototype.png" type="Texture" id=1]
-[ext_resource path="res://Content/Entities/Enemies/BossAirSuperiority.cs" type="Script" id=2]
+[ext_resource path="res://Content/Entities/Enemies/BossPrototype/BossPrototype.cs" type="Script" id=2]
 [ext_resource path="res://Content/VFX/JetExhaustParticleMaterialBlue.tres" type="Material" id=3]
 [ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
 [ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
@@ -15,10 +15,9 @@ height = 104.0
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 2 )
-Health = 8000.0
+Health = 10000.0
 IsEnemy = true
 IsBoss = true
-AIState = 1
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8 )
@@ -58,6 +57,7 @@ script = ExtResource( 7 )
 [node name="ReloadTimer" type="Timer" parent="."]
 process_mode = 0
 wait_time = 0.251
+one_shot = true
 autostart = true
 
 [node name="FlareTimer" type="Timer" parent="."]
@@ -66,12 +66,11 @@ wait_time = 0.251
 autostart = true
 
 [node name="FiringArc" type="Area2D" parent="."]
-visible = false
 position = Vector2( 0, -17 )
 monitorable = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FiringArc"]
-polygon = PoolVector2Array( 0, -6, -600, -1990, 600, -1990 )
+polygon = PoolVector2Array( 0, -6, -982, -2500, 982, -2500 )
 
 [connection signal="body_entered" from="FiringArc" to="." method="SetTargetInArc"]
 [connection signal="body_exited" from="FiringArc" to="." method="UnsetTargetInArc"]

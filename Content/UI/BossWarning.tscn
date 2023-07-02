@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Fonts/ROGFonts-Regular.otf" type="DynamicFontData" id=1]
 [ext_resource path="res://Content/UI/BossWarningLabel.cs" type="Script" id=2]
 [ext_resource path="res://Content/UI/BossWarning.cs" type="Script" id=3]
+[ext_resource path="res://Assets/Sounds/SFX/Alarm3.ogg" type="AudioStream" id=4]
+[ext_resource path="res://Content/UI/BossWarningSound.cs" type="Script" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 
@@ -32,5 +34,8 @@ THREAT INBOUND"
 align = 1
 script = ExtResource( 2 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BossWarningSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -31.414
 bus = "SFX"
+script = ExtResource( 5 )

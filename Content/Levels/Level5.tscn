@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Content/Levels/Music.cs" type="Script" id=1]
 [ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,41 @@
 [ext_resource path="res://Content/Entities/EntityContainer.cs" type="Script" id=7]
 [ext_resource path="res://Content/Levels/Level5.cs" type="Script" id=8]
 [ext_resource path="res://Assets/Sounds/Music/RunningHell.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Content/Levels/TerrainContainer.cs" type="Script" id=10]
+[ext_resource path="res://Content/Entities/TerrainElement.cs" type="Script" id=11]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/BaseGate.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Content/Entities/TaskForceContainer.cs" type="Script" id=13]
+[ext_resource path="res://Content/Levels/TaskForceTrigger.cs" type="Script" id=14]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTankSam.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Content/Entities/Enemies/EnemyTankAntiAir.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Assets/Sprites/Terrain/TextureSnow.png" type="Texture" id=17]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetRadar.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/TargetControlTower.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Content/Entities/Enemies/FlightWaypoint.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Content/Entities/Enemies/EnemyBomber.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Content/Entities/PathEntityContainer.cs" type="Script" id=22]
+[ext_resource path="res://Content/Entities/Enemies/BossCommandTank/BossCommandTank.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Content/Entities/Enemies/BossAirSuperiority.tscn" type="PackedScene" id=24]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6945, 6521.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6945, 4513.75 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8064, 8890 )
+
+[sub_resource type="Curve2D" id=7]
+_data = {
+"points": PoolVector2Array( 384.434, -703.262, -384.434, 703.262, -1832, 2044.63, -384.434, -164.827, 384.434, 164.827, -155, 2770.08, -683.438, 186.804, 683.438, -186.804, 966, 1824.43, -523.257, -351.631, 523.257, 351.631, 2643, 2747.45, 683.438, 582.388, -683.438, -582.388, 4768, 1769.89, 672.759, 142.85, -672.759, -142.85, 4405, -174.932, 1334.84, -670.296, -1334.84, 670.296, 2045, -790.275, 822.261, 186.804, -822.261, -186.804, 1180, -2241.17, 309.683, -384.596, -309.683, 384.596, -1447, -1273.91, -149.502, -439.539, 149.502, 439.539, -1597, 659.594, 0, 0, 0, 0, -1832, 2044.63 )
+}
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 4593.5, 5664.5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 2185.25, 1149.25 )
 
 [node name="Level5" type="Node2D" groups=["Level", "Main"]]
 pause_mode = 1
@@ -34,12 +69,579 @@ autoplay = true
 bus = "Music"
 script = ExtResource( 1 )
 
-[node name="Wave" type="Node2D" parent="."]
+[node name="Terrain" type="Node2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="Mountain1" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -4326, 494 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain1"]
+show_behind_parent = true
+polygon = PoolVector2Array( -898, -1891, -754, -1059, -306, -627, 478, -467, 702, 445, 1182, 1037, 1806, 1325, 2350, 2093, 3758, 2493, 6779, 38486, -46259, 32808, -46742, -1383 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain1"]
+show_behind_parent = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -898, -1891, -754, -1059, -306, -627, 478, -467, 702, 445, 1182, 1037, 1806, 1325, 2350, 2093, 3758, 2493, 6779, 38486, -46259, 32808, -46742, -1383 )
+
+[node name="Mountain2" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 5470, -1188 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain2"]
+show_behind_parent = true
+polygon = PoolVector2Array( -1012, 389, -670, 1224, -1119, 1745, -1146, 2678, -1874, 3280, -2574, 3029, -3607, 3585, -5349, 3765, -5735, 4241, -6229, 3945, -6417, 4223, -3471, 39242, 40169, 38680, 37667, 118 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain2"]
+show_behind_parent = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -1012, 389, -670, 1224, -1119, 1745, -1146, 2678, -1874, 3280, -2574, 3029, -3607, 3585, -5349, 3765, -5735, 4241, -6229, 3945, -6417, 4223, -3471, 39242, 40169, 38680, 37667, 118 )
+
+[node name="Mountain3" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -4014, -4492 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain3"]
+show_behind_parent = true
+polygon = PoolVector2Array( -1225, 3114, -1135, 2736, -878, 2480, -425, 2600, -78, 2238, 436, 2162, 541, 1725, 103, 1422, 194, 1015, 617, 260, 1266, 63, 1599, -1009, 1372, -1704, 934, -2036, 919, -2247, 1100, -2580, 1961, -2821, 2520, -3440, 3169, -4271, 4377, -4451, 5329, -3893, 6220, -4044, 6431, -4723, 6235, -6022, -48404, -5733, -48351, 4546 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain3"]
+show_behind_parent = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -1225, 3114, -1135, 2736, -878, 2480, -425, 2600, -78, 2238, 436, 2162, 541, 1725, 103, 1422, 194, 1015, 617, 260, 1266, 63, 1599, -1009, 1372, -1704, 934, -2036, 919, -2247, 1100, -2580, 1961, -2821, 2520, -3440, 3169, -4271, 4377, -4451, 5329, -3893, 6220, -4044, 6431, -4723, 6235, -6022, -48404, -5733, -48351, 4546 )
+
+[node name="Mountain4" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 7253, -6650 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain4"]
+show_behind_parent = true
+polygon = PoolVector2Array( -4080, -1655, -3959, -2440, -4050, -3165, -4484, -3741, -4284, -4173, -4235, -4449, -4113, -4509, -3867, -4464, -3679, -4698, -3564, -4919, -3599, -5115, -3264, -5217, -3152, -5450, -3260, -5668, -3353, -5812, -3199, -5810, -2947, -5600, -2471, -5861, 36378, -5000, 36378, 5885, -2591, 6045, -3247, 5641, -3665, 4522, -3003, 3998, -2800, 3689, -1671, 3032, -1247, 2371, -1687, 1846, -1993, 540, -2518, 371, -2637, -239, -3424, -288, -4127, -670 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain4"]
+show_behind_parent = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -4080, -1655, -3959, -2440, -4050, -3165, -4484, -3741, -4284, -4173, -4235, -4449, -4113, -4509, -3867, -4464, -3679, -4698, -3564, -4919, -3599, -5115, -3264, -5217, -3152, -5450, -3260, -5668, -3353, -5812, -3199, -5810, -2947, -5600, -2471, -5861, 36378, -5000, 36378, 5885, -2591, 6045, -3247, 5641, -3665, 4522, -3003, 3998, -2800, 3689, -1671, 3032, -1247, 2371, -1687, 1846, -1993, 540, -2518, 371, -2637, -239, -3424, -288, -4127, -670 )
+
+[node name="Mountain5" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 7253, -16650 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain5"]
+show_behind_parent = true
+polygon = PoolVector2Array( -3067, 5026, -2590, 4158, -2670, 3802, -2799, 3375, -2842, 2922, -3493, 2459, -3804, 2032, -4322, 1706, -4335, 1225, -3196, 393, -3559, -90, -3151, -498, -3121, -996, -2985, -1419, -2275, -1691, -2109, -2114, -1701, -2537, -1897, -3231, -2321, -4093, -3528, -4394, -5461, -4953, -5809, -5512, -5628, -6388, -5313, -7429, -5336, -8238, -5752, -8944, -6258, -9108, -6575, -9018, -6867, -9111, -7195, -9043, -7405, -8844, -7694, -8662, -7765, -8341, -8148, -8289, -8382, -8455, -8615, -8571, -8875, -8849, -9286, -8732, -9708, -8411, -9884, -8523, -9761, -9084, -9359, -9443, -8926, -9950, -8937, -10495, -9053, -10995, -9469, -11920, -10058, -11920, -10677, -11671, -11172, -10907, -11396, -10665, -11484, -10387, -11577, -10191, -11684, -9969, -11899, -9854, -12171, -9893, -12375, -10014, -12618, -10141, -12820, -10181, -13083, -9986, -13222, -9789, -13389, -9898, -13513, -10074, -13906.3, -10148.4, -14172, -9934, -14519, -9851, -14730, -9588, -14645, -9265, -14515, -9079, -14266, -8978, -14234, -8912, -14257, -8866, -14392, -8879, -14547, -8879, -14777, -8770, -14934, -8675, -15010, -8606, -15105, -8584, -15240, -8726, -15432, -8863, -15834, -9078, -16161, -9309, -16746, -9342, -16998, -9148, -17201, -8937, -17298, -8818, -17467, -8793, -17613, -8840, -17777, -9136, -18280, -9546, -18898, -9520, -19381, -9278, -20076, -9293, -22234, -24646, 39695, -22348, 39187, -6175, 39051, 6463 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain5"]
+show_behind_parent = true
+texture = ExtResource( 17 )
+texture_offset = Vector2( 841.865, 200.512 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -3067, 5026, -2590, 4158, -2670, 3802, -2799, 3375, -2842, 2922, -3493, 2459, -3804, 2032, -4322, 1706, -4335, 1225, -3196, 393, -3559, -90, -3151, -498, -3121, -996, -2985, -1419, -2275, -1691, -2109, -2114, -1701, -2537, -1897, -3231, -2321, -4093, -3528, -4394, -5461, -4953, -5809, -5512, -5628, -6388, -5313, -7429, -5336, -8238, -5752, -8944, -6258, -9108, -6575, -9018, -6867, -9111, -7195, -9043, -7405, -8844, -7694, -8662, -7765, -8341, -8148, -8289, -8382, -8455, -8615, -8571, -8875, -8849, -9286, -8732, -9708, -8411, -9884, -8523, -9761, -9084, -9359, -9443, -8926, -9950, -8937, -10495, -9053, -10995, -9469, -11920, -10058, -11920, -10677, -11671, -11172, -10907, -11396, -10665, -11484, -10387, -11577, -10191, -11684, -9969, -11899, -9854, -12171, -9893, -12375, -10014, -12618, -10141, -12820, -10181, -13083, -9986, -13222, -9789, -13389, -9898, -13513, -10074, -13906.3, -10148.4, -14172, -9934, -14519, -9851, -14730, -9588, -14645, -9265, -14515, -9079, -14266, -8978, -14234, -8912, -14257, -8866, -14392, -8879, -14547, -8879, -14777, -8770, -14934, -8675, -15010, -8606, -15105, -8584, -15240, -8726, -15432, -8863, -15834, -9078, -16161, -9309, -16746, -9342, -16998, -9148, -17201, -8937, -17298, -8818, -17467, -8793, -17613, -8840, -17777, -9136, -18280, -9546, -18898, -9520, -19381, -9278, -20076, -9293, -22234, -24646, 39695, -22348, 39187, -6175, 39051, 6463 )
+
+[node name="Mountain6" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -7253, -16650 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain6"]
+show_behind_parent = true
+polygon = PoolVector2Array( 9467, 6173, 9534, 5959, 9724, 5816, 9900, 5683, 9910, 5512, 9929, 5388, 9976, 5303, 10057, 5260, 10148, 5184, 10285, 5198, 10385, 5222, 10485, 5208, 10590, 5160, 10633, 5093, 10628, 4970, 10576, 4889, 10523, 4808, 10528, 4684, 10599, 4632, 10815, 4659, 10923, 4552, 10923, 4426, 10890, 4312, 10735, 4416, 10503, 4397, 10369, 4181, 10412, 3924, 10636, 3748, 10903, 3753, 10980, 3815, 11029, 3919, 11198, 3939, 11384, 3629, 11253, 3482, 11263, 3242, 11109, 2870, 10745, 2807, 10642, 2511, 9712, 1617, 9446.67, 987.555, 8659, 213, 8328, -652, 8510, -1613, 8382, -2168, 7691, -2434, 7563, -2718, 7709, -3075, 7603, -3504, 7121, -3710, 6942, -4016, 6928, -4270, 7403, -4358, 7565, -4615, 7354, -4781, 7253, -5005, 7311, -5167, 7693, -5489, 8409, -6019, 8360, -6483, 8581, -7082, 8695, -7460, 8647, -7997, 8378, -8473, 7974, -8697, 7430, -8646, 7274, -8538, 7126, -8274, 6995, -8164, 6878, -7906, 6599, -7869, 6334, -7758, 6115, -7941, 5818, -7950, 5680, -8070, 5574, -8214, 5423, -8230, 5234, -8194, 5124, -8048, 4886, -7866, 4671, -7881, 4408, -7955, 4254, -8305, 4194, -8806, 4258, -9071, 4375, -9341, 4648, -9811, 4773, -10228, 4668, -10477, 4491, -10611, 3941, -10464, 3473, -10081, 3033, -9509, 2486, -9215, 2149, -9286, 1946, -9675, 1572, -9618, 1337, -9290, 1162, -9251, 934, -9279, 798, -9700, 605, -9734, 428, -9618, 288, -9424, 277, -9340, 351, -9295, 442, -9190, 649, -9142, 806, -9077, 920, -8931, 934, -8810, 895, -8618, 803, -8543, 708, -8508, 602, -8506, 525, -8520, 432, -8542, 239, -8642, 231, -8607, 301, -8521, 277, -8419, 131, -8356, 40, -8374, -52, -8427, -209, -8276, -349, -8298, -518, -8412, -796, -8336, -947, -8418, -1148, -8429, -1499, -8622, -1672, -8760, -1759, -8869, -1938, -8820, -2172, -8837, -2296, -8829, -2424, -8703, -2427, -8590, -2470, -8517, -2432, -8303, -2503, -8212, -2506, -8122, -2647, -8006, -2746, -7974, -2916, -8031, -3020, -7990, -3112, -8008, -3315, -8307, -3441, -8697, -3770, -8915, -4417, -8879, -4693, -8615, -5340, -8381, -5826, -8495, -5899.62, -8268.26, -6152, -7491, -14145, 6603 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain6"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 9467, 6173, 9534, 5959, 9724, 5816, 9900, 5683, 9910, 5512, 9929, 5388, 9976, 5303, 10057, 5260, 10148, 5184, 10285, 5198, 10385, 5222, 10485, 5208, 10590, 5160, 10633, 5093, 10628, 4970, 10576, 4889, 10523, 4808, 10528, 4684, 10599, 4632, 10815, 4659, 10923, 4552, 10923, 4426, 10890, 4312, 10735, 4416, 10503, 4397, 10369, 4181, 10412, 3924, 10636, 3748, 10903, 3753, 10980, 3815, 11029, 3919, 11198, 3939, 11384, 3629, 11253, 3482, 11263, 3242, 11109, 2870, 10745, 2807, 10642, 2511, 9712, 1617, 9446.67, 987.555, 8659, 213, 8328, -652, 8510, -1613, 8382, -2168, 7691, -2434, 7563, -2718, 7709, -3075, 7603, -3504, 7121, -3710, 6942, -4016, 6928, -4270, 7403, -4358, 7565, -4615, 7354, -4781, 7253, -5005, 7311, -5167, 7693, -5489, 8409, -6019, 8360, -6483, 8581, -7082, 8695, -7460, 8647, -7997, 8378, -8473, 7974, -8697, 7430, -8646, 7274, -8538, 7126, -8274, 6995, -8164, 6878, -7906, 6599, -7869, 6334, -7758, 6115, -7941, 5818, -7950, 5680, -8070, 5574, -8214, 5423, -8230, 5234, -8194, 5124, -8048, 4886, -7866, 4671, -7881, 4408, -7955, 4254, -8305, 4194, -8806, 4258, -9071, 4375, -9341, 4648, -9811, 4773, -10228, 4668, -10477, 4491, -10611, 3941, -10464, 3473, -10081, 3033, -9509, 2486, -9215, 2149, -9286, 1946, -9675, 1572, -9618, 1337, -9290, 1162, -9251, 934, -9279, 798, -9700, 605, -9734, 428, -9618, 288, -9424, 277, -9340, 351, -9295, 442, -9190, 649, -9142, 806, -9077, 920, -8931, 934, -8810, 895, -8618, 803, -8543, 708, -8508, 602, -8506, 525, -8520, 432, -8542, 239, -8642, 231, -8607, 301, -8521, 277, -8419, 131, -8356, 40, -8374, -52, -8427, -209, -8276, -349, -8298, -518, -8412, -796, -8336, -947, -8418, -1148, -8429, -1499, -8622, -1672, -8760, -1759, -8869, -1938, -8820, -2172, -8837, -2296, -8829, -2424, -8703, -2427, -8590, -2470, -8517, -2432, -8303, -2503, -8212, -2506, -8122, -2647, -8006, -2746, -7974, -2916, -8031, -3020, -7990, -3112, -8008, -3315, -8307, -3441, -8697, -3770, -8915, -4417, -8879, -4693, -8615, -5340, -8381, -5826, -8495, -5899.62, -8268.26, -6152, -7491, -14145, 6603 )
+
+[node name="Mountain7" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -18575, -32503 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain7"]
+show_behind_parent = true
+polygon = PoolVector2Array( 5708, 6536, 5587, 6502, 5546, 6423, 5398, 6308, 5140, 5818, 5148, 5615, 5177, 5369, 5003, 4977, 4688, 4710, 4433, 4725, 4268, 4458, 3991, 3926, 4073, 3653, 4042, 3463, 3921, 3196, 3553, 2967, 3045, 2878, 2867, 3012, 2588, 2993, 2384, 2929, 2124, 2707, 1864, 2548, 1527, 2605, 1102, 2808, 903, 3036, 532, 3079, 418, 2922, 119, 2523, -10, 2338, 162, 1739, 233, 1425, -694, 869, -1164, 584, -1763, 755, -2276, 1340, -3473, 1126, -4229, 542, -4310, -1130, -4096, -1899, -3904, -2647, -4160, -3202, -4374, -3629, -6050, -4075, -6984, -4866, -6960, -9438, 3654, -8774, 5759, 6563 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain7"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 5708, 6536, 5587, 6502, 5546, 6423, 5398, 6308, 5140, 5818, 5148, 5615, 5177, 5369, 5003, 4977, 4688, 4710, 4433, 4725, 4268, 4458, 3991, 3926, 4073, 3653, 4042, 3463, 3921, 3196, 3553, 2967, 3045, 2878, 2867, 3012, 2588, 2993, 2384, 2929, 2124, 2707, 1864, 2548, 1527, 2605, 1102, 2808, 903, 3036, 532, 3079, 418, 2922, 119, 2523, -10, 2338, 162, 1739, 233, 1425, -694, 869, -1164, 584, -1763, 755, -2276, 1340, -3473, 1126, -4229, 542, -4310, -1130, -4096, -1899, -3904, -2647, -4160, -3202, -4374, -3629, -6050, -4075, -6984, -4866, -6960, -9438, 3654, -8774, 5759, 6563 )
+
+[node name="Mountain8" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -27402, -16239 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain8"]
+show_behind_parent = true
+polygon = PoolVector2Array( 14241, -8668, 13985, -8572, 13558, -8268, 13232, -8278, 12887, -7974, 12877, -7736, 12715, -7422, 12335, -7356, 11716, -7318, 11341, -6789, 11100, -6291, 11100, -5973, 10888, -5717, 10405, -5520, 8922, -5564, 8110, -5158, 7512, -5350, 7170, -5478, 7085, -6076, 6615, -6119, 5846, -6332, 5099, -6119, 4565, -6375, 4202, -6696, 4309, -6995, 4415, -7443, 4180, -7635, 3839, -7892, 3646, -8511, 3668, -9002, 3412, -8917, 3027, -8789, 2536, -9002, 2237, -9472, 2215, -9963, 1916, -10348, 1404, -10113, 1148, -10241, 870, -10390, 400, -10604, 16, -11010, -155, -11586, 208, -12206, 357, -12569, 229, -13210, 101, -13850, 678, -15687, 1084, -15815, 1425, -16136, 1724, -16755, 2429, -17225, 2579, -17609, 2258, -18229, 2045, -18763, 2215, -19062, 1703, -20215, 1276, -20386, -1437, -20856, -24630, -20425, -25010, 6303, 6338, 6383, 14229, -7907 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain8"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 14241, -8668, 13985, -8572, 13558, -8268, 13232, -8278, 12887, -7974, 12877, -7736, 12715, -7422, 12335, -7356, 11716, -7318, 11341, -6789, 11100, -6291, 11100, -5973, 10888, -5717, 10405, -5520, 8922, -5564, 8110, -5158, 7512, -5350, 7170, -5478, 7085, -6076, 6615, -6119, 5846, -6332, 5099, -6119, 4565, -6375, 4202, -6696, 4309, -6995, 4415, -7443, 4180, -7635, 3839, -7892, 3646, -8511, 3668, -9002, 3412, -8917, 3027, -8789, 2536, -9002, 2237, -9472, 2215, -9963, 1916, -10348, 1404, -10113, 1148, -10241, 870, -10390, 400, -10604, 16, -11010, -155, -11586, 208, -12206, 357, -12569, 229, -13210, 101, -13850, 678, -15687, 1084, -15815, 1425, -16136, 1724, -16755, 2429, -17225, 2579, -17609, 2258, -18229, 2045, -18763, 2215, -19062, 1703, -20215, 1276, -20386, -1437, -20856, -24630, -20425, -25010, 6303, 6338, 6383, 14229, -7907 )
+
+[node name="Mountain9" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -39528, -47405 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain9"]
+show_behind_parent = true
+polygon = PoolVector2Array( 13108, -3073, 12503, -2845, 12866, -1634, 11897, -571, 11588, 505, 11938, 1757, 10652, 2548, 10592, 3575, 11679, 4330, 11940, 5851, 11653, 6211, 11293, 6427, 10454, 6546, 10118, 7553, 9471, 7769, 8920, 8057, 9016, 9112, 9855, 9231, 10862, 9591, 11293, 10166, 12012, 10262, 12492, 10622, 13019, 10886, 12923, 11413, 12012, 11749, 10382, 12444, 1757, 10977, -14686, 11858, -10985, 512, -8457, -8384, 8663, -9344, 11302, -8050, 12145, -7101, 12553, -6678, 12432, -6028, 11964, -5636, 12024, -3733 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain9"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 13108, -3073, 12812, -2780, 12764, -2457, 12866, -1634, 11897, -571, 11588, 505, 11938, 1757, 10652, 2548, 10592, 3575, 11679, 4330, 11940, 5851, 11653, 6211, 11293, 6427, 10454, 6546, 10118, 7553, 9471, 7769, 8920, 8057, 9016, 9112, 9855, 9231, 10862, 9591, 11293, 10166, 12012, 10262, 12492, 10622, 13019, 10886, 12923, 11413, 12012, 11749, 10382, 12444, 1757, 10977, -14686, 11858, -10985, 512, -8457, -8384, 8663, -9344, 11302, -8050, 12145, -7101, 12553, -6678, 12432, -6028, 11964, -5636, 12024, -3733 )
+
+[node name="Mountain10" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -10168, -50253 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain10"]
+show_behind_parent = true
+polygon = PoolVector2Array( -15118, 13113, -15598, 12792, -15961, 12782, -16495, 12750, -16816, 12536, -17168, 12248, -17990, 12333, -18172, 11991, -18033, 11447, -18118, 10966, -18064, 10161, -17744, 9777, -17144, 9489, -16968, 8881, -16145, 7718, -15579, 7494, -15002, 6885, -14287, 6714, -14141, 5598, -13146, 5354, -12634, 4346, -12746, 3690, -13306, 3338, -12810, 2666, -13409, 1823, -13636, 1128, -14322, 818, -15071, 645, -14762, 288, -14573, -110, -14672, -323, -15026, -564, -15872, -1198, -16295, -2286, -15893, -2991, -15654, -5073, -13450, -7277, 14980, -7369, 24192, 11120 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain10"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -15118, 13113, -15598, 12792, -15961, 12782, -16495, 12750, -16816, 12536, -17168, 12248, -17990, 12333, -18172, 11991, -18033, 11447, -18118, 10966, -18064, 10161, -17744, 9777, -17144, 9489, -16968, 8881, -16145, 7718, -15579, 7494, -15002, 6885, -14287, 6714, -14141, 5598, -13146, 5354, -12634, 4346, -12746, 3690, -13306, 3338, -12810, 2666, -13409, 1823, -13636, 1128, -14322, 818, -15071, 645, -14762, 288, -14573, -110, -14672, -323, -15026, -564, -15872, -1198, -16295, -2286, -15893, -2991, -15654, -5073, -13450, -7277, 14980, -7369, 24192, 11120 )
+
+[node name="Mountain11" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -19592, -63482 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain11"]
+show_behind_parent = true
+polygon = PoolVector2Array( -6206, 8796, -6404, 8096, -6691, 7647, -6835, 7395, -6835, 6991, -6682, 6803, -6395, 6533, -6126, 6246, -6126, 5914, -6233, 5689, -6377, 5536, -6682, 5438, -6916, 5357, -7850, 5213, -8146, 4980, -8290, 4620, -8083, 4207, -7832, 4010, -7482, 3821, -6816, 3911, -6084, 3654, -5285, 3606, -4600, 3254, -4210, 2864, -3953, 2189, -3915, 1599, -4172, 1228, -4790, 800, -5732, -66, -5932, -827, -5817, -1636, -5732, -2854, -6036, -3529, -5532, -4281, -5741, -5184, -6008, -5641, -6036, -6088, -5808, -6745, -6008, -7962, -6169, -9066, -6141, -9951, -6141, -10988, -6038, -11406, -6007, -11762, -6106, -12032, -6070, -12307, -6106, -12617, -6097, -12779, -6070, -12955, -6096, -13345, -5979, -13569, -5809, -13910, -5539, -14189, -5189, -14449, -4974, -14629, -4722, -14871, -4390, -15213, -4103, -15446, 7126, -16401, 21789, -12871, 24640, 6046 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain11"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -6206, 8796, -6404, 8096, -6691, 7647, -6835, 7395, -6835, 6991, -6682, 6803, -6395, 6533, -6126, 6246, -6126, 5914, -6233, 5689, -6377, 5536, -6682, 5438, -6916, 5357, -7850, 5213, -8146, 4980, -8290, 4620, -8083, 4207, -7832, 4010, -7482, 3821, -6816, 3911, -6084, 3654, -5285, 3606, -4600, 3254, -4210, 2864, -3953, 2189, -3915, 1599, -4172, 1228, -4790, 800, -5732, -66, -5932, -827, -5817, -1636, -5732, -2854, -6036, -3529, -5532, -4281, -5741, -5184, -6008, -5641, -6036, -6088, -5808, -6745, -6008, -7962, -6169, -9066, -6141, -9951, -6141, -10988, -6038, -11406, -6007, -11762, -6106, -12032, -6070, -12307, -6106, -12617, -6097, -12779, -6070, -12955, -6096, -13345, -5979, -13569, -5809, -13910, -5539, -14189, -5189, -14449, -4974, -14629, -4722, -14871, -4390, -15213, -4103, -15446, 7126, -16401, 21789, -12871, 24640, 6046 )
+
+[node name="Mountain12" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -31917, -60522 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain12"]
+show_behind_parent = true
+polygon = PoolVector2Array( 4710, 6510, 5225, 5976, 5187, 5506, 4914, 5214, 4704, 4872, 4545, 4471, 4768, 4002, 5269, 3646, 5479, 3303, 5377, 3056, 5015, 2954, 4222, 2700, 3828, 2490, 3479, 2129, 3441, 1506, 3834, 979, 4183, 471, 4952, 211, 5263, 420, 5815, 205, 6761, -94, 7307, -297, 7727, -805, 7517, -1351, 6247, -2208, 5612, -2456, 5447, -3072, 5565, -4188, 5927, -4615, 5908, -5795, 5889, -6470, 6374, -7307, 6110, -8121, 5896, -8325, 5681, -8840, 5756, -9301, 6034, -9799, 6094, -10158, 5902, -10770, 5782, -11657, 5866, -12328, 5854, -12735, 5830, -13215, 5866, -13886, 5925, -14376, 5895, -14685, 5952, -14988, 5902, -15251, 5913, -15594, 5909, -15900, 5959, -16324, 5856, -16698, 5713, -17094, 5546, -17611, 5146, -18273, 4174, -19753, 2664, -21323, 1577, -23377, -357, -24525, -2652, -24585, -19566, -24887, -17996, 5256 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain12"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 4710, 6510, 5225, 5976, 5187, 5506, 4914, 5214, 4704, 4872, 4545, 4471, 4768, 4002, 5269, 3646, 5479, 3303, 5377, 3056, 5015, 2954, 4222, 2700, 3828, 2490, 3479, 2129, 3441, 1506, 3834, 979, 4183, 471, 4952, 211, 5263, 420, 5815, 205, 6761, -94, 7307, -297, 7727, -805, 7517, -1351, 6247, -2208, 5612, -2456, 5447, -3072, 5565, -4188, 5927, -4615, 5908, -5795, 5889, -6470, 6374, -7307, 6110, -8121, 5896, -8325, 5681, -8840, 5756, -9301, 6034, -9799, 6094, -10158, 5902, -10770, 5782, -11657, 5866, -12328, 5854, -12735, 5830, -13215, 5866, -13886, 5925, -14376, 5895, -14685, 5952, -14988, 5902, -15251, 5913, -15594, 5909, -15900, 5959, -16324, 5856, -16698, 5713, -17094, 5546, -17611, 5146, -18273, 4174, -19753, 2664, -21323, 1577, -23377, -357, -24525, -2652, -24585, -19566, -24887, -17996, 5256 )
+
+[node name="Mountain13" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -34416, -87248 )
+collision_layer = 0
+collision_mask = 128
+script = ExtResource( 11 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain13"]
+show_behind_parent = true
+polygon = PoolVector2Array( 4052, 3352, 2734, 1926, 2007, 339, 1092, -1034, 796, -2998, -65, -5743, -386, -9964, 790, -13313, 5089, -16662, 7035, -18924, 10022, -18472, 13824, -17793, 14593, -16933, 16675, -17114, 19933, -17974, 23915, -16616, 25545, -14037, 28486, -12860, 31790, -13313, 36180, -17159, 38623, -16345, 41022, -16028, 42244, -12634, 43601, -10507, 43466, -8199, 44506, -5574, 44597, -4035, 53409, 2488, 52001, 4536, 50721, 9272, 47521, 9784, 42913, 8504, 38561, 10424, 36385, 10680, 33381, 9415, 32207, 8504, 29666, 7593, 26453, 6730, 16668, 6091, 14406, 7042, 12052, 7766, 11102, 7223, 10647, 8538, 11538, 13044, 50341, 49183, 81445, 49190, 84133, -33761, -26843, -46817, -17243, 11295 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain13"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 17 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 4052, 3352, 2734, 1926, 2007, 339, 1092, -1034, 796, -2998, -65, -5743, -386, -9964, 790, -13313, 5089, -16662, 7035, -18924, 10022, -18472, 13824, -17793, 14593, -16933, 16675, -17114, 19933, -17974, 23915, -16616, 25545, -14037, 28486, -12860, 31790, -13313, 36180, -17159, 38623, -16345, 41022, -16028, 42244, -12634, 43601, -10507, 43466, -8199, 44506, -5574, 44597, -4035, 53409, 2488, 52001, 4536, 50721, 9272, 47521, 9784, 42913, 8504, 38561, 10424, 36385, 10680, 33381, 9415, 32207, 8504, 29666, 7593, 26453, 6730, 16668, 6091, 14406, 7042, 12052, 7766, 11102, 7223, 10647, 8538, 11538, 13044, 50341, 49183, 81445, 49190, 84133, -33761, -26843, -46817, -17243, 11295 )
+
+[node name="Gate1" type="Node2D" parent="."]
 script = ExtResource( 7 )
 Active = true
 
-[node name="EnemyDrone" parent="Wave" instance=ExtResource( 5 )]
-position = Vector2( -787, -2526 )
+[node name="TaskForceContainer" type="Node2D" parent="Gate1"]
+script = ExtResource( 13 )
+Active = true
+activationCheckPath = NodePath("Trigger1")
+
+[node name="Trigger1" type="Area2D" parent="Gate1/TaskForceContainer"]
+position = Vector2( 223, -3380 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate1/TaskForceContainer/Trigger1"]
+shape = SubResource( 1 )
+
+[node name="BaseGate" parent="Gate1/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 2792, -8924 )
+rotation = 1.83434
+IsEnemy = true
+
+[node name="EnemyDrone" parent="Gate1/TaskForceContainer" instance=ExtResource( 5 )]
+position = Vector2( -4243.47, -1114.27 )
+rotation = 1.29852
+
+[node name="EnemyDrone2" parent="Gate1/TaskForceContainer" instance=ExtResource( 5 )]
+position = Vector2( -4700, -925 )
+rotation = 1.29852
+
+[node name="EnemyDrone3" parent="Gate1/TaskForceContainer" instance=ExtResource( 5 )]
+position = Vector2( -3877, -937 )
+rotation = 1.29852
+
+[node name="EnemyDrone4" parent="Gate1/TaskForceContainer" instance=ExtResource( 5 )]
+position = Vector2( -4187, -1496 )
+rotation = 1.29852
+
+[node name="Gate2" type="Node2D" parent="."]
+position = Vector2( 0, -20000 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate2"]
+script = ExtResource( 13 )
+Active = true
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Gate2/TaskForceContainer"]
+position = Vector2( 223, -3380 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate2/TaskForceContainer/Trigger2"]
+position = Vector2( 2112, 5320 )
+shape = SubResource( 2 )
+
+[node name="VisualGate" parent="Gate2/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 2790, 11074 )
+rotation = 1.82212
+IsEnemy = true
+MissionKill = true
+
+[node name="BaseGate" parent="Gate2/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 1197, -2391 )
+rotation = 1.63712
+scale = Vector2( 0.7, 0.7 )
+IsEnemy = true
+
+[node name="EnemyTankAntiAir2" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 860, -1578 )
+
+[node name="EnemyTankAntiAir3" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 492, -1005 )
+
+[node name="EnemyTankAntiAir4" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 1277, -1035 )
+
+[node name="EnemyTankAntiAir6" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 2541, 1861 )
+
+[node name="EnemyTankAntiAir7" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 1769, 2813 )
+
+[node name="EnemyTankAntiAir8" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 3417, 3084 )
+
+[node name="EnemyTankAntiAir5" parent="Gate2/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 1178, 710 )
+
+[node name="EnemyTankSam" parent="Gate2/TaskForceContainer" instance=ExtResource( 15 )]
+position = Vector2( 4498, 782 )
+
+[node name="EnemyTankSam2" parent="Gate2/TaskForceContainer" instance=ExtResource( 15 )]
+position = Vector2( 1744, 1004 )
+
+[node name="EnemyTankSam3" parent="Gate2/TaskForceContainer" instance=ExtResource( 15 )]
+position = Vector2( 3224, 128 )
+
+[node name="Gate3" type="Node2D" parent="."]
+position = Vector2( -22022, -29962 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate3"]
+position = Vector2( -5274, 5987 )
+script = ExtResource( 13 )
+Active = true
+activationCheckPath = NodePath("Trigger2")
+
+[node name="BaseGate" parent="Gate3/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 2166, -12378 )
+rotation = 0.846485
+IsEnemy = true
+
+[node name="Trigger2" type="Area2D" parent="Gate3/TaskForceContainer"]
+position = Vector2( 223, -3380 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate3/TaskForceContainer/Trigger2"]
+position = Vector2( 7420, -1300 )
+shape = SubResource( 3 )
+
+[node name="BomberContainer" type="Node2D" parent="Gate3/TaskForceContainer"]
+script = ExtResource( 7 )
+
+[node name="FlightWaypoint" parent="Gate3/TaskForceContainer/BomberContainer" instance=ExtResource( 20 )]
+position = Vector2( 2384, -5845 )
+
+[node name="EnemyBomber1" parent="Gate3/TaskForceContainer/BomberContainer/FlightWaypoint" instance=ExtResource( 21 )]
+position = Vector2( 1663, -84 )
+IsEnemy = true
+
+[node name="EnemyBomber2" parent="Gate3/TaskForceContainer/BomberContainer/FlightWaypoint" instance=ExtResource( 21 )]
+position = Vector2( -490, 1101 )
+rotation = 2.17643
+IsEnemy = true
+
+[node name="EnemyBomber3" parent="Gate3/TaskForceContainer/BomberContainer/FlightWaypoint" instance=ExtResource( 21 )]
+position = Vector2( -1363, -1268 )
+rotation = -2.61276
+IsEnemy = true
+
+[node name="EnemyTankAntiAir7" parent="Gate3/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 2189, -11398 )
+
+[node name="EnemyTankAntiAir8" parent="Gate3/TaskForceContainer" instance=ExtResource( 16 )]
+position = Vector2( 3094, -12275 )
+
+[node name="TankPath1" type="Node2D" parent="Gate3"]
+position = Vector2( 1673, 2096 )
+script = ExtResource( 22 )
+CompletionTime = 45.0
+LoopType = 1
+
+[node name="BossCommandTank" parent="Gate3/TankPath1" instance=ExtResource( 23 )]
+position = Vector2( -1327, 1227 )
+
+[node name="Path" type="Path2D" parent="Gate3/TankPath1"]
+position = Vector2( -359, 201 )
+scale = Vector2( 1, 0.971812 )
+curve = SubResource( 7 )
+
+[node name="PathFollow" type="PathFollow2D" parent="Gate3/TankPath1/Path"]
+position = Vector2( -1401.94, 3612.53 )
+rotation = 0.110796
+offset = 3950.31
+
+[node name="Gate4" type="Node2D" parent="."]
+position = Vector2( -25705, -46870 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate4"]
+position = Vector2( -5274, 5987 )
+script = ExtResource( 13 )
+Active = true
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Gate4/TaskForceContainer"]
+position = Vector2( 4658, -5477 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate4/TaskForceContainer/Trigger2"]
+position = Vector2( 1522, -456 )
+shape = SubResource( 5 )
+
+[node name="BaseGate" parent="Gate4/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 4770, -10039 )
+rotation = 0.846485
+IsEnemy = true
+
+[node name="BossAirSuperiority" parent="Gate4/TaskForceContainer" instance=ExtResource( 24 )]
+position = Vector2( 5839, -5156 )
+
+[node name="BossAirSuperiority2" parent="Gate4/TaskForceContainer" instance=ExtResource( 24 )]
+position = Vector2( 4404, -6067 )
+
+[node name="Gate5" type="Node2D" parent="."]
+position = Vector2( -25379, -63330 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate5"]
+position = Vector2( -5274, 5987 )
+script = ExtResource( 13 )
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Gate5/TaskForceContainer"]
+position = Vector2( 5010, -7333 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate5/TaskForceContainer/Trigger2"]
+show_behind_parent = true
+position = Vector2( 263, -207 )
+shape = SubResource( 6 )
+
+[node name="BaseGate" parent="Gate5/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 4944, -9126 )
+rotation = 1.5708
+scale = Vector2( 0.6, 0.6 )
+IsEnemy = true
+
+[node name="Gate6" type="Node2D" parent="."]
+position = Vector2( -25371, -65788 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate6"]
+position = Vector2( -5274, 5987 )
+script = ExtResource( 13 )
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Gate6/TaskForceContainer"]
+position = Vector2( 5010, -7333 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate6/TaskForceContainer/Trigger2"]
+show_behind_parent = true
+position = Vector2( 263, -207 )
+shape = SubResource( 6 )
+
+[node name="BaseGate" parent="Gate6/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 4944, -9126 )
+rotation = 0.977384
+scale = Vector2( 0.6, 0.6 )
+IsEnemy = true
+
+[node name="Gate7" type="Node2D" parent="."]
+position = Vector2( -25348, -68310 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Gate7"]
+position = Vector2( -5274, 5987 )
+script = ExtResource( 13 )
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Gate7/TaskForceContainer"]
+position = Vector2( 5010, -7333 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gate7/TaskForceContainer/Trigger2"]
+show_behind_parent = true
+position = Vector2( 263, -207 )
+shape = SubResource( 6 )
+
+[node name="BaseGate" parent="Gate7/TaskForceContainer" instance=ExtResource( 12 )]
+position = Vector2( 4823, -9025 )
+rotation = 1.5708
+scale = Vector2( 0.6, 0.6 )
+IsEnemy = true
+
+[node name="StaticDefenses" type="Node2D" parent="."]
+position = Vector2( -10000, -10000 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="EnemyTankSam3" parent="StaticDefenses" instance=ExtResource( 15 )]
+position = Vector2( 10900, -13492 )
+
+[node name="EnemyTankSam5" parent="StaticDefenses" instance=ExtResource( 15 )]
+position = Vector2( 8431, -15808 )
+
+[node name="EnemyTankSam6" parent="StaticDefenses" instance=ExtResource( 15 )]
+position = Vector2( 5514, -16736 )
+
+[node name="EnemyTankSam7" parent="StaticDefenses" instance=ExtResource( 15 )]
+position = Vector2( 2059, -14791 )
+
+[node name="EnemyTankSam4" parent="StaticDefenses" instance=ExtResource( 15 )]
+position = Vector2( 11688, -15729 )
+
+[node name="TargetRadar" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( 10695, -12976 )
+rotation = -0.493928
+
+[node name="TargetRadar2" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( 11862, -12836 )
+rotation = 1.08909
+
+[node name="TargetControlTower" parent="StaticDefenses" instance=ExtResource( 19 )]
+position = Vector2( 11900, -5668 )
+
+[node name="TargetControlTower2" parent="StaticDefenses" instance=ExtResource( 19 )]
+position = Vector2( 13314, -5063 )
+
+[node name="EnemyTankAntiAir3" parent="StaticDefenses" instance=ExtResource( 16 )]
+position = Vector2( 7217, -16921 )
+
+[node name="EnemyTankAntiAir5" parent="StaticDefenses" instance=ExtResource( 16 )]
+position = Vector2( 4640, -16225 )
+
+[node name="EnemyTankAntiAir6" parent="StaticDefenses" instance=ExtResource( 16 )]
+position = Vector2( 2869, -15594 )
+
+[node name="EnemyTankAntiAir4" parent="StaticDefenses" instance=ExtResource( 16 )]
+position = Vector2( 6811, -17714 )
+
+[node name="TargetRadar3" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( 6923, -16787 )
+rotation = 2.87107
+
+[node name="TargetRadar4" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -17639, -28571 )
+rotation = 2.87107
+
+[node name="TargetRadar5" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -20293, -27784 )
+rotation = 0.58294
+
+[node name="TargetRadar6" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -17131, -30475 )
+rotation = -2.1869
+
+[node name="TargetRadar7" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -15479, -43442 )
+rotation = -1.09781
+
+[node name="TargetRadar8" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -17430, -45326 )
+rotation = 1.06116
+
+[node name="TargetRadar9" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -16919, -48488 )
+rotation = -2.50106
+
+[node name="TargetRadar10" parent="StaticDefenses" instance=ExtResource( 18 )]
+position = Vector2( -14887, -51340 )
+rotation = -3.88685
+
+[node name="StaticDefenses2" type="Node2D" parent="."]
+position = Vector2( -10000, -10000 )
+script = ExtResource( 7 )
+Active = true
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 541, 318 )
@@ -50,3 +652,11 @@ position = Vector2( 0, -8000 )
 [node name="BackgroundMountainsLow" parent="." instance=ExtResource( 3 )]
 
 [node name="ForegroundDarkClouds" parent="." instance=ExtResource( 4 )]
+
+[connection signal="body_entered" from="Gate1/TaskForceContainer/Trigger1" to="Gate1/TaskForceContainer/Trigger1" method="OnEntered"]
+[connection signal="body_entered" from="Gate2/TaskForceContainer/Trigger2" to="Gate2/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Gate3/TaskForceContainer/Trigger2" to="Gate3/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Gate4/TaskForceContainer/Trigger2" to="Gate4/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Gate5/TaskForceContainer/Trigger2" to="Gate5/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Gate6/TaskForceContainer/Trigger2" to="Gate6/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Gate7/TaskForceContainer/Trigger2" to="Gate7/TaskForceContainer/Trigger2" method="OnEntered"]

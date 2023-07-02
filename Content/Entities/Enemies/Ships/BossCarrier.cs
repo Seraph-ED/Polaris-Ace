@@ -175,6 +175,37 @@ public class BossCarrier : Ship
         }
     }
 
+    public override void Kill()
+    {
+        if(Game.CurrentLevel is Level4)
+        {
+            (Game.CurrentLevel as Level4).CarrierDowned = true;
+        }
+        SpawnOnDeathExplosionPattern(KillType);
+
+        for (int i = Components.Count - 1; i >= 0; --i)
+        {
+
+
+            Components[i].Kill();
+        }
+
+        if (KillType == 1)
+        {
+            MissionKill = true;
+        }
+        else
+        {
+            for (int i = Components.Count - 1; i >= 0; --i)
+            {
+                Components[i].QueueFree();
+            }
+            QueueFree();
+            //base.Kill();
+        }
+
+    }
+
     public override void OnActivate()
     {
         FindCatapults();

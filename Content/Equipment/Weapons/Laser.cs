@@ -10,11 +10,11 @@ public class Laser : Weapon
     // Called when the node enters the scene tree for the first time.
     public override string DisplayName => "Laser";
 
-    public override string Description => "A concentrated beam of light which deals damage over time, can be aimed towards the cursor. 30 damage per second (total: 150), 5 second cooldown.";
+    public override string Description => "A concentrated beam of light which deals damage over time, can be aimed towards the cursor. 60 damage per second (total: 300), 6 second cooldown.";
 
     public override float UseTime => 5.0f;
 
-    public override float CooldownSeconds => 5.0f;
+    public override float CooldownSeconds => 6.0f;
     public override void _Ready()
     {
         
@@ -30,7 +30,7 @@ public class Laser : Weapon
         for (int i = 0; i < 1; i++)
         {
             //LaserProjectile instance = scene.Instance() as LaserProjectile;
-            Projectile instance = Game.CurrentLevel.SpawnProjectile(scene, shooter.LevelRelativePosition, Vector2.Zero, shooter.Rotation, 6);
+            Projectile instance = Game.CurrentLevel.SpawnProjectile(scene, shooter.LevelRelativePosition, Vector2.Zero, shooter.Rotation, 12);
             Game.CurrentLevel.AddChild(instance);
             
             (instance as LaserProjectile).attachedChar = shooter;

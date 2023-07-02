@@ -20,6 +20,8 @@ public class AegisRadar : ShipComponent
 
     public float antennaRotation = 0;
 
+    public float a = 0;
+
     public Node2D RadarHandler;
 
     public Area2D RadarDetection;
@@ -93,6 +95,7 @@ public class AegisRadar : ShipComponent
     {
         base.Behavior(delta);
 
+       
         //FindTarget();
         if (MissionKill)
         {
@@ -102,12 +105,24 @@ public class AegisRadar : ShipComponent
 
         if (DetectedObjects.Contains(Game.CurrentLevel.player))
         {
+            a += delta;
+
+            a = a % 3;
+
+
             Target = Game.CurrentLevel.player;
+            
+
             Game.CurrentLevel.player.RWRWarning = 0.4f;
+            if(a < delta * 3)
+            {
+                Game.CurrentLevel.player.RWRSources.Add(new Vector3(LevelRelativePosition.x, LevelRelativePosition.y, 3f));
+            }
         }
         else
         {
             Target = null;
+            a = 0;
         }
 
         if (RadarHandler == null || RadarDetection == null)

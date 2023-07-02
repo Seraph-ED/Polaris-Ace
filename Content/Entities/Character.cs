@@ -46,7 +46,8 @@ public class Character : KinematicBody2D, IActivateable
     public bool IsBoss = false;
 
     public bool MissileJamming = false;
-
+    
+    [Export]
     public bool MissionKill = false;
 
     public float InvinTime = 0;
@@ -200,7 +201,7 @@ public class Character : KinematicBody2D, IActivateable
         
         Behavior(delta);
         //LevelRelativePosition = GlobalPosition - Game.CurrentLevel.GlobalPosition;
-        CollisionData = MoveAndCollide(Velocity);
+        CollisionData = MoveAndCollide(Velocity* delta * 60);
 
         PostBehavior(delta);
 

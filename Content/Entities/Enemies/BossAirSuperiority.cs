@@ -44,7 +44,7 @@ public class BossAirSuperiority : Character
     public void FindTarget()
     {
 
-        target = Game.CurrentLevel.GetNode("Player");
+        target = Game.CurrentLevel.player;
     }
 
     public void SetTargetInArc(Node body)

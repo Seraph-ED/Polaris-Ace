@@ -51,7 +51,7 @@ custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
 text = "DEV MODE ENABLED"
 
 [node name="GameUI" type="CanvasLayer" parent="."]
-layer = 12
+layer = 128
 
 [node name="GameHUD" parent="GameUI" instance=ExtResource( 4 )]
 visible = false
@@ -60,7 +60,7 @@ visible = false
 visible = false
 
 [node name="Screens" type="CanvasLayer" parent="."]
-layer = 13
+layer = 128
 
 [node name="WinScreen" parent="Screens" instance=ExtResource( 6 )]
 visible = false
@@ -73,7 +73,7 @@ pause_mode = 2
 visible = false
 
 [node name="Menus" type="CanvasLayer" parent="."]
-layer = 14
+layer = 128
 
 [node name="TitleScreen" parent="Menus" instance=ExtResource( 3 )]
 

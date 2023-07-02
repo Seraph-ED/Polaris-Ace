@@ -1,0 +1,123 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Sounds/SFX/MissileLaunch.wav" type="AudioStream" id=1]
+[ext_resource path="res://Content/Entities/Projectiles/MissileHostileNuke.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/Projectiles/MissileNuke.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+[ext_resource path="res://Content/VFX/ProxFuse.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Content/VFX/ProxFuse.gdshader" type="Shader" id=7]
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 760.0
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.0652819, 0.124629, 0.178042, 0.198813, 1 )
+colors = PoolColorArray( 0.287394, 0.771364, 0.82666, 0.965398, 0.590823, 0.426514, 0.555041, 0.469984, 0.866667, 0.0627451, 0.277072, 0.0196078, 1, 1, 1, 0.0117647, 0.933334, 0.703921, 0.531373, 0.0156863, 1, 1, 1, 0.0313726 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0.523864 ), 0.0, -2.0014, 0, 0, Vector2( 0.161426, 0.452273 ), 4.17576, 4.17576, 0, 0, Vector2( 0.419287, 0.980682 ), 0.0585995, 0.0585995, 0, 0, Vector2( 0.995807, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+lifetime_randomness = 0.08
+emission_shape = 2
+emission_box_extents = Vector3( 0, 0, 0 )
+flag_disable_z = true
+direction = Vector3( 0, 1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 519.45
+initial_velocity_random = 0.06
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = -100.0
+damping = 13.2
+scale = 0.5
+scale_random = 0.17
+scale_curve = SubResource( 11 )
+color = Color( 1, 1, 1, 0.258824 )
+color_ramp = SubResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 7 )
+shader_param/waveCol = Color( 0.972549, 0.337255, 0.337255, 1 )
+shader_param/timeOffset = -0.12
+shader_param/timeOffsetRotate = null
+shader_param/waves = 3.0
+shader_param/minOpacity = 0.084
+shader_param/maxOpacity = 0.599
+shader_param/borderOpacity = null
+shader_param/borderWidth = null
+shader_param/PI = 3.14159
+
+[sub_resource type="ShaderMaterial" id=15]
+shader = ExtResource( 7 )
+shader_param/waveCol = Color( 1, 0.576471, 0.576471, 1 )
+shader_param/timeOffset = -0.6
+shader_param/timeOffsetRotate = null
+shader_param/waves = 2.0
+shader_param/minOpacity = 0.0
+shader_param/maxOpacity = 0.899
+shader_param/borderOpacity = null
+shader_param/borderWidth = null
+shader_param/PI = 3.14159
+
+[node name="MissileHostileNuke" type="Area2D"]
+show_behind_parent = true
+collision_layer = 3
+monitorable = false
+script = ExtResource( 2 )
+Lifespan = 4.0
+AppearsOnRadar = true
+Homing = 1.1
+DropTime = 0.5
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 13 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 3.8147e-06 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 3 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+volume_db = -2.423
+pitch_scale = 0.73
+attenuation = 0.420448
+bus = "SFX"
+
+[node name="Exhaust" type="Particles2D" parent="."]
+show_behind_parent = true
+material = ExtResource( 5 )
+position = Vector2( -46, 0 )
+rotation = 1.5708
+emitting = false
+amount = 1800
+lifetime = 2.0
+preprocess = 1.0
+speed_scale = 0.76
+randomness = 0.36
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 4 )
+
+[node name="ProxFuse" parent="." instance=ExtResource( 6 )]
+material = SubResource( 14 )
+scale = Vector2( 1.5, 1.5 )
+
+[node name="ProxFuse2" parent="." instance=ExtResource( 6 )]
+visible = false
+material = SubResource( 15 )
+scale = Vector2( 0.8, 0.8 )
+
+[connection signal="body_entered" from="." to="." method="SetAsColliding"]
+[connection signal="body_exited" from="." to="." method="UnsetAsColliding"]

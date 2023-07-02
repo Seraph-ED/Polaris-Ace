@@ -107,8 +107,9 @@ public class Level6 : Level
         player.Active = true;
         player.Rotation = 0;
         GetNode<EntityContainer>("Wave").Active = true;
-        GetNode<Character>("Wave/BossPrototype").LevelRelativePosition = player.LevelRelativePosition + new Vector2(0, -3000);
-        GetNode<Character>("Wave/BossPrototype").Rotation = Mathf.Pi;
+        GetNode<Character>("Wave/BossPrototype").LevelRelativePosition = player.LevelRelativePosition + new Vector2(0, -10000);
+        GetNode<Character>("Wave/BossPrototype").Velocity = new Vector2(0, 40);
+        //GetNode<Character>("Wave/BossPrototype").Rotation = Mathf.Pi;
     }
 
 

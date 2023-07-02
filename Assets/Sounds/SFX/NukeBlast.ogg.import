@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/NukeBlast.ogg-efbd12ce311a36dd0301fb6c5993aae0.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sounds/SFX/NukeBlast.ogg"
+dest_files=[ "res://.import/NukeBlast.ogg-efbd12ce311a36dd0301fb6c5993aae0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

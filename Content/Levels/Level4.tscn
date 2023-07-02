@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Content/Levels/Level4.cs" type="Script" id=1]
 [ext_resource path="res://Content/Levels/Music.cs" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Content/VFX/ForegroundClouds.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Content/Entities/Enemies/Ships/CruiserMoskva.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Content/Entities/Enemies/Ships/BossCarrier.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Sprites/Terrain/TextureRocks.png" type="Texture" id=15]
 
 [node name="Level4" type="Node2D" groups=["Level", "Main"]]
 pause_mode = 1
@@ -47,17 +48,431 @@ script = ExtResource( 2 )
 [node name="Terrain" type="Node2D" parent="."]
 script = ExtResource( 11 )
 
+[node name="Mainland" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 0, -30000 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mainland"]
+show_behind_parent = true
+polygon = PoolVector2Array( -35871, 32733, -39455, 20317, -34719, 4317, -32287, -19619, -21791, -32547, -16040, -45848, -9770, -50100, 8102, -52982, 16749, -43542, 28640, -36696, 33684, -25093, 30042, 1400, 49446, 19890, 53510, 35535, 71821, 65143, 110477, 76151, 111474, -75700, -910, -138676, -102414, -59316, -103310, 97484, -56590, 68300 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Mainland"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.5, 0.5 )
+polygon = PoolVector2Array( -35871, 32733, -39455, 20317, -34719, 4317, -32287, -19619, -21791, -32547, -16040, -45848, -9770, -50100, 8102, -52982, 16749, -43542, 28640, -36696, 33684, -25093, 30042, 1400, 49446, 19890, 53510, 35535, 71821, 65143, 110477, 76151, 111474, -75700, -910, -138676, -102414, -59316, -103310, 97484, -56590, 68300 )
+
 [node name="Island1" type="StaticBody2D" parent="Terrain"]
-position = Vector2( 2824, -2432 )
+position = Vector2( 2729, -34895 )
+rotation = 1.28631
 collision_layer = 128
 collision_mask = 128
 script = ExtResource( 9 )
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island1"]
 show_behind_parent = true
+polygon = PoolVector2Array( -507, 656, -214, 536, 74, 572, 308, 722, 476, 674, 889, 458, 1105, 392, 1459, 470, 1794, 416, 2028, 170, 2262, -100, 2106, -357, 1626, -399, 1189, -309, 763, -525, 140, -627, -250, -333, -789, -201, -867, 164, -1196, 404, -1155, 644, -951, 811 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/Island1"]
 show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -507, 656, -214, 536, 74, 572, 308, 722, 476, 674, 889, 458, 1105, 392, 1459, 470, 1794, 416, 2028, 170, 2262, -100, 2106, -357, 1626, -399, 1189, -309, 763, -525, 140, -627, -250, -333, -789, -201, -867, 164, -1196, 404, -1155, 644, -951, 811 )
+
+[node name="Island2" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -3675, -36754 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island2"]
+show_behind_parent = true
+polygon = PoolVector2Array( -2025, 1577, -1800, 2052, -350, 1418, 83, 727, 641, -493, -199, -1648, -730, -1839, -1873, -1102, -2432, -200, -2343, 346, -2279, 1146 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island2"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -2025, 1577, -1800, 2052, -350, 1418, 83, 727, 641, -493, -199, -1648, -730, -1839, -1873, -1102, -2432, -200, -2343, 346, -2279, 1146 )
+
+[node name="Island3" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 7804.03, -38557 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island3"]
+show_behind_parent = true
+polygon = PoolVector2Array( -2829, 604, -1676, 486, -913, 1096, 375, 113, 409, -1158, -371, -1091, -1625, -2328, -2456, -2260 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island3"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -2829, 604, -1676, 486, -913, 1096, 375, 113, 409, -1158, -371, -1091, -1625, -2328, -2456, -2260 )
+
+[node name="Island4" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 12202, -35218 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island4"]
+show_behind_parent = true
+polygon = PoolVector2Array( 71, -1566, -553, -998, -385, -694, -481, -142, -241, 258, 111, 418, 255, -30, 431, -462, 167, -742 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island4"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 71, -1566, -553, -998, -385, -694, -481, -142, -241, 258, 111, 418, 255, -30, 431, -462, 167, -742 )
+
+[node name="Island5" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 15740, -42360 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island5"]
+show_behind_parent = true
+polygon = PoolVector2Array( -503, -573, -566, -27, -351, 151, -401, 558, -135, 596, 335, 431, 1046, 278, 919, -357, 221, -598 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island5"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -503, -573, -566, -27, -351, 151, -401, 558, -135, 596, 335, 431, 1046, 278, 919, -357, 221, -598 )
+
+[node name="Island6" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -8491, -45142 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island6"]
+show_behind_parent = true
+polygon = PoolVector2Array( 516, -1852, 672, -1145, 900, -450, 540, -18, 876, 497, 468, 809, -371, 533, -862, 353, -1593, 497, -1570, 89, -1246, -414, -647, -90, -191, -750 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island6"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 516, -1852, 672, -1145, 900, -450, 540, -18, 876, 497, 468, 809, -371, 533, -862, 353, -1593, 497, -1570, 89, -1246, -414, -647, -90, -191, -750 )
+
+[node name="Island7" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 3686, -51002 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island7"]
+show_behind_parent = true
+polygon = PoolVector2Array( -120, -408, 101, -329, 310, -391, 486, -250, 316, -1, 367, 214, 73, 299, -272, 265, -272, -7 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island7"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -120, -408, 101, -329, 310, -391, 486, -250, 316, -1, 367, 214, 73, 299, -272, 265, -272, -7 )
+
+[node name="Island8" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -8035, -27560 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island8"]
+show_behind_parent = true
+polygon = PoolVector2Array( 826, -2334, 1093, -1814, 788, -1547, 902, -1026, 1143, 2, 546, -11, 305, 307, -177, 675, -901, 320, -1447, -252, -711, -303, -419, -811, -292, -1661, 140, -1852 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island8"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 826, -2334, 1093, -1814, 788, -1547, 902, -1026, 1143, 2, 546, -11, 305, 307, -177, 675, -901, 320, -1447, -252, -711, -303, -419, -811, -292, -1661, 140, -1852 )
+
+[node name="Island9" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 10349, -46873 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island9"]
+show_behind_parent = true
+polygon = PoolVector2Array( -111, 828, 297, 396, 841, 372, 817, -252, -23, -788, -567, -324 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island9"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -111, 828, 297, 396, 841, 372, 817, -252, -23, -788, -567, -324 )
+
+[node name="Island10" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -1426, -46045 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island10"]
+show_behind_parent = true
+polygon = PoolVector2Array( -208, -861, 631, -705, 691, -214, 870, 301, 451, 745, 31, 445, -760, 565, -940, 38, -484, -202, -328, -466, -844, -645, -808, -1017 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island10"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -208, -861, 631, -705, 691, -214, 870, 301, 451, 745, 31, 445, -760, 565, -940, 38, -484, -202, -328, -466, -844, -645, -808, -1017 )
+
+[node name="Island11" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -5769, -54391 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island11"]
+show_behind_parent = true
+polygon = PoolVector2Array( 122, 650, 730, 170, 1226, 138, 1450, -166, 1258, -518, 1210, -1606, 394, -1302, -358, -710, -630, -70, -438, 554 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island11"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 122, 650, 730, 170, 1226, 138, 1450, -166, 1258, -518, 1210, -1606, 394, -1302, -358, -710, -630, -70, -438, 554 )
+
+[node name="Island12" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 3608, -29797 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island12"]
+show_behind_parent = true
+polygon = PoolVector2Array( -135, 312, 68, 273, 258, 312, 341, 337, 436, 286, 506, 216, 506, 121, 379, 26, 303, -196, 297, -330, 163, -444, 4, -304, -72, -260, -237, -273, -243, -6, -262, 172 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island12"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -135, 312, 68, 273, 258, 312, 341, 337, 436, 286, 506, 216, 506, 121, 379, 26, 303, -196, 297, -330, 163, -444, 4, -304, -72, -260, -237, -273, -243, -6, -262, 172 )
+
+[node name="Island13" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 7901, -26380 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island13"]
+show_behind_parent = true
+polygon = PoolVector2Array( -447, -113, -379, -317, -249, -238, -91, -345, -6, -577, 181, -702, 260, -560, 333, -345, 413, -283, 288, -176, 282, -17, 362, 68, 294, 215, 328, 350, 152, 430, 62, 260, -97, 271, -255, 164, -368, 73 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island13"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -447, -113, -379, -317, -249, -238, -91, -345, -6, -577, 181, -702, 260, -560, 333, -345, 413, -283, 288, -176, 282, -17, 362, 68, 294, 215, 328, 350, 152, 430, 62, 260, -97, 271, -255, 164, -368, 73 )
+
+[node name="Island14" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 1075, -24115 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island14"]
+show_behind_parent = true
+polygon = PoolVector2Array( 622, -155, 469, 226, 241, 334, -223, 671, -674, 512, -1523, 443, -1844, 195, -2253, -134, -1852, -431, -1515, -375, -985, -624, -512, -431 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island14"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 622, -155, 469, 226, 241, 334, -223, 671, -674, 512, -1523, 443, -1844, 195, -2253, -134, -1852, -431, -1515, -375, -985, -624, -512, -431 )
+
+[node name="Island15" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 7889, -55926 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island15"]
+show_behind_parent = true
+polygon = PoolVector2Array( -579, -529, -103, -861, 49, -556, 400, -439, 516, 1, 265, 423, -229, 306, -831, 333, -866, -71 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island15"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -579, -529, -103, -861, 49, -556, 400, -439, 516, 1, 265, 423, -229, 306, -831, 333, -866, -71 )
+
+[node name="Island16" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 3252, -61974 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island16"]
+show_behind_parent = true
+polygon = PoolVector2Array( -324, 361, 53, 381, 134, 186, 336, 112, 443, -150, 430, -520, 618, -796, 504, -1032, 268, -911, 208, -709, -95, -534, -492, -272, -472, -43, -674, 341, -734, 563, -526, 670 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island16"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -324, 361, 53, 381, 134, 186, 336, 112, 443, -150, 430, -520, 618, -796, 504, -1032, 268, -911, 208, -709, -95, -534, -492, -272, -472, -43, -674, 341, -734, 563, -526, 670 )
+
+[node name="Island17" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -3844, -63708 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island17"]
+show_behind_parent = true
+polygon = PoolVector2Array( -166, -387, 123, -398, 474, 4, 89, 270, -262, 66, -652, -92, -924, -443, -488, -658 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island17"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -166, -387, 123, -398, 474, 4, 89, 270, -262, 66, -652, -92, -924, -443, -488, -658 )
+
+[node name="Island18" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 494, -56706 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island18"]
+show_behind_parent = true
+polygon = PoolVector2Array( -129, -283, 239, -275, 275, -7, 187, 197, -57, 161, -177, -7, -337, -147 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island18"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -129, -283, 239, -275, 275, -7, 187, 197, -57, 161, -177, -7, -337, -147 )
+
+[node name="Island19" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 13509, -53700 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island19"]
+show_behind_parent = true
+polygon = PoolVector2Array( -706, 364, -787, -166, -500, -498, -329, -1064, 299, -1145, 524, -875, 1027, -956, 1781, -1001, 1835, -606, 1593, -103, 1602, 130, 1377, 535, 1063, 319, 560, 382, 237, 633, -230, 930, -1335, 903, -1856, 499, -1649, 112, -1012, 247, -850, 409 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island19"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -706, 364, -787, -166, -500, -498, -329, -1064, 299, -1145, 524, -875, 1027, -956, 1781, -1001, 1835, -606, 1593, -103, 1602, 130, 1377, 535, 1063, 319, 560, 382, 237, 633, -230, 930, -1335, 903, -1856, 499, -1649, 112, -1012, 247, -850, 409 )
+
+[node name="Island20" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -10884, -50656 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island20"]
+show_behind_parent = true
+polygon = PoolVector2Array( 160, -634, 530, -491, 352, -106, 153, 108, 146, 293, -132, 336, -375, 514, -710, 350, -1337, 450, -1522, 157, -1529, -99, -1251, -384, -1251, -213, -1130, 1, -931, 36, -681, -106, -631, -327, -446, -185, -368, -178, -232, -199, -147, -334, -11, -513, 3, -741 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island20"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 160, -634, 530, -491, 352, -106, 153, 108, 146, 293, -132, 336, -375, 514, -710, 350, -1337, 450, -1522, 157, -1529, -99, -1251, -384, -1251, -213, -1130, 1, -931, 36, -681, -106, -631, -327, -446, -185, -368, -178, -232, -199, -147, -334, -11, -513, 3, -741 )
+
+[node name="Island21" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -12977, -58990 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island21"]
+show_behind_parent = true
+polygon = PoolVector2Array( -2, -404, 226, -133, 180, 31, 126, 79, 121, 126, 116, 169, 90, 188, 9, 200, -12, 193, -12, 157, -167, 174, -164, 110, -207, 98, -217, 86, -231, -7, -224, -52, -198, -119, -107, -114, -84, -109, -19, -183, -3, -307, -64, -335 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island21"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -2, -404, 226, -133, 180, 31, 126, 79, 121, 126, 116, 169, 90, 188, 9, 200, -12, 193, -12, 157, -167, 174, -164, 110, -207, 98, -217, 86, -231, -7, -224, -52, -198, -119, -107, -114, -84, -109, -19, -183, -3, -307, -64, -335 )
+
+[node name="Island22" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 13890, -61692 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island22"]
+show_behind_parent = true
+polygon = PoolVector2Array( -265, 79, -262, -59, -175, -152, -64, -296, 17, -335, 96, -287, 105, -197, 150, -22, 76, 72, 53, 253, -3, 383, -82, 408, -108, 337, -108, 233, -179, 131 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island22"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -265, 79, -262, -59, -175, -152, -64, -296, 17, -335, 96, -287, 105, -197, 150, -22, 76, 72, 53, 253, -3, 383, -82, 408, -108, 337, -108, 233, -179, 131 )
+
+[node name="Island23" type="StaticBody2D" parent="Terrain"]
+position = Vector2( -7421, -65421 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island23"]
+show_behind_parent = true
+polygon = PoolVector2Array( 33, -618, 124, -541, 124, -450, 114, -339, 158, -94, 165, 54, 91, 159, -41, 206, -269, 95, -216, 21, -111, -94, -125, -154, -179, -292, -162, -531, -71, -763, 60, -716 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island23"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( 33, -618, 124, -541, 124, -450, 114, -339, 158, -94, 165, 54, 91, 159, -41, 206, -269, 95, -216, 21, -111, -94, -125, -154, -179, -292, -162, -531, -71, -763, 60, -716 )
+
+[node name="Island24" type="StaticBody2D" parent="Terrain"]
+position = Vector2( 6235, -63663 )
+collision_layer = 128
+collision_mask = 128
+script = ExtResource( 9 )
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Island24"]
+show_behind_parent = true
+polygon = PoolVector2Array( -556, 133, -455, 112, -208, 207, 187, 212, 335, 112, 706, 31, 658, -145, 620, -259, 506, -212, 225, -159, 16, -221, -236, -212, -469, -74, -602, 88 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Terrain/Island24"]
+show_behind_parent = true
+antialiased = true
+texture = ExtResource( 15 )
+texture_scale = Vector2( 0.6, 0.6 )
+polygon = PoolVector2Array( -556, 133, -455, 112, -208, 207, 187, 212, 335, 112, 706, 31, 658, -145, 620, -259, 506, -212, 225, -159, 16, -221, -236, -212, -469, -74, -602, 88 )
 
 [node name="Fleet" type="Node2D" parent="."]
 position = Vector2( 0, -50000 )
@@ -87,7 +502,7 @@ Active = true
 position = Vector2( -203, -1206 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-position = Vector2( 541, 318 )
+position = Vector2( 0, -20000 )
 
 [node name="ProjectileContainer" type="Node2D" parent="."]
 position = Vector2( 0, -8000 )

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Content/VFX/ProxFuse.gdshader" type="Shader" id=1]
+[ext_resource path="res://Assets/Sprites/Backgrounds/BlueOcean.png" type="Texture" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/waveCol = Color( 0.972549, 0.337255, 0.337255, 1 )
+shader_param/timeOffset = -0.06
+shader_param/timeOffsetRotate = 0.1
+shader_param/waves = 5.0
+shader_param/minOpacity = 0.084
+shader_param/maxOpacity = 0.624
+shader_param/borderOpacity = 0.731
+shader_param/borderWidth = 0.01
+shader_param/PI = 3.14159
+
+[node name="ProxFuse" type="Sprite"]
+material = SubResource( 1 )
+texture = ExtResource( 2 )

@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 EquipmentHandler="*res://Content/Main/EquipmentHandler.tscn"
+SaveGame="*res://Content/Main/SaveData.tscn"
 
 [display]
 

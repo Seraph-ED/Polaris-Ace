@@ -23,6 +23,7 @@ public class RadarWindow : Panel
     public Texture BlipTexture;
     public Texture BlipTextureStructure;
     public Texture MissileWarnTexture;
+    public Texture RWRWarnTexture;
 
     public Level currentLevel;
 
@@ -42,6 +43,7 @@ public class RadarWindow : Panel
         BlipTexture = GD.Load<Texture>("res://Assets/Sprites/RadarBlip.png");
         BlipTextureStructure = GD.Load<Texture>("res://Assets/Sprites/RadarBlipSquare.png");
         MissileWarnTexture = GD.Load<Texture>("res://Assets/Sprites/MissileWarning.png");
+        RWRWarnTexture = GD.Load<Texture>("res://Assets/Sprites/RWRDirectionIndicator.png");
         RelativeEnemyPositions = new List<Vector3>();
         RelativeProjectilePositions = new List<Vector2>();
     }
@@ -154,7 +156,7 @@ public class RadarWindow : Panel
 
     public void FindTerrainElements()
     {
-        if (Game.CurrentLevel == null)
+        if (Game.CurrentLevel == null || !Game.CurrentLevel.HasTerrain)
         {
             return;
         }
@@ -262,8 +264,8 @@ public class RadarWindow : Panel
                 Vector2 relativeV = ((poly[i] - currentPlayer.GlobalPosition) * 120f / (float)RadarRange);
 
 
-                relativeV.x = Mathf.Clamp(relativeV.x, -120f, 120f);
-                relativeV.y = Mathf.Clamp(relativeV.y, -120f, 120f);
+               // relativeV.x = Mathf.Clamp(relativeV.x, -120f, 120f);
+                //relativeV.y = Mathf.Clamp(relativeV.y, -120f, 120f);
 
 
 
@@ -317,7 +319,7 @@ public class RadarWindow : Panel
 
     public void DrawTerrainOnWindow()
     {
-        if (!Game.CurrentLevel.HasTerrain||RelativePolygonPoints == null||RelativePolygonPoints.Count==0)
+        if (Game.CurrentLevel==null||!Game.CurrentLevel.HasTerrain||RelativePolygonPoints == null||RelativePolygonPoints.Count==0)
         {
             //GD.Print("Polygon list not valid");
             return;
@@ -343,6 +345,29 @@ public class RadarWindow : Panel
         }
 
 
+    }
+
+    public void DrawPlayerRWRBlips()
+    {
+        if (currentPlayer == null)
+        {
+            return;
+        }
+
+        for(int i = 0; i < currentPlayer.RWRSources.Count; ++i)
+        {
+            Vector3 a = currentPlayer.RWRSources[i];
+            Vector2 relativeRadarPos = new Vector2(a.x - currentPlayer.LevelRelativePosition.x, a.y - currentPlayer.LevelRelativePosition.y);
+
+            float relativeRadarDirection = relativeRadarPos.Angle();
+
+
+
+            DrawSetTransform(new Vector2(120, 120), relativeRadarDirection, Vector2.One * 0.3f);
+
+            DrawTexture(RWRWarnTexture, new Vector2(60, -16), new Color(1, 1, 1, a.z/3f));
+
+        }
     }
 
     public override void _Draw()
@@ -428,6 +453,7 @@ public class RadarWindow : Panel
 
         }
 
+        DrawPlayerRWRBlips();
 
 
 

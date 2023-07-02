@@ -27,7 +27,7 @@ public class WeaponCrosshairBomb : Sprite
 
         
         
-        float v = (7 + player.Velocity.Length()) * (0.3f/delta);
+        float v = (7 + player.Velocity.Length()) * (0.3f*60f);
 
         if (Visible)
         {

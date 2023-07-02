@@ -71,6 +71,8 @@ public class Player : Character
 
     public List<Projectile> IncomingProjectiles = new List<Projectile>();
 
+    public List<Vector3> RWRSources = new List<Vector3>();
+
 
 
     Vector2 targetVel = Vector2.Zero;
@@ -285,13 +287,6 @@ public class Player : Character
                     WeaponUseTimer = EquipmentHandler.Instance.equippedWeapon.UseTime;
                     (GetNode("MissileTimer") as Timer).Start((EquipmentHandler.Instance.equippedWeapon.CooldownSeconds * WeaponCooldownMultiplier) + EquipmentHandler.Instance.equippedWeapon.UseTime);
                 }
-
-
-
-            //SpawnMissiles();
-
-
-
         }
         else
         {
@@ -363,7 +358,7 @@ public class Player : Character
         if (Game.DevMode)
         {
             Health = MaxHealth;
-            InvinTime = 1f;
+            //InvinTime = 1f;
         }
 
         if (RWRWarning > 0)
@@ -387,10 +382,20 @@ public class Player : Character
         {
             //GD.Print("PlayerColliding");
 
-            if(CollisionData.Collider is TerrainElement)
+            if(CollisionData.Collider is TerrainElement||CollisionData.Collider is CollideableCharacter)
             {
                 HandleTerrainCollision(CollisionData);
 
+            }
+
+            for(int i = RWRSources.Count-1; i >= 0; i--)
+            {
+                RWRSources[i] = new Vector3(RWRSources[i].x, RWRSources[i].y, RWRSources[i].z - delta);
+
+                if (RWRSources[i].z < 0)
+                {
+                    RWRSources.RemoveAt(i);
+                }
             }
 
         }

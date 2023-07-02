@@ -1,0 +1,5 @@
+[gd_resource type="StreamTexture" format=2]
+
+[resource]
+flags = 4
+load_path = "res://.import/TextureSnow.png-1b3e22afe0e6f8e07dd8cb70f32b6ac2.stex"

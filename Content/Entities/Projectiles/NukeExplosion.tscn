@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Sprites/Extra/Flash.png" type="Texture" id=1]
+[ext_resource path="res://Content/Entities/Projectiles/NukeExplosion.cs" type="Script" id=2]
+[ext_resource path="res://Assets/Sounds/SFX/NukeBlast.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sprites/Radiance.png" type="Texture" id=4]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=5]
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 380.0
+
+[sub_resource type="Gradient" id=14]
+offsets = PoolRealArray( 0.00520833, 0.171875, 0.927083 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.644531, 1, 0.945847, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=15]
+gradient = SubResource( 14 )
+
+[sub_resource type="Curve" id=16]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.027907, 0 ), -1.60843, 0.0, 0, 0, Vector2( 0.139535, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=17]
+curve = SubResource( 16 )
+
+[sub_resource type="ParticlesMaterial" id=18]
+emission_shape = 1
+emission_sphere_radius = 9.36
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+radial_accel = 2002.85
+radial_accel_curve = SubResource( 17 )
+damping = 114.27
+scale = 2.4
+color_ramp = SubResource( 15 )
+
+[node name="NukeExplosion" type="Area2D"]
+collision_layer = 3
+monitorable = false
+script = ExtResource( 2 )
+Lifespan = 1.4
+AppearsOnRadar = true
+FlashDissipationTime = 1.2
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 13 )
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -2.423
+pitch_scale = 0.73
+autoplay = true
+max_distance = 4000.0
+attenuation = 0.420448
+bus = "SFX"
+
+[node name="Blast" type="Particles2D" parent="."]
+show_behind_parent = true
+material = ExtResource( 5 )
+rotation = 1.5708
+amount = 1600
+lifetime = 0.67
+preprocess = 2.0
+randomness = 0.11
+visibility_rect = Rect2( -4000, -4000, 8000, 8000 )
+local_coords = false
+process_material = SubResource( 18 )
+texture = ExtResource( 4 )
+
+[node name="BlastTimer" type="Timer" parent="."]
+wait_time = 0.001
+one_shot = true
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 50, 50 )
+texture = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="SetAsColliding"]
+[connection signal="body_exited" from="." to="." method="UnsetAsColliding"]

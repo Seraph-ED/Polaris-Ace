@@ -14,7 +14,7 @@ public class EntityContainer : Node2D, IActivateable
     [Export]
     public bool Active;
 
-    public bool IsActive()
+    public virtual bool IsActive()
     {
         return Active;
     }

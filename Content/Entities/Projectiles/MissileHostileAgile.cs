@@ -21,7 +21,7 @@ public class MissileHostileAgile : Projectile
     public override void _Ready()
     {
         target = null;
-        Lifespan = 7.0f;
+        //Lifespan = 7.0f;
     }
 
     public void FindTarget()
@@ -46,8 +46,6 @@ public class MissileHostileAgile : Projectile
             DestroyProjectile();
         }
 
-
-
     }
 
     public override void OnDestroyed()
@@ -61,8 +59,6 @@ public class MissileHostileAgile : Projectile
 
     public override void Behavior(float delta)
     {
-        //base.AI(delta);
-        
 
         if (target == null||!IsInstanceValid(target))
         {
@@ -114,15 +110,6 @@ public class MissileHostileAgile : Projectile
         }
 
         Velocity = Velocity.Normalized() * 41f;
-        /*
-        if (Velocity.Length() > 34f)
-        {
-            Velocity = Velocity.Normalized() * 34;
-        }else if (Velocity.Length() < 20)
-        {
-            Velocity = Velocity.Normalized() * 20;
-        }
-        */
 
         Rotation = Velocity.Angle() + (float)Utils.Pi / 2f;
     }

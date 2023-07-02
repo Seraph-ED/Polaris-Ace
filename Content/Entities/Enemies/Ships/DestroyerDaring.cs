@@ -91,7 +91,7 @@ public class DestroyerDaring : Ship
 
         }
 
-		GD.Print("Weight of active components: " + CurrentComponentWeight + ", Critical components protected:" + (CurrentComponentWeight>MinComponentWeightForInvincibility));
+		//GD.Print("Weight of active components: " + CurrentComponentWeight + ", Critical components protected:" + (CurrentComponentWeight>MinComponentWeightForInvincibility));
     }
 
 

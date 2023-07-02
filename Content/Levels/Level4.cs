@@ -8,12 +8,14 @@ public class Level4 : Level
     // private string b = "text";
 
     // Called when the node enters the scene tree for the first time.
-    
 
+    public bool CarrierDowned = false;
     public override bool CheckWinCondition()
     {
-        return false;//base.CheckWinCondition();
+        return CarrierDowned;//base.CheckWinCondition();
     }
+
+   
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     //  public override void _Process(float delta)

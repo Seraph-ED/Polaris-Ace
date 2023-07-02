@@ -11,6 +11,8 @@ public class MissileHostileLongRange : Projectile
     // Called when the node enters the scene tree for the first time.
     public Character target = null;
 
+    public Character LaunchPlatform = null;
+
     public float SeekerAngleDegrees = 180;
 
     public int State = 0;
@@ -154,18 +156,6 @@ public class MissileHostileLongRange : Projectile
 
              (GetNode("Exhaust") as Particles2D).Visible = true;
 
-            
-           
-
-
-
-            // }
-
-           
-
-            
-
-           
 
             if (minspeed > maxspeed)
             {
