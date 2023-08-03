@@ -15,7 +15,12 @@ public class Level4 : Level
         return CarrierDowned;//base.CheckWinCondition();
     }
 
-   
+    public override void UpdateLevel(float delta)
+    {
+       // base.UpdateLevel(delta);
+        GD.Print("Carrier Downed:" + CarrierDowned);
+    }
+
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     //  public override void _Process(float delta)

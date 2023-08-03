@@ -177,10 +177,7 @@ public class BossCarrier : Ship
 
     public override void Kill()
     {
-        if(Game.CurrentLevel is Level4)
-        {
-            (Game.CurrentLevel as Level4).CarrierDowned = true;
-        }
+        
         SpawnOnDeathExplosionPattern(KillType);
 
         for (int i = Components.Count - 1; i >= 0; --i)
@@ -188,6 +185,11 @@ public class BossCarrier : Ship
 
 
             Components[i].Kill();
+        }
+
+        if (Game.CurrentLevel is Level4)
+        {
+            (Game.CurrentLevel as Level4).CarrierDowned = true;
         }
 
         if (KillType == 1)

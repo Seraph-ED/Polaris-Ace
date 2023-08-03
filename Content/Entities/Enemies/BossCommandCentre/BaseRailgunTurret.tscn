@@ -1,0 +1,398 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Content/Entities/Enemies/BossCommandCentre/BaseRailgunTurret.cs" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Enemies/BossCommandCentre/RailgunTurret.png" type="Texture" id=2]
+[ext_resource path="res://Content/VFX/AdditiveBlending.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Sprites/Star.png" type="Texture" id=4]
+[ext_resource path="res://Content/Entities/Enemies/BossCommandCentre/SparkEmitter.cs" type="Script" id=5]
+[ext_resource path="res://Content/Entities/Enemies/FiringCrosshair.cs" type="Script" id=6]
+
+[sub_resource type="Gradient" id=1]
+interpolation_mode = 2
+offsets = PoolRealArray( 0, 0.307292, 0.760417 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.974792, 1, 0.5625, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+damping = 1e+15
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0, 0.161458, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.492188, 0.915199, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 9 )
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 0.953608 ), 0.0, -2.08202, 0, 0, Vector2( 1, 0.0227273 ), -0.813349, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+next_pass = SubResource( 8 )
+trail_divisor = 40
+trail_size_modifier = SubResource( 6 )
+trail_color_modifier = SubResource( 4 )
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 24000.0
+initial_velocity_random = 0.3
+angular_velocity = 5440.54
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100000.0
+damping = 1.3e+06
+angle = 360.0
+angle_random = 1.0
+scale = 0.1
+scale_random = 0.1
+color_ramp = SubResource( 2 )
+anim_speed = 5.95
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=11]
+_data = [ Vector2( 0, 0.201136 ), 0.0, 3.70335, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=12]
+curve = SubResource( 11 )
+
+[sub_resource type="Gradient" id=13]
+offsets = PoolRealArray( 0, 0.161458, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.972229, 1, 0.492188, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
+[sub_resource type="ParticlesMaterial" id=15]
+next_pass = SubResource( 8 )
+trail_divisor = 20
+trail_size_modifier = SubResource( 6 )
+trail_color_modifier = SubResource( 14 )
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 1 )
+flag_disable_z = true
+spread = 2.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 24000.0
+initial_velocity_random = 0.3
+angular_velocity = 5440.54
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100000.0
+tangential_accel = 500000.0
+tangential_accel_random = 1.0
+damping = 1.3e+06
+angle = 360.0
+angle_random = 1.0
+scale = 0.41
+scale_random = 0.1
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 10 )
+anim_speed = 5.95
+
+[sub_resource type="ParticlesMaterial" id=16]
+next_pass = SubResource( 8 )
+trail_divisor = 20
+trail_size_modifier = SubResource( 6 )
+trail_color_modifier = SubResource( 14 )
+emission_shape = 2
+emission_box_extents = Vector3( 40, 1, 1 )
+flag_disable_z = true
+spread = 2.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 24000.0
+initial_velocity_random = 0.3
+angular_velocity = 5440.54
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -100000.0
+tangential_accel = -500000.0
+tangential_accel_random = 1.0
+damping = 1.3e+06
+angle = 360.0
+angle_random = 1.0
+scale = 0.41
+scale_random = 0.1
+scale_curve = SubResource( 12 )
+color_ramp = SubResource( 2 )
+anim_speed = 5.95
+
+[node name="BaseRailgunTurret" type="KinematicBody2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource( 1 )
+Health = 1000.0
+IsEnemy = true
+IsStructure = true
+BulletDamage = 160.0
+TurnSpeedDegreesPerSecond = 40.0
+TargetLead = 0.0
+ReloadTime = 10.0
+ShootRange = 4000.0
+
+[node name="Hitbox" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -43, -49, 19, -49, 64, -1, 20, 47, -43, 46, -133, 30, -133, -32 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 14, 0 )
+scale = Vector2( 0.752857, 0.752857 )
+texture = ExtResource( 2 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+autostart = true
+
+[node name="ShootTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
+autostart = true
+
+[node name="LeftEmitter" type="Node2D" parent="."]
+position = Vector2( -104, -74 )
+rotation = -0.593412
+script = ExtResource( 5 )
+
+[node name="Particles" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles2" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles3" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles4" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles5" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles6" type="Particles2D" parent="LeftEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="RightEmitter" type="Node2D" parent="."]
+position = Vector2( -104, 74 )
+rotation = 3.735
+script = ExtResource( 5 )
+
+[node name="Particles" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles2" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles3" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles4" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles5" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="Particles6" type="Particles2D" parent="RightEmitter"]
+material = ExtResource( 3 )
+emitting = false
+amount = 120
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.05
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 4 )
+
+[node name="MuzzleFlash" type="Node2D" parent="."]
+position = Vector2( 250, 0 )
+script = ExtResource( 5 )
+
+[node name="Particles" type="Particles2D" parent="MuzzleFlash"]
+material = ExtResource( 3 )
+emitting = false
+amount = 600
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.1
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 15 )
+texture = ExtResource( 4 )
+
+[node name="Particles2" type="Particles2D" parent="MuzzleFlash"]
+material = ExtResource( 3 )
+emitting = false
+amount = 600
+lifetime = 0.05
+one_shot = true
+speed_scale = 0.1
+explosiveness = 0.8
+randomness = 0.41
+fract_delta = false
+visibility_rect = Rect2( -1000, -1000, 2000, 2000 )
+local_coords = false
+process_material = SubResource( 16 )
+texture = ExtResource( 4 )
+
+[node name="FiringCrosshair" type="Line2D" parent="."]
+scale = Vector2( 0.171147, 0.171147 )
+points = PoolVector2Array( 0, 0, 6000, 0 )
+width = 15.0
+default_color = Color( 1, 0, 0, 0.560784 )
+script = ExtResource( 6 )
+
+[connection signal="EmitParticleSignal" from="LeftEmitter" to="LeftEmitter" method="EmitParticles"]
+[connection signal="EmitParticleSignal" from="RightEmitter" to="RightEmitter" method="EmitParticles"]
+[connection signal="EmitParticleSignal" from="MuzzleFlash" to="MuzzleFlash" method="EmitParticles"]

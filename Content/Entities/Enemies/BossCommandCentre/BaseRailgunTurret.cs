@@ -2,11 +2,9 @@ using Content;
 using Godot;
 using System;
 
-public class BasicShipDeckGun : ShipComponent
-{
-   
+public class BaseRailgunTurret : Character {
 
-   
+
 
     public Node target;
 
@@ -24,6 +22,9 @@ public class BasicShipDeckGun : ShipComponent
     public float TargetLead = 1;
 
     [Export]
+    public float ProjectileSpeed = 70;
+
+    [Export]
     public float ReloadTime = 3;
 
     [Export]
@@ -36,7 +37,7 @@ public class BasicShipDeckGun : ShipComponent
 
     public override void OnActivate()
     {
-        (GetNode("ReloadTimer") as Timer).Start(7f);
+        (GetNode("ReloadTimer") as Timer).Start(ReloadTime);
     }
 
     public void FindTarget()
@@ -66,6 +67,8 @@ public class BasicShipDeckGun : ShipComponent
         {
             return;
         }
+
+        GetNode<FiringCrosshair>("FiringCrosshair").TimeProportion = ((GetNode("ReloadTimer") as Timer).TimeLeft / ReloadTime);
         // MovementBehavior();
 
         if (((target as Character).LevelRelativePosition - LevelRelativePosition).Length() < ShootRange)
@@ -91,33 +94,33 @@ public class BasicShipDeckGun : ShipComponent
             // GD.Print(relativeVelocity);
 
 
-            Vector2 targetLead = (target as Character).LevelRelativePosition + (TargetLead*relativeVelocity);
+            Vector2 targetLead = (target as Character).LevelRelativePosition + (TargetLead * relativeVelocity);
 
 
-            Rotation = Utils.TurnTowards(Rotation, (targetLead - LevelRelativePosition).Angle() - (GetParent() as Node2D).Rotation, Mathf.Deg2Rad(TurnSpeedDegreesPerSecond * delta ));
+            Rotation = Utils.TurnTowards(Rotation, (targetLead - LevelRelativePosition).Angle() - (GetParent() as Node2D).Rotation, Mathf.Deg2Rad(TurnSpeedDegreesPerSecond * delta));
 
             ShootAtTarget();
         }
-       
 
 
 
-       
+
+
 
 
     }
 
     public virtual void SpawnBullets()
     {
-        var scene = GD.Load<PackedScene>("res://Content/Entities/Projectiles/BulletHostileSlow.tscn");
+        var scene = GD.Load<PackedScene>("res://Content/Entities/Projectiles/RailgunProjectile.tscn");
         Vector2 vel = Velocity;
-        
+
 
         float offset = Mathf.Deg2Rad(45);
 
-       // Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(20, 0).Rotated(Rotation-offset), Rotation-offset + (Mathf.Pi / 2f), BulletDamage);
-        Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(20, 0).Rotated(Rotation), Rotation, BulletDamage);
-       // Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(20, 0).Rotated(Rotation+offset), Rotation+offset + (Mathf.Pi / 2f), BulletDamage);
+        // Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(20, 0).Rotated(Rotation-offset), Rotation-offset + (Mathf.Pi / 2f), BulletDamage);
+        Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(ProjectileSpeed, 0).Rotated(Rotation), Rotation, BulletDamage);
+        // Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(15, 0).Rotated(Rotation), vel + new Vector2(20, 0).Rotated(Rotation+offset), Rotation+offset + (Mathf.Pi / 2f), BulletDamage);
 
         //Game.CurrentLevel.SpawnProjectile(scene, LevelRelativePosition + new Vector2(0, -13).Rotated(turretRotation), Velocity + new Vector2(45, 0).Rotated(turretRotation), turretRotation + (Mathf.Pi / 2f), 5);
 
@@ -127,17 +130,21 @@ public class BasicShipDeckGun : ShipComponent
 
     public virtual void ShootAtTarget()
     {
-        if (((Timer)GetNode("ReloadTimer")).TimeLeft==0)
+        if (((Timer)GetNode("ReloadTimer")).TimeLeft <= 0.05)
         {
-            
-                (GetNode("ReloadTimer") as Timer).Start(ReloadTime);
+
+            (GetNode("ReloadTimer") as Timer).Start(ReloadTime+0.05f);
+
+            GetNode<SparkEmitter>("LeftEmitter").EmitParticles();
+            GetNode<SparkEmitter>("RightEmitter").EmitParticles();
+            GetNode<SparkEmitter>("MuzzleFlash").EmitParticles();
 
             SpawnBullets();
 
 
         }
 
-        
+
 
 
 

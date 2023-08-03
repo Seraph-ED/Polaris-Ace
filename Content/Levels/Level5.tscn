@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Content/Levels/Music.cs" type="Script" id=1]
 [ext_resource path="res://Content/Entities/Player.tscn" type="PackedScene" id=2]
@@ -24,6 +24,8 @@
 [ext_resource path="res://Content/Entities/PathEntityContainer.cs" type="Script" id=22]
 [ext_resource path="res://Content/Entities/Enemies/BossCommandTank/BossCommandTank.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Content/Entities/Enemies/BossAirSuperiority.tscn" type="PackedScene" id=24]
+[ext_resource path="res://Content/Entities/Enemies/BaseParts/BaseRunway.tscn" type="PackedScene" id=25]
+[ext_resource path="res://Content/Entities/Enemies/BossCommandCentre/BaseRailgunTurret.tscn" type="PackedScene" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6945, 6521.5 )
@@ -44,6 +46,9 @@ extents = Vector2( 4593.5, 5664.5 )
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 2185.25, 1149.25 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 2095.5, 2579.13 )
 
 [node name="Level5" type="Node2D" groups=["Level", "Main"]]
 pause_mode = 1
@@ -280,14 +285,15 @@ script = ExtResource( 11 )
 
 [node name="Hitbox" type="CollisionPolygon2D" parent="Terrain/Mountain13"]
 show_behind_parent = true
-polygon = PoolVector2Array( 4052, 3352, 2734, 1926, 2007, 339, 1092, -1034, 796, -2998, -65, -5743, -386, -9964, 790, -13313, 5089, -16662, 7035, -18924, 10022, -18472, 13824, -17793, 14593, -16933, 16675, -17114, 19933, -17974, 23915, -16616, 25545, -14037, 28486, -12860, 31790, -13313, 36180, -17159, 38623, -16345, 41022, -16028, 42244, -12634, 43601, -10507, 43466, -8199, 44506, -5574, 44597, -4035, 53409, 2488, 52001, 4536, 50721, 9272, 47521, 9784, 42913, 8504, 38561, 10424, 36385, 10680, 33381, 9415, 32207, 8504, 29666, 7593, 26453, 6730, 16668, 6091, 14406, 7042, 12052, 7766, 11102, 7223, 10647, 8538, 11538, 13044, 50341, 49183, 81445, 49190, 84133, -33761, -26843, -46817, -17243, 11295 )
+polygon = PoolVector2Array( 9924, 10515, 10799, 8058, 11122, 6764, 11446, 5985, 12201, 5265, 13977, 3825, 14873, 2001, 15225, 577, 14905, -1333, 13987, -2678, 12769, -4024, 11381, -3959, 8818, -4472, 7067, -3895, 6042, -2934, 4739, -2464, 4120, -927, 4269, 333, 4077, 1871, 4120, 3430, 4226, 4114, -11836, 3369, -11190, -16889, 33206, -16602, 32703, 11343 )
 
 [node name="Polygon2D" type="Polygon2D" parent="Terrain/Mountain13"]
 show_behind_parent = true
 antialiased = true
 texture = ExtResource( 17 )
+texture_offset = Vector2( 475.314, 27.492 )
 texture_scale = Vector2( 0.6, 0.6 )
-polygon = PoolVector2Array( 4052, 3352, 2734, 1926, 2007, 339, 1092, -1034, 796, -2998, -65, -5743, -386, -9964, 790, -13313, 5089, -16662, 7035, -18924, 10022, -18472, 13824, -17793, 14593, -16933, 16675, -17114, 19933, -17974, 23915, -16616, 25545, -14037, 28486, -12860, 31790, -13313, 36180, -17159, 38623, -16345, 41022, -16028, 42244, -12634, 43601, -10507, 43466, -8199, 44506, -5574, 44597, -4035, 53409, 2488, 52001, 4536, 50721, 9272, 47521, 9784, 42913, 8504, 38561, 10424, 36385, 10680, 33381, 9415, 32207, 8504, 29666, 7593, 26453, 6730, 16668, 6091, 14406, 7042, 12052, 7766, 11102, 7223, 10647, 8538, 11538, 13044, 50341, 49183, 81445, 49190, 84133, -33761, -26843, -46817, -17243, 11295 )
+polygon = PoolVector2Array( 9924, 10515, 10799, 8058, 11122, 6764, 11446, 5985, 12201, 5265, 13977, 3825, 14873, 2001, 15225, 577, 14905, -1333, 13987, -2678, 12769, -4024, 11381, -3959, 8818, -4472, 7067, -3895, 6042, -2934, 4739, -2464, 4120, -927, 4269, 333, 4077, 1871, 4120, 3430, 4226, 4114, -11836, 3369, -11190, -16889, 33206, -16602, 32703, 11343 )
 
 [node name="Gate1" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -325,6 +331,10 @@ rotation = 1.29852
 [node name="EnemyDrone4" parent="Gate1/TaskForceContainer" instance=ExtResource( 5 )]
 position = Vector2( -4187, -1496 )
 rotation = 1.29852
+
+[node name="BaseRailgunTurret" parent="Gate1" instance=ExtResource( 26 )]
+position = Vector2( 507, -3038 )
+ShootRange = 6000.0
 
 [node name="Gate2" type="Node2D" parent="."]
 position = Vector2( 0, -20000 )
@@ -451,8 +461,8 @@ scale = Vector2( 1, 0.971812 )
 curve = SubResource( 7 )
 
 [node name="PathFollow" type="PathFollow2D" parent="Gate3/TankPath1/Path"]
-position = Vector2( -1401.94, 3612.53 )
-rotation = 0.110796
+position = Vector2( 1260.64, 1799.66 )
+rotation = 0.108759
 offset = 3950.31
 
 [node name="Gate4" type="Node2D" parent="."]
@@ -560,6 +570,34 @@ rotation = 1.5708
 scale = Vector2( 0.6, 0.6 )
 IsEnemy = true
 
+[node name="Base" type="Node2D" parent="."]
+position = Vector2( -25770, -76458 )
+script = ExtResource( 7 )
+Active = true
+
+[node name="TaskForceContainer" type="Node2D" parent="Base"]
+position = Vector2( -19, -703 )
+script = ExtResource( 13 )
+activationCheckPath = NodePath("Trigger2")
+
+[node name="Trigger2" type="Area2D" parent="Base/TaskForceContainer"]
+position = Vector2( -78, -533 )
+script = ExtResource( 14 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base/TaskForceContainer/Trigger2"]
+show_behind_parent = true
+position = Vector2( 294, 1462 )
+shape = SubResource( 8 )
+
+[node name="BaseRunway" parent="Base/TaskForceContainer" instance=ExtResource( 25 )]
+position = Vector2( 3616, -8253 )
+
+[node name="BaseRunway2" parent="Base/TaskForceContainer" instance=ExtResource( 25 )]
+position = Vector2( 3568, -8974 )
+
+[node name="TargetControlTower" parent="Base/TaskForceContainer" instance=ExtResource( 19 )]
+position = Vector2( 2374, -9401 )
+
 [node name="StaticDefenses" type="Node2D" parent="."]
 position = Vector2( -10000, -10000 )
 script = ExtResource( 7 )
@@ -660,3 +698,4 @@ position = Vector2( 0, -8000 )
 [connection signal="body_entered" from="Gate5/TaskForceContainer/Trigger2" to="Gate5/TaskForceContainer/Trigger2" method="OnEntered"]
 [connection signal="body_entered" from="Gate6/TaskForceContainer/Trigger2" to="Gate6/TaskForceContainer/Trigger2" method="OnEntered"]
 [connection signal="body_entered" from="Gate7/TaskForceContainer/Trigger2" to="Gate7/TaskForceContainer/Trigger2" method="OnEntered"]
+[connection signal="body_entered" from="Base/TaskForceContainer/Trigger2" to="Base/TaskForceContainer/Trigger2" method="OnEntered"]
